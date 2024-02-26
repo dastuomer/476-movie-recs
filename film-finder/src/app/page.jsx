@@ -1,11 +1,11 @@
-import Logo from './Components/logo.js';
+import Logo from './components/logo.js';
 
 export default function Home() {
   return (
     <main>
-      <div>
+      <div className="logo">
         <Logo/>
-        <p className="text-success">This website is working!</p>
+        
       </div>
     </main>
   );
