@@ -1,8 +1,9 @@
 "use client";
 // import Logo from "./components/logo.js";
-import NavDrawer from "@/app/Components/Drawer";
-import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
+
+import NavDrawer from "@/app/components/Drawer";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function Index() {
   return (

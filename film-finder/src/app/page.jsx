@@ -1,8 +1,10 @@
 // import Logo from "./components/logo.js";
 // import Burger from "./components/burger.jsx";
-import { ChakraProvider } from "@chakra-ui/react";
-import Index from "./pages/index-page/Index";
 import * as React from "react";
+
+import { ChakraProvider } from "@chakra-ui/react";
+import Index from "./pages/index-page/index.jsx";
+
 
 export default function Home() {
   return (
