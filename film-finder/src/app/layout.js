@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Logo from "./components/logo.js";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,8 +13,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-      <h1>GET AT IT!</h1>
+      <body className={inter.className}>
+      <h1><Logo /></h1>
+        {children}
+        </body>
+      
     </html>
   );
 }

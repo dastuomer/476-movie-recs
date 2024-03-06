@@ -1,5 +1,4 @@
 "use client";
-// import Logo from "./components/logo.js";
 // import Burger from "./components/burger.jsx";
 import * as React from "react";
 

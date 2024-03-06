@@ -6,11 +6,10 @@ export default function Logo() {
             <p>
                 <Image
                 src="/Film_Finder.png"
-                width={50}
-                height={50}
+                width={100}
+                height={100}
                 alt="Brand Logo"
                 />
-                <span>Film Finder</span>
             </p>
         </div>
     )
