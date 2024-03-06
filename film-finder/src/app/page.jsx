@@ -1,15 +1,47 @@
+"use client";
 // import Logo from "./components/logo.js";
 // import Burger from "./components/burger.jsx";
 import * as React from "react";
 
+import NavDrawer from "@/app/components/Drawer";
 import { ChakraProvider } from "@chakra-ui/react";
-import Index from "./pages/index-page/index.jsx";
+import Link from 'next/link'
 
-
-export default function Home() {
+export default function Page() {
   return (
     <ChakraProvider>
-      <Index />
+      <NavDrawer />
+      <ul>
+        <h2>Dastu:</h2>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <h2>Nabeera:</h2>
+        <li>
+          <Link href="login">Login Page</Link>
+        </li>
+        <li>
+          <Link href="signup">Signup Page</Link>
+        </li>
+        <h2>Alex:</h2>
+        <li>
+          <Link href="view-friend-review">Friend Review Page</Link>
+        </li>
+        <li>
+          <Link href="blender">Blend Page</Link>
+        </li>
+        <h2>Maxx:</h2>
+        <li>
+          <Link href="review-my-movie">Review a movie Page</Link>
+        </li>
+        <li>
+          <Link href="view-my-movies">My movies Page</Link>
+        </li>
+        <h2>Xander:</h2>
+        <li>
+          <Link href="profile">Edit my profile Page</Link>
+        </li>
+      </ul>
     </ChakraProvider>
     // <main>
     //   <div className="container-fluid">
