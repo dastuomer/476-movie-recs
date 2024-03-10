@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -7,7 +8,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
   IconButton,
   Input,
   useDisclosure,
@@ -22,19 +22,25 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  pseudoSelectors,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
-import { redirect } from "next/dist/server/api-utils";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+//import { redirect } from "next/dist/server/api-utils";
+import Link from "next/link";
 
 export default function NavDrawer() {
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+  const { isOpen, onClose, onToggle } = useDisclosure();
   const btnRef = React.useRef();
   const friendLink = React.useRef();
+  const [isHovering, setIsHovering] = useState(false);
+
+  // const handleMouseOver = () => {
+  //   setIsHovering(true);
+  // };
+
+  // const handleMouseOut = () => {
+  //   setIsHovering(false);
+  // };
 
   return (
     <>
@@ -70,7 +76,7 @@ export default function NavDrawer() {
               </Avatar>
               <Stack>
                 <Text fontSize="2xl" align={"center"}>
-                  @Das_two
+                  <Link href="profile">@Das_two</Link>
                 </Text>
               </Stack>
             </HStack>
@@ -88,10 +94,18 @@ export default function NavDrawer() {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    <Box>Nabeera</Box>
-                    <Box>Xander</Box>
-                    <Box>Alex</Box>
-                    <Box>Maxx</Box>
+                    <Box>
+                      <Link href="profile">Nabeera</Link>
+                    </Box>
+                    <Box>
+                      <Link href="profile">Xander</Link>
+                    </Box>
+                    <Box>
+                      <Link href="profile">Alex</Link>
+                    </Box>
+                    <Box>
+                      <Link href="profile">Maxx</Link>
+                    </Box>
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
@@ -99,13 +113,12 @@ export default function NavDrawer() {
             <Box marginTop={3} marginLeft={3} marginRight={3}>
               <Text fontFamily={"sans-serif"} fontSize="xl">
                 {" "}
-                My movies
+                <Link href="view-my-movies">My movies</Link>
               </Text>
             </Box>
             <Box marginTop={3} marginLeft={3} marginRight={3}>
               <Text fontFamily={"sans-serif"} fontSize="xl">
-                {" "}
-                Blends{" "}
+                <Link href="blender">Blends</Link>
               </Text>
             </Box>
             {/* <Button
@@ -122,9 +135,10 @@ export default function NavDrawer() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Logout
-            </Button>
+            <Stack>
+              <Link href="login"> Logout </Link>
+              <Link href="signup"> Signup </Link>
+            </Stack>
             {/* Make this button navigate back to the log in page */}
           </DrawerFooter>
         </DrawerContent>
