@@ -39,21 +39,23 @@ import {
   Tab,
   TabPanel,
   extendTheme,
-  ColorModeScript 
+  ColorModeScript,
+  Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 
 export default function Page() {
     return (
         <ChakraProvider>
+            <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
                       <div className="col-6">  
-                        <Box w='100%' minH='1500px' borderWidth='8px' boxShadow='dark-lg' borderColor='black' borderRadius='lg' backgroundColor={'grey'}>
+                        <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                         <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px' zIndex='1'>Favourite Movie: Lord of the Rings : Return of the King</Text>
-                        <Image boxSize='400px' w='100%' borderBottom='8px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>
+                        <Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>
                         <Center>
-                            <Image border='8px' borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>   
+                            <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>   
                         </Center>
                             <Heading fontSize="4xl" align={"center"} mt='100px'>
                                 Profile Name
@@ -69,7 +71,7 @@ export default function Page() {
                                         Movie stats here or in some other spot?
                             </Text>
                             <Divider />
-                            <Tabs isFitted variant='soft-rounded' colorScheme='blue' margin='2px'>
+                            <Tabs isFitted variant='solid-rounded' colorScheme='blue' margin='2px'>
                             <TabList mb='1em'>
                                 <Tab>Favourites</Tab>
                                 <Tab>Genres</Tab>
@@ -97,25 +99,25 @@ export default function Page() {
                                 <p>Favourite Genres: Fantasy, Psychological Horror, Comedy</p>
                                 </TabPanel>
                                 <TabPanel>
-                                <Box border={'solid'}>
+                                <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Actor : Tom Hardy</Text>
                                     <Image width='100%' height='400px' objectFit='cover' src='https://www.giantfreakinrobot.com/wp-content/uploads/2021/11/tom-hardy-mad-max.jpg'></Image>
                                 </Box>
                                 </TabPanel>
                                 <TabPanel>
-                                <Box border={'solid'}>
+                                <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Director : Martin Scorcese</Text>
                                     <Image width='100%' height='400px' objectFit='cover' src='https://static01.nyt.com/images/2020/01/05/arts/05martin-scorsese3/05martin-scorsese3-facebookJumbo.jpg?year=2020&h=550&w=1050&s=0f5a5899d5c57e3c87edbc90e8b8228d7cbefa0f663d4992e768874ce09cd2f4&k=ZQJBKqZ0VN'></Image>
                                 </Box>
                                 </TabPanel>
                                 <TabPanel>
-                                <Box border={'solid'}>
+                                <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Soundtrack : Interstellar</Text>
                                     <Image width='100%' height='400px' objectFit='cover' src='https://ninamunteanudotnet.files.wordpress.com/2023/05/gargantua-black-hole.jpg'></Image>
                                 </Box>
                                 </TabPanel>
                                 <TabPanel>
-                                <Box border={'solid'}>
+                                <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Character : Aragorn</Text>
                                     <Image width='100%' height='400px' objectFit='cover' src='https://miro.medium.com/v2/resize:fit:1400/1*f4tWL0qzHK7tYK1XCNlTHA.jpeg'></Image>
                                 </Box>
@@ -124,12 +126,13 @@ export default function Page() {
                             </Tabs>
                             <Divider />
                             <Center>
-                                <Button colorScheme='blue' justifySelf={'center'} margin='5px'> <Link href="login">Log Out</Link></Button>
+                                <Button colorScheme='blue' margin='5px' pos='absolute' bottom='5px'> <Link href="login">Log Out</Link></Button>
                             </Center>
                         </Box>
                       </div>
                     </div>
                 </div>
+            </Box>
         </ChakraProvider>
         
     )
