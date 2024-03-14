@@ -3,6 +3,9 @@
 import * as React from "react";
 import Logo from "./components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
+import Carousel from "react-bootstrap/Carousel";
+import Card from "react-bootstrap/Card";
+
 import {
   ChakraProvider,
   Box,
@@ -19,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 import TheReturnOfTheKing from "./components/movie-picture.jsx";
 import { SearchIcon } from "@chakra-ui/icons";
+import MovieCards from "./components/MovieCards.jsx";
 
 export default function Page() {
   return (
@@ -251,6 +255,23 @@ export default function Page() {
             </TabPanel>
           </TabPanels>
         </Tabs>{" "}
+        <div className="row justify-content-center">
+          <div className="col-9">
+            <p className="h1 mt-4">Recommended for you</p>
+
+            <div data-interval="false">
+              {" "}
+              <Carousel>
+                <Carousel.Item color="blue">
+                  <MovieCards />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <MovieCards />
+                </Carousel.Item>
+              </Carousel>
+            </div>
+          </div>
+        </div>
       </div>
     </ChakraProvider>
   );
