@@ -1,5 +1,6 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
+import StarRating from "../components/stars.js";
 import {
   Drawer,
   DrawerBody,
@@ -60,7 +61,7 @@ export default function Page() {
                 <Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/a01a95f5ccf69d4946bc47259a10f7fa9b5368963870bfe37c3c2f314e50ee2d._SX1080_FMjpg_.jpg'></Image>
                 <div>
                     <Text fontSize='3xl' margin="10px">V For Vendetta</Text>
-                    *Insert stars here + small description*
+                    <StarRating />
                 </div>
                 <br/>
                 <Center>
