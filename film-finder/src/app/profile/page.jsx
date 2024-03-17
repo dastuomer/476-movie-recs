@@ -44,7 +44,11 @@ import {
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import { poster, getPoster } from "../database.js";
-const mad = await poster();
+const num1 = await poster('Spider-Man');
+const num2 = await poster('Gremlins 2');
+const num3 = await poster('Interstellar');
+const num4 = await poster('Gladia');
+const num5 = await poster('Mad Max: F');
 
 export default function Page() {
     return (
@@ -52,7 +56,7 @@ export default function Page() {
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                      <div className="col-6">  
+                      <div className="col-8">  
                         <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                         <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px' zIndex='1'>Favourite Movie: Lord of the Rings : Return of the King</Text>
                         <Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>
@@ -84,12 +88,12 @@ export default function Page() {
                             </TabList>
                             <TabPanels>
                                 <TabPanel>
-                                <Grid templateColumns='repeat(5, 1fr)' gap='5px' margin='5px'>
-                                <Image width='200px' height='250px' objectFit='cover' src='https://m.media-amazon.com/images/I/71X6YzwV0gL.jpg'></Image>
-                                <Image width='200px' height='250px' objectFit='cover' src='https://i.ebayimg.com/images/g/ViAAAOSwn-Nlzmtp/s-l400.jpg'></Image>
-                                <Image width='200px' height='250px' objectFit='cover' src='https://i.ebayimg.com/images/g/zu4AAOSw2spbJQ0J/s-l1600.jpg'></Image>
-                                <Image width='200px' height='250px' objectFit='cover' src='https://m.media-amazon.com/images/I/61O9+6+NxYL._AC_UF894,1000_QL80_.jpg'></Image>
-                                <Image width='200px' height='250px' objectFit='cover' src={mad}></Image>
+                                <Grid templateColumns='repeat(5, 1fr)'>
+                                <Image width='200px' height='300px' objectFit='cover' src={num1}></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src={num2}></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src={num3}></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src={num4}></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src={num5}></Image>
                                 <Text align='center'>1. Lord of the Rings : Return of the King</Text>
                                 <Text align='center'>2. Dune 2</Text>
                                 <Text align='center'>3. Interstellar</Text>
