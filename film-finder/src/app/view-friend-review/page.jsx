@@ -5,7 +5,6 @@ import NavDrawer from "@/app/components/Drawer";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import { Input } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
-import { Link } from '@chakra-ui/react'
 
 export default function Page() {
     return (
@@ -13,7 +12,7 @@ export default function Page() {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-3">
-                        <Link href='/' ><Logo /> </Link> 
+                        <Logo />
                     </div>
 
                     <div className="d-flex justify-content-center col-6 mt-4">
@@ -31,10 +30,6 @@ export default function Page() {
                     <div className="col-3">
                        <Input placeholder='Search Reviews'/>
                     </div>
-
-                    {/*<script type="text/javascript" src="../components/image-api.js">
-                    </script>
-                    */}
                 </div>
 
                 <div className="row justify-content-center"> 
@@ -43,7 +38,6 @@ export default function Page() {
                             <div className="row">
                                 <div className="col-3">
                                     <TheReturnOfTheKing className="align-left"/>
-                                    {/*<div id='image-here'></div>*/}
 
                                     <div className="fs-1">
                                         <StarIcon color='gold'/>
