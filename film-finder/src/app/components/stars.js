@@ -14,7 +14,7 @@ const StarRating = () => {
             return (
                 <label>
                     <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)} />
-                    <StarIcon className='star' color={ratingValue <= (hover || rating) ? "gold" : "gray"} fontSize={50} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)}/>
+                    <StarIcon className='star' color={ratingValue <= (hover || rating) ? "gold" : "gray"} fontSize={25} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)}/>
                 </label>
              );
         })}
