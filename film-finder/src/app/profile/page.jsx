@@ -1,5 +1,7 @@
+"use client";
 import * as React from "react";
 import Logo from "../components/logo.js";
+import NavDrawer from "@/app/components/Drawer";
 import {
   Drawer,
   DrawerBody,
@@ -52,7 +54,11 @@ export default function Page() {
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                      <div className="col-6">  
+                        <Flex>
+                        <div className="col-1">
+                            <Logo/>
+                        </div>
+                        <div className="col-10">
                         <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                         <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px' zIndex='1'>Favourite Movie: Lord of the Rings : Return of the King</Text>
                         <Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>
@@ -131,7 +137,11 @@ export default function Page() {
                                 <Button colorScheme='blue' margin='5px' pos='absolute' bottom='5px'> <Link href="login">Log Out</Link></Button>
                             </Center>
                         </Box>
-                      </div>
+                        </div>
+                            <div className="col-1">
+                                <NavDrawer/>
+                            </div>
+                        </Flex>
                     </div>
                 </div>
             </Box>
