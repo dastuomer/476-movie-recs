@@ -43,6 +43,8 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
+import { poster, getPoster } from "../database.js";
+const mad = await poster();
 
 export default function Page() {
     return (
@@ -87,7 +89,7 @@ export default function Page() {
                                 <Image width='200px' height='250px' objectFit='cover' src='https://i.ebayimg.com/images/g/ViAAAOSwn-Nlzmtp/s-l400.jpg'></Image>
                                 <Image width='200px' height='250px' objectFit='cover' src='https://i.ebayimg.com/images/g/zu4AAOSw2spbJQ0J/s-l1600.jpg'></Image>
                                 <Image width='200px' height='250px' objectFit='cover' src='https://m.media-amazon.com/images/I/61O9+6+NxYL._AC_UF894,1000_QL80_.jpg'></Image>
-                                <Image width='200px' height='250px' objectFit='cover' src='https://i.ebayimg.com/images/g/plIAAOSw9L9guhlU/s-l1200.webp'></Image>
+                                <Image width='200px' height='250px' objectFit='cover' src={mad}></Image>
                                 <Text align='center'>1. Lord of the Rings : Return of the King</Text>
                                 <Text align='center'>2. Dune 2</Text>
                                 <Text align='center'>3. Interstellar</Text>

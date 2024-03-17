@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import Logo from "./components/logo.js";
+//import Logo from "../components/logo.js";
 
 const inter = Inter({ subsets: ["latin"] });
 
