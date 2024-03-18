@@ -86,8 +86,8 @@ export default function Page() {
                       </div>
 
                       <div className="col-9 fs-3">
-                        <p class="h1">Generic movie</p>
-                        <p class="h5 mt-5">
+                        <p className="h1">Generic movie</p>
+                        <p className="h5 mt-5">
                           This is a plot summary This is a plot summary This is
                           a plot summary This is a plot summary This is a plot
                           summary This is a plot summary This is a plot summary
@@ -208,7 +208,7 @@ export default function Page() {
                         </p>
 
                         <Button marginTop={3} borderRadius={50}>
-                          + Add to List
+                          <a href='/view-my-movies'>+ Add to List</a>
                         </Button>
                       </div>
                     </div>
