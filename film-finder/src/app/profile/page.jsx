@@ -59,7 +59,7 @@ export default function Page() {
                     <div className="row justify-content-center">
                         <Flex>
                             <div className="col-1">
-                                <Logo/>
+                                <a href='/'><Logo/></a>
                             </div>
                       <div className="col-10">  
                         <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
@@ -142,7 +142,7 @@ export default function Page() {
                         </Box>
                       </div>
                       <div className="col-1">
-                            <Button colorScheme='blue' margin='15px' > <Link href="view-my-movies">View Movies</Link></Button>
+                            <NavDrawer />
                       </div>
                     </Flex>
                     </div>

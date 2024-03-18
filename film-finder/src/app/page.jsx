@@ -123,8 +123,8 @@ export default function Page() {
                       </div>
 
                       <div className="col-9 fs-3">
-                        <p class="h1">Comedy movie</p>
-                        <p class="h5 mt-5">
+                        <p className="h1">Comedy movie</p>
+                        <p className="h5 mt-5">
                           This is a plot summary This is a plot summary This is
                           a plot summary This is a plot summary This is a plot
                           summary This is a plot summary This is a plot summary
@@ -160,8 +160,8 @@ export default function Page() {
                       </div>
 
                       <div className="col-9 fs-3">
-                        <p class="h1">Action movie</p>
-                        <p class="h5 mt-5">
+                        <p className="h1">Action movie</p>
+                        <p className="h5 mt-5">
                           This is a plot summary This is a plot summary This is
                           a plot summary This is a plot summary This is a plot
                           summary This is a plot summary This is a plot summary
@@ -197,8 +197,8 @@ export default function Page() {
                       </div>
 
                       <div className="col-9 fs-3">
-                        <p class="h1">Drama movie</p>
-                        <p class="h5 mt-5">
+                        <p className="h1">Drama movie</p>
+                        <p className="h5 mt-5">
                           This is a plot summary This is a plot summary This is
                           a plot summary This is a plot summary This is a plot
                           summary This is a plot summary This is a plot summary
@@ -234,8 +234,8 @@ export default function Page() {
                       </div>
 
                       <div className="col-9 fs-3">
-                        <p class="h1">Horror movie</p>
-                        <p class="h5 mt-5">
+                        <p className="h1">Horror movie</p>
+                        <p className="h5 mt-5">
                           This is a plot summary This is a plot summary This is
                           a plot summary This is a plot summary This is a plot
                           summary This is a plot summary This is a plot summary

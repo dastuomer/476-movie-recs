@@ -17,7 +17,7 @@ export default function Page() {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-3">
-                        <Logo />
+                        <a href='/'><Logo/></a>
                     </div>
 
                     <div className="d-flex justify-content-center col-6 mt-4 fs-1">

@@ -1,3 +1,4 @@
+import * as React from "react";
 import Logo from "../components/logo.js"; 
 import TheReturnOfTheKing from "../components/movie-picture.jsx"; 
 import NavDrawer from "@/app/components/Drawer";
@@ -11,7 +12,7 @@ export default function Page() {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-3">
-                        <Logo />
+                        <a href='/'><Logo/></a>
                     </div>
 
                     <div className="d-flex justify-content-center col-6 mt-4">
