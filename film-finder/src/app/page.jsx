@@ -97,7 +97,7 @@ export default function Page() {
                         </p>
 
                         <Button marginTop={3} borderRadius={50}>
-                          + Add to List
+                          <a href='/view-my-movies'>+ Add to List</a>
                         </Button>
                       </div>
                     </div>
@@ -134,7 +134,7 @@ export default function Page() {
                         </p>
 
                         <Button marginTop={3} borderRadius={50}>
-                          + Add to List
+                          <a href='/view-my-movies'>+ Add to List</a> 
                         </Button>
                       </div>
                     </div>
@@ -171,7 +171,7 @@ export default function Page() {
                         </p>
 
                         <Button marginTop={3} borderRadius={50}>
-                          + Add to List
+                          <a href='/view-my-movies'>+ Add to List</a>
                         </Button>
                       </div>
                     </div>
@@ -208,7 +208,7 @@ export default function Page() {
                         </p>
 
                         <Button marginTop={3} borderRadius={50}>
-                          <a href='/view-my-movies'>+ Add to List</a>
+                          <a href='/view-my-movies'>+ Add to List</a> 
                         </Button>
                       </div>
                     </div>
@@ -245,7 +245,7 @@ export default function Page() {
                         </p>
 
                         <Button marginTop={3} borderRadius={50}>
-                          + Add to List
+                          <a href='/view-my-movies'>+ Add to List</a>
                         </Button>
                       </div>
                     </div>
