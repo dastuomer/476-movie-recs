@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import Logo from "../components/logo.js";
 import StarRating from "../components/stars.js";

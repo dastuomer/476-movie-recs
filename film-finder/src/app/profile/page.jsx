@@ -43,6 +43,7 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
+import NavDrawer from "@/app/components/Drawer";
 import { poster, getPoster } from "../database.js";
 const num1 = await poster('Spider-Man');
 const num2 = await poster('Gremlins 2');
@@ -136,6 +137,7 @@ export default function Page() {
                             </Center>
                         </Box>
                       </div>
+                      
                     </div>
                 </div>
             </Box>

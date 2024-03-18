@@ -1,4 +1,3 @@
-"use client";
 import Logo from "../components/logo.js"; 
 import TheReturnOfTheKing from "../components/movie-picture.jsx"; 
 import NavDrawer from "@/app/components/Drawer";
