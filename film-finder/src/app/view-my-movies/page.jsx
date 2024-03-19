@@ -49,6 +49,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 export default function Page() {
   return (
     <ChakraProvider>
+      <title>Film Finder - Your Movies</title>
       <Box backgroundColor="#2D3748">
         <div className="container-fluid">
           <div className="row justify-content-center">

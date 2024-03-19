@@ -50,6 +50,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 export default function Page() {
   return (
     <ChakraProvider>
+      <title>Film Finder - Review Movie</title>
       <Box backgroundColor="#2D3748">
         <div className="container-fluid">
           <div className="row justify-content-center">
@@ -78,7 +79,7 @@ export default function Page() {
 
 
                 </Center>
-                  <Button colorScheme='blue' margin='15px' marginLeft="1070px"> <Link href="view-my-movies">Submit Review</Link></Button>
+                <Button colorScheme='blue' margin='15px' marginLeft="1070"> <Link href="view-my-movies">Submit Review</Link></Button>
                 <br/><br/>
                 <Divider/>
                 <Center>

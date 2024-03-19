@@ -27,6 +27,7 @@ import MovieCards from "./components/MovieCards.jsx";
 export default function Page() {
   return (
     <ChakraProvider>
+      <title>Film Finder - Home Page</title>
       <div className="container-fluid">
         <div className="row">
           <div className="col-3">
