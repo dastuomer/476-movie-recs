@@ -19,6 +19,7 @@ import {
   Tab,
   TabPanel,
   Center,
+  Flex
 } from "@chakra-ui/react";
 import TheReturnOfTheKing from "./components/movie-picture.jsx";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -28,252 +29,255 @@ export default function Page() {
   return (
     <ChakraProvider>
       <title>Film Finder - Home Page</title>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-3">
-            <Logo />
-          </div>
-          <div className="justify-content-center col-6 mt-4">
-            <div>
-              {/* Trying to make this search bar wider */}
-              <InputGroup size="lg" w="100%">
-                <Input
-                  placeholder="Search Reviews"
-                  size="lg"
-                  w="100%"
-                  borderColor="#4A5568"
-                  borderWidth={1.5}
-                  borderLeftRadius={50}
-                />
-                <IconButton
-                  aria-label="Search database"
-                  icon={<SearchIcon />}
-                />
-              </InputGroup>
-            </div>
-          </div>
+      <Box backgroundColor="#2D3748">
+        <div className="container-fluid">
+          <div className="row justify-content-center">
+            <Flex>
+              <div className="col-1">
+                <a href='/'><Logo /></a>
+              </div>
+              <div className="col-10">
+                <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
+                  <Center>
+                  <div className="col-10">
+                    {/* Trying to make this search bar wider */}
+                    <InputGroup size="lg" w="100%" margin="15px">
+                      <Input
+                        placeholder="Search For a Movie"
+                        size="lg"
+                        w="100%"
+                        borderColor="#4A5568"
+                        borderWidth={1.5}
+                        borderLeftRadius={50}/>
+                      <IconButton
+                        aria-label="Search database"
+                        icon={<SearchIcon />}/>
+                    </InputGroup>
+                  </div>
+                  </Center>
+                  <Tabs variant="line" colorScheme="gray" position="relative">
+                    <Center>
+                      <TabList>
+                        <Tab>All</Tab>
+                        <Tab>Comedy</Tab>
+                        <Tab>Action</Tab>
+                        <Tab>Drama</Tab>
+                        <Tab>Horror</Tab>
+                      </TabList>
+                    </Center>
+                    <TabPanels>
+                      <TabPanel>
+                        <div className="row justify-content-center">
+                          <div className="col-9">
+                            <Box
+                              className="container-fluid"
+                              bg="#4A5568"
+                              w="100%"
+                              p={20}
+                              color="white"
+                              marginTop={3}
+                              borderRadius={50}
+                            >
+                              <div className="row">
+                                <div className="col-3">
+                                  <TheReturnOfTheKing className="align-left" />
+                                </div>
 
-          <div className="col-3">
-            <NavDrawer />
+                                <div className="col-9 fs-3">
+                                  <p className="h1">Generic movie</p>
+                                  <p className="h5 mt-5">
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                  </p>
+
+                                  <Button marginTop={3} borderRadius={50}>
+                                    <a href='/view-my-movies'>+ Add to List</a>
+                                  </Button>
+                                </div>
+                              </div>
+                            </Box>
+                          </div>
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className="row justify-content-center">
+                          <div className="col-9">
+                            <Box
+                              className="container-fluid"
+                              bg="#4A5568"
+                              w="100%"
+                              p={20}
+                              color="white"
+                              marginTop={3}
+                              borderRadius={50}
+                            >
+                              <div className="row">
+                                <div className="col-3">
+                                  <TheReturnOfTheKing className="align-left" />
+                                </div>
+
+                                <div className="col-9 fs-3">
+                                  <p className="h1">Comedy movie</p>
+                                  <p className="h5 mt-5">
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                  </p>
+
+                                  <Button marginTop={3} borderRadius={50}>
+                                    <a href='/view-my-movies'>+ Add to List</a>
+                                  </Button>
+                                </div>
+                              </div>
+                            </Box>
+                          </div>
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className="row justify-content-center">
+                          <div className="col-9">
+                            <Box
+                              className="container-fluid"
+                              bg="#4A5568"
+                              w="100%"
+                              p={20}
+                              color="white"
+                              marginTop={3}
+                              borderRadius={50}
+                            >
+                              <div className="row">
+                                <div className="col-3">
+                                  <TheReturnOfTheKing className="align-left" />
+                                </div>
+
+                                <div className="col-9 fs-3">
+                                  <p className="h1">Action movie</p>
+                                  <p className="h5 mt-5">
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                  </p>
+
+                                  <Button marginTop={3} borderRadius={50}>
+                                    <a href='/view-my-movies'>+ Add to List</a>
+                                  </Button>
+                                </div>
+                              </div>
+                            </Box>
+                          </div>
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className="row justify-content-center">
+                          <div className="col-9">
+                            <Box
+                              className="container-fluid"
+                              bg="#4A5568"
+                              w="100%"
+                              p={20}
+                              color="white"
+                              marginTop={3}
+                              borderRadius={50}
+                            >
+                              <div className="row">
+                                <div className="col-3">
+                                  <TheReturnOfTheKing className="align-left" />
+                                </div>
+
+                                <div className="col-9 fs-3">
+                                  <p className="h1">Drama movie</p>
+                                  <p className="h5 mt-5">
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                  </p>
+
+                                  <Button marginTop={3} borderRadius={50}>
+                                    <a href='/view-my-movies'>+ Add to List</a>
+                                  </Button>
+                                </div>
+                              </div>
+                            </Box>
+                          </div>
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className="row justify-content-center">
+                          <div className="col-9">
+                            <Box
+                              className="container-fluid"
+                              bg="#4A5568"
+                              w="100%"
+                              p={20}
+                              color="white"
+                              marginTop={3}
+                              borderRadius={50}
+                            >
+                              <div className="row">
+                                <div className="col-3">
+                                  <TheReturnOfTheKing className="align-left" />
+                                </div>
+
+                                <div className="col-9 fs-3">
+                                  <p className="h1">Horror movie</p>
+                                  <p className="h5 mt-5">
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                    This is a plot summary This is a plot summary This is
+                                    a plot summary This is a plot summary This is a plot
+                                    summary This is a plot summary This is a plot summary
+                                  </p>
+
+                                  <Button marginTop={3} borderRadius={50}>
+                                    <a href='/view-my-movies'>+ Add to List</a>
+                                  </Button>
+                                </div>
+                              </div>
+                            </Box>
+                          </div>
+                        </div>
+                      </TabPanel>
+                    </TabPanels>
+                  </Tabs>{" "}
+                  <div className="row justify-content-center">
+                    <div className="col-9">
+                      <p className="h1 mt-4">Recommended for you</p>
+                      <div data-interval="false">
+                        {" "}
+                        <Carousel>
+                          <Carousel.Item color="blue">
+                            <MovieCards />
+                          </Carousel.Item>
+                          <Carousel.Item>
+                            <MovieCards />
+                          </Carousel.Item>
+                        </Carousel>
+                      </div>
+                    </div>
+                  </div>
+                </Box>
+              </div>
+              <div className="col-1">
+                <NavDrawer/>
+              </div>
+            </Flex>
           </div>
         </div>
-        <Tabs variant="line" colorScheme="gray" position="relative">
-          <Center>
-            <TabList>
-              <Tab>All</Tab>
-              <Tab>Comedy</Tab>
-              <Tab>Action</Tab>
-              <Tab>Drama</Tab>
-              <Tab>Horror</Tab>
-            </TabList>
-          </Center>
-
-          <TabPanels>
-            <TabPanel>
-              <div className="row justify-content-center">
-                <div className="col-9">
-                  <Box
-                    className="container-fluid"
-                    bg="#4A5568"
-                    w="100%"
-                    p={20}
-                    color="white"
-                    marginTop={3}
-                    borderRadius={50}
-                  >
-                    <div className="row">
-                      <div className="col-3">
-                        <TheReturnOfTheKing className="align-left" />
-                      </div>
-
-                      <div className="col-9 fs-3">
-                        <p className="h1">Generic movie</p>
-                        <p className="h5 mt-5">
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                        </p>
-
-                        <Button marginTop={3} borderRadius={50}>
-                          <a href='/view-my-movies'>+ Add to List</a>
-                        </Button>
-                      </div>
-                    </div>
-                  </Box>
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className="row justify-content-center">
-                <div className="col-9">
-                  <Box
-                    className="container-fluid"
-                    bg="#4A5568"
-                    w="100%"
-                    p={20}
-                    color="white"
-                    marginTop={3}
-                    borderRadius={50}
-                  >
-                    <div className="row">
-                      <div className="col-3">
-                        <TheReturnOfTheKing className="align-left" />
-                      </div>
-
-                      <div className="col-9 fs-3">
-                        <p className="h1">Comedy movie</p>
-                        <p className="h5 mt-5">
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                        </p>
-
-                        <Button marginTop={3} borderRadius={50}>
-                          <a href='/view-my-movies'>+ Add to List</a> 
-                        </Button>
-                      </div>
-                    </div>
-                  </Box>
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className="row justify-content-center">
-                <div className="col-9">
-                  <Box
-                    className="container-fluid"
-                    bg="#4A5568"
-                    w="100%"
-                    p={20}
-                    color="white"
-                    marginTop={3}
-                    borderRadius={50}
-                  >
-                    <div className="row">
-                      <div className="col-3">
-                        <TheReturnOfTheKing className="align-left" />
-                      </div>
-
-                      <div className="col-9 fs-3">
-                        <p className="h1">Action movie</p>
-                        <p className="h5 mt-5">
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                        </p>
-
-                        <Button marginTop={3} borderRadius={50}>
-                          <a href='/view-my-movies'>+ Add to List</a>
-                        </Button>
-                      </div>
-                    </div>
-                  </Box>
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className="row justify-content-center">
-                <div className="col-9">
-                  <Box
-                    className="container-fluid"
-                    bg="#4A5568"
-                    w="100%"
-                    p={20}
-                    color="white"
-                    marginTop={3}
-                    borderRadius={50}
-                  >
-                    <div className="row">
-                      <div className="col-3">
-                        <TheReturnOfTheKing className="align-left" />
-                      </div>
-
-                      <div className="col-9 fs-3">
-                        <p className="h1">Drama movie</p>
-                        <p className="h5 mt-5">
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                        </p>
-
-                        <Button marginTop={3} borderRadius={50}>
-                          <a href='/view-my-movies'>+ Add to List</a> 
-                        </Button>
-                      </div>
-                    </div>
-                  </Box>
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className="row justify-content-center">
-                <div className="col-9">
-                  <Box
-                    className="container-fluid"
-                    bg="#4A5568"
-                    w="100%"
-                    p={20}
-                    color="white"
-                    marginTop={3}
-                    borderRadius={50}
-                  >
-                    <div className="row">
-                      <div className="col-3">
-                        <TheReturnOfTheKing className="align-left" />
-                      </div>
-
-                      <div className="col-9 fs-3">
-                        <p className="h1">Horror movie</p>
-                        <p className="h5 mt-5">
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                          This is a plot summary This is a plot summary This is
-                          a plot summary This is a plot summary This is a plot
-                          summary This is a plot summary This is a plot summary
-                        </p>
-
-                        <Button marginTop={3} borderRadius={50}>
-                          <a href='/view-my-movies'>+ Add to List</a>
-                        </Button>
-                      </div>
-                    </div>
-                  </Box>
-                </div>
-              </div>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>{" "}
-        <div className="row justify-content-center">
-          <div className="col-9">
-            <p className="h1 mt-4">Recommended for you</p>
-
-            <div data-interval="false">
-              {" "}
-              <Carousel>
-                <Carousel.Item color="blue">
-                  <MovieCards />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <MovieCards />
-                </Carousel.Item>
-              </Carousel>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ChakraProvider>
+      </Box >
+    </ChakraProvider >
   );
 }
