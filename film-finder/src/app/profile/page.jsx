@@ -43,7 +43,9 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
-import { poster, getPoster } from "../database.js";
+import { poster } from "../db/database.js";
+import NavDrawer from "@/app/components/Drawer";
+
 const num1 = await poster('Spider-Man');
 const num2 = await poster('Gremlins 2');
 const num3 = await poster('Interstellar');
