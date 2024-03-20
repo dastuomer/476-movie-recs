@@ -43,7 +43,9 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
-import { poster, getPoster } from "../database.js";
+import { poster } from "../db/database.js";
+import {signOut, useSession} from "next-auth/react";
+
 const num1 = await poster('Spider-Man');
 const num2 = await poster('Gremlins 2');
 const num3 = await poster('Interstellar');
@@ -51,6 +53,7 @@ const num4 = await poster('Gladia');
 const num5 = await poster('Mad Max: F');
 
 export default function Page() {
+    //const {data: session} = useSession();
     return (
         <ChakraProvider>
             <Box backgroundColor="#2D3748">
@@ -63,9 +66,7 @@ export default function Page() {
                         <Center>
                             <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>   
                         </Center>
-                            <Heading fontSize="4xl" align={"center"} mt='100px'>
-                                Profile Name
-                            </Heading>
+                            <Heading fontSize="4xl" align={"center"} mt='100px'></Heading>
                             <Center>
                                 <Box w='50%'>
                                     <Text fontSize="xl" margin='3px' align={"center"}> 
