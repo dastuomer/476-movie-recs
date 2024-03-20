@@ -6,7 +6,7 @@ export default function MovieCards() {
     <>
       <HStack>
         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" borderRadius="50%" />
+          <Card.Img variant="top" src="holder.js/100px180" borderradius="50%" />
           <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
