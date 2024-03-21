@@ -28,6 +28,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 //import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
+import SearchBar from "./searchBar.jsx";
 
 export default function NavDrawer() {
   const { isOpen, onClose, onToggle } = useDisclosure();
@@ -95,18 +96,7 @@ export default function NavDrawer() {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    <Box>
-                      <Link href="profile">Nabeera</Link>
-                    </Box>
-                    <Box>
-                      <Link href="profile">Xander</Link>
-                    </Box>
-                    <Box>
-                      <Link href="profile">Alex</Link>
-                    </Box>
-                    <Box>
-                      <Link href="profile">Maxx</Link>
-                    </Box>
+                    <SearchBar />
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
