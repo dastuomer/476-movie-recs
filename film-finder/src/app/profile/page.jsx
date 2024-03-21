@@ -75,7 +75,7 @@ const Profile = () => {
                             <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>  
                         </Center>
                         <Center>
-                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{session.user?.username}</Heading> )}   
+                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{session.user?.email}</Heading> )}   
                         </Center>
                             <Center>
                                 <Box w='50%'>
