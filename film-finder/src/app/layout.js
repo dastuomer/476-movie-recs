@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 //import Logo from "../components/logo.js";
 import { getServerSession } from "next-auth";
-import SessionProvider from "@/app/db/SessionProvider";
+import SessionProvider from "@/app/utils/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +16,13 @@ export const metadata = {
 export default async function RootLayout({children}){
   const session = await getServerSession();
   return (
+    <SessionProvider session={session}>
     <html lang="en">
       <body className={inter.className}>
-      <SessionProvider session={session}>
         {/* <h1><Logo /></h1> */}
         {children}
-      </SessionProvider>
       </body>
     </html>
+    </SessionProvider>
   );
 }

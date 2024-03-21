@@ -1,6 +1,6 @@
 //This file authorizes account creation and adds it to the DB
-import User from "../../db/User";
-import connect from '../../db/dbconnect';
+import User from "../../models/User";
+import connect from '../../utils/dbconnect';
 import { NextResponse } from "next/server";
 
 //Using POST method for sending info

@@ -43,62 +43,66 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation.js"
+import {signIn, useSession } from "next-auth/react";
 import Link from "next/link.js"
 
 //IMPORTANT NOTE: default function is changed to export both HTML and the code for managing account creation
-const Register = () => {
-    //Used to help show errors
-    const [error, setError] = useState("");
+const Login = () => {
     //Redirects current page
     const router = useRouter();
+    //Used to help show errors
+    const [error, setError] = useState("");
+    //Checks the current user session and if they are logged in. 
+    const session = useSession();
+
+    //Checks if user is logged in already and directs to profile automatically if true
+    useEffect(() => {
+        if (session?.status === "authenticated") {
+            router.replace("/profile");
+        }
+    }, [session, router])
+    
     //REGEX check on the email field
     const isValidEmail = (email) => {
         const emailReg = /^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+/i;
         return emailReg.test(email);
     };
-    //Called when submit button is clicked, manages user account creation.
+
+    //Handles the login attempt from the user.
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //Gets values of the 3 fields, stores in variables
+        //Gets the values out of the input fields and stores them in variables
         const email = e.target[0].value;
         const username = e.target[1].value;
         const password = e.target[2].value;
-        //Will deny account creation if email is not valid. 
-        //NOTE: we could add more limitations here like password length and such.
+        //Will give an error message if the email entered doesnt pass REGEX check
         if (!isValidEmail(email)) {
             setError("This is not a valid email.");
             return;
         }
-        try {
-            //Creates POST to send to route.js in the register folder
-            const res = await fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "applications/json",},
-                body: JSON.stringify({
-                    email,
-                    username,
-                    password
-                })
-            })
-            //Error for if the username/email is in the DB already
-            if (res.status == 400) {
-                setError("Already registered.");
-            }
-            //Signifies that account is created, automatically sends user to the profile page (can be changed)
-            if (res.status == 200) {
-                setError("");
-                router.push("/profile");
-            }
-        }catch(error) {
-            setError("Error, please try again.");
+        //Attempts to sign in the user given the user's inputs.
+        const res = await signIn("credentials", {
+            redirect: false,
+            email,
+            username,
+            password
+        })
+
+        //Will tell the user that their login isnt found in the DB or they typed in something wrong.
+        if (res?.error) {
+            setError("Invalid email or password res error.");
+            //Sent to profile page upon successful login
+            if (res?.url) router.replace("/profile")
+        } else {
+            console.log(res?.url)
+            setError("");
         }
-    } 
+    }
     return (
-        <ChakraProvider>
-             <title>Film Finder - Signup</title>
+            <ChakraProvider>
+                <title>Film Finder - Login</title>
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
@@ -109,7 +113,7 @@ const Register = () => {
                             <div className="col-10">
                                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                                     <Center>
-                                        <Text fontSize="40" margin="20px">Sign Up</Text>
+                                        <Text fontSize="40" margin="20px">Log In</Text>
                                     </Center>
                                     <Center>
                                         <Box w="50%" bg="lightslategrey" borderRadius="100px" minHeight="800px">
@@ -135,13 +139,16 @@ const Register = () => {
                                                             </div>
                                                             <Input placeholder='pass' type='password' required></Input>
                                                         </Flex>
-                                                        <Button olorScheme='blue' margin='5px' pos='absolute' marginTop="150px" type='submit'>Create account</Button>
+                                                        <Button colorScheme='blue' margin='5px' pos='absolute' marginTop="200px" type='submit'>Log In</Button>
                                                         <Text>{error && error}</Text>
                                                     </form>
                                                     </Grid>
                                                     <Center>
-                                                        <Text marginTop="325px">Already have an account?</Text>
-                                                        <Button colorScheme='blue' margin='5px' pos='absolute' marginTop="400px"> <Link Link href="signup">Log In Here</Link></Button>
+                                                        
+                                                    </Center>
+                                                    <Center>
+                                                        <Text marginTop="425px">Don't have an account?</Text>
+                                                        <Button colorScheme='blue' margin='5px' pos='absolute' marginTop="500px"> <Link href="signup">Create Account Here</Link></Button>
                                                     </Center>
                                                 </Box>
                                             </Center>
@@ -153,7 +160,7 @@ const Register = () => {
                     </div>
                 </div>
             </Box>
-        </ChakraProvider>
-        )
-};
-export default Register;
+            </ChakraProvider>
+    )
+}
+export default Login;

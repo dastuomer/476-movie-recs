@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Logo from "../components/logo.js";
 import {
@@ -43,17 +44,19 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
-import { poster } from "../db/database.js";
 import NavDrawer from "@/app/components/Drawer";
+import {signOut, useSession} from "next-auth/react";
+import {redirect} from "next/navigation";
 
-const num1 = await poster('Spider-Man');
-const num2 = await poster('Gremlins 2');
-const num3 = await poster('Interstellar');
-const num4 = await poster('Gladia');
-const num5 = await poster('Mad Max: F');
+//import { poster } from "../utils/database.js";
+//const num1 = await poster('Spider-Man');
+//const num2 = await poster('Gremlins 2');
+//const num3 = await poster('Interstellar');
+//const num4 = await poster('Gladia');
+//const num5 = await poster('Mad Max: F');
 
-export default function Page() {
-    //const {data: session} = useSession();
+const Profile = () => {
+    const {data: session, status} = useSession();
     return (
         <ChakraProvider>
             <title>Film Finder - User Profile</title>
@@ -69,9 +72,11 @@ export default function Page() {
                         <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px' zIndex='1'>Favourite Movie: Lord of the Rings : Return of the King</Text>
                         <Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>
                         <Center>
-                            <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>   
+                            <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>  
                         </Center>
-                            <Heading fontSize="4xl" align={"center"} mt='100px'></Heading>
+                        <Center>
+                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{session.user?.username}</Heading> )}   
+                        </Center>
                             <Center>
                                 <Box w='50%'>
                                     <Text fontSize="xl" margin='3px' align={"center"}> 
@@ -95,11 +100,11 @@ export default function Page() {
                             <TabPanels>
                                 <TabPanel>
                                 <Grid templateColumns='repeat(5, 1fr)'>
-                                <Image width='200px' height='300px' objectFit='cover' src={num1}></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src={num2}></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src={num3}></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src={num4}></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src={num5}></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
+                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
                                 <Text align='center'>1. Lord of the Rings : Return of the King</Text>
                                 <Text align='center'>2. Dune 2</Text>
                                 <Text align='center'>3. Interstellar</Text>
@@ -137,9 +142,6 @@ export default function Page() {
                             </TabPanels>
                             </Tabs>
                             <Divider />
-                            <Center>
-                                <Button colorScheme='blue' margin='5px' pos='absolute' bottom='5px'> <Link href="login">Log Out</Link></Button>
-                            </Center>
                         </Box>
                       </div>
                       <div className="col-1">
@@ -153,3 +155,5 @@ export default function Page() {
         
     )
 }
+export default Profile;
+//{!session ? (<Text>User</Text>): (session.user?.email)}

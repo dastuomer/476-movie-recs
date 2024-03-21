@@ -1,5 +1,6 @@
 //File that defines what the user database entry will look like. Specifies datatype, uniqueness, and requiredness of each element
 import mongoose from "mongoose";
+//import { Link } from "react-bootstrap/lib/Navbar";
 
 const {Schema} = mongoose;
 
@@ -21,6 +22,9 @@ const userSchema = new Schema(
             unique: false,
             required: true,
         },
+        pfp: {
+            type: String
+        }
     },
     { timestamps: true }
 );

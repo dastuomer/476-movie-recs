@@ -23,17 +23,22 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Button,
+  Center,
   pseudoSelectors,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 //import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
+import {signOut, useSession} from "next-auth/react";
+import {redirect} from "next/navigation";
 
 export default function NavDrawer() {
   const { isOpen, onClose, onToggle } = useDisclosure();
   const btnRef = React.useRef();
   const friendLink = React.useRef();
   const [isHovering, setIsHovering] = useState(false);
+  const {data: session, status} = useSession();
 
   // const handleMouseOver = () => {
   //   setIsHovering(true);
@@ -136,10 +141,15 @@ export default function NavDrawer() {
           </DrawerBody>
 
           <DrawerFooter>
+            {!session?(
             <Stack>
-              <Link href="login"> Logout </Link>
-              <Link href="signup"> Signup </Link>
-            </Stack>
+              <Link href="login"> Log In </Link>
+              <Link href="signup"> Register </Link>
+            </Stack>):
+            (
+                <Button colorScheme='blue' margin='5px' pos='absolute' bottom='5px' onClick={() => {signOut();}}> <Link href="login">Log Out</Link></Button>
+            )}
+            
             {/* Make this button navigate back to the log in page */}
           </DrawerFooter>
         </DrawerContent>
