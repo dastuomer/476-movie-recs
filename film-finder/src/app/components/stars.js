@@ -10,9 +10,10 @@ const StarRating = () => {
     return <div>
         {[... Array(5)].map((star, i) => {
             const ratingValue = i + 1;
+            
 
             return (
-                <label>
+                <label key={i}> {/* Needs to have a unique key variable, or else will have 2 billion warnings every time you load this function.*/}
                     <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)} />
                     <StarIcon className='star' color={ratingValue <= (hover || rating) ? "gold" : "gray"} fontSize={25} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)}/>
                 </label>
