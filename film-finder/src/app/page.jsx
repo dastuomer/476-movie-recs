@@ -24,6 +24,8 @@ import {
 import TheReturnOfTheKing from "./components/movie-picture.jsx";
 import { SearchIcon } from "@chakra-ui/icons";
 import MovieCards from "./components/MovieCards.jsx";
+import SearchBar from "./components/searchBar/searchBarMain.jsx";
+import { Movies } from "./components/searchBar/movies-MOCK";
 
 export default function Page() {
   return (
@@ -40,7 +42,7 @@ export default function Page() {
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
                   <div className="col-10">
-                    {/* Trying to make this search bar wider */}
+                    {/* Trying to make this search bar wider 
                     <InputGroup size="lg" w="100%" margin="15px">
                       <Input
                         placeholder="Search For a Movie"
@@ -49,10 +51,10 @@ export default function Page() {
                         borderColor="#4A5568"
                         borderWidth={1.5}
                         borderLeftRadius={50}/>
-                      <IconButton
-                        aria-label="Search database"
-                        icon={<SearchIcon />}/>
+                        
                     </InputGroup>
+                    */}
+                    <SearchBar placeholder="Enter a movie title..." dataSet={Movies}/>
                   </div>
                   </Center>
                   <Tabs variant="line" colorScheme="gray" position="relative">
