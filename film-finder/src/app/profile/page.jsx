@@ -84,9 +84,12 @@ const Profile = () => {
                                     </Text>
                                 </Box>
                             </Center>
-                            <Text fontSize="xl" margin='5px'> 
-                                        Movie stats here or in some other spot?
-                            </Text>
+                            <Flex>
+                                <Button colorScheme='blue' margin='5px' algin=""> <Link href="view-friend-review">View User's Reviews</Link></Button>
+                                <Text fontSize="xl" margin='5px'> 
+                                            Movie stats here or in some other spot?
+                                </Text>
+                            </Flex>
                             <Divider />
                             <Tabs isFitted variant='solid-rounded' colorScheme='blue' margin='2px'>
                             <TabList mb='1em'>

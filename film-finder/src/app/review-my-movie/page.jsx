@@ -3,48 +3,20 @@ import Logo from "../components/logo.js";
 import StarRating from "../components/stars.js";
 import NavDrawer from "@/app/components/Drawer";
 import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   Divider,
   Button,
-  IconButton,
-  Input,
-  useDisclosure,
-  Avatar,
-  AvatarBadge,
-  HStack,
-  Stack,
   Text,
   Box,
   Center,
-  Circle,
-  Heading,
   Link,
   Image,
   Grid,
   Textarea,
-  WrapItem,
-  Container,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Tab,
-  TabList,
-  TabPanels,
-  Tabs,
-  TabPanel,
-  extendTheme,
-  ColorModeScript,
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
+
+{/*Obtain Selected movie's Poster, ~maybe genre, and reviews*/}
 
 export default function Page() {
   return (
@@ -64,35 +36,31 @@ export default function Page() {
                   </Center>
                   <Divider />
                   <Flex margin="50px">
-                    <Image width='400px' height='500px' objectFit='cover' margin="20px" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*Etx-JkqJ5fGz9DnwLVlzNA.jpeg"></Image>
+                    <Image width='400px' height='500px' objectFit='cover' margin="20px" src=""></Image>{/*Movie poster URL*/}
                     <Box w="55%">
-                      <Text fontSize='4xl' margin="15px" marginLeft="30px" as="u"> V For Vendetta </Text>
-                      <Text margin="5px" marginLeft="30px"> - Action, Horror, Comedy</Text>
+                      <Text fontSize='4xl' margin="15px" marginLeft="30px" as="u"> Movie Title </Text>{/*Movie Title*/}
+                      <Text margin="5px" marginLeft="30px"> - Genre, Genre, Genre</Text>{/*Movie Genres*/}
                       <Flex marginTop="40px">
                         <Text marginLeft="45px" marginRight="10px" fontSize={20}>Rating:</Text>
-                        <StarRating />
+                        <StarRating/>{/*Inputted Movie Rating*/}
                       </Flex>
-                      <Textarea w="100%" outlineColor="black" minHeight="200px" marginLeft="45px" placeholder="Write your review!"></Textarea>
-                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href="view-my-movies">Submit Review</Link></Button>
+                      <Textarea w="100%" outlineColor="black" minHeight="200px" marginLeft="45px" placeholder="Write your review!"></Textarea>{/*Inputted Review text*/}
+                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href="view-my-movies">Submit Review</Link></Button>{/*Submits review and takes back to movies page*/}
                     </Box>
                   </Flex>
-                  <Divider />
+                  <Divider/>
                   <Center>
                     <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='35px'>
+{/*Loop for each review the selected movie has*/}
+{/*Obtain the Text, username, and rating from each review*/}
                       <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px">
                         <Flex>
-                          <Text margin="10px" fontSize="md">Muck's Review: </Text>
-                          <StarRating />
+                          <Text margin="10px" fontSize="md">User's Review: </Text>{/*Username of reviewer*/}
+                          <StarRating/>{/*Reviewr's rating of the movie*/}
                         </Flex>
-                        <Text margin="10px" fontSize="md">Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually </Text>
+                        <Text margin="10px" fontSize="md"> User's Review of the movie</Text>{/*Review text*/}
                       </Box>
-                      <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px">
-                        <Flex>
-                          <Text margin="10px" fontSize="md">Muck's Review: </Text>
-                          <StarRating />
-                        </Flex>
-                        <Text margin="10px" fontSize="md">Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually Zander watch the movie it's a good one actually </Text>
-                      </Box>
+{/*End loop*/}
                     </Grid>
                   </Center>
                   <Center>
