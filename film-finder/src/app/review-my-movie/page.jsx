@@ -16,7 +16,24 @@ import {
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 
-{/*Obtain Selected movie's Poster, ~maybe genre, and reviews*/}
+{/*Obtain Selected movie's Poster, ~maybe genre, and review list (Search all Reviews for matching MovieID, and get ReviewIDs)*/}
+
+function getMovieReviewList(/*Selected movie's Review list*/) {
+  const reviewArray = [];
+  for (let i = 0; i < 10 /*Number of review's for selected movie*/; i++) {
+    {/*Obtain each review's Username, Rating, and Review text*/}
+    reviewArray.push(
+      <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px" minWidth="700px">
+      <Flex>
+        <Text margin="10px" fontSize="md">User's Review: </Text>{/*Username of reviewer*/}
+        <StarRating/>{/*Reviewr's rating of the movie*/}
+      </Flex>
+      <Text margin="10px" fontSize="md"> User's Review of the movie</Text>{/*Review text*/}
+    </Box>
+    )
+  }
+  return reviewArray;
+}
 
 export default function Page() {
   return (
@@ -45,22 +62,20 @@ export default function Page() {
                         <StarRating/>{/*Inputted Movie Rating*/}
                       </Flex>
                       <Textarea w="100%" outlineColor="black" minHeight="200px" marginLeft="45px" placeholder="Write your review!"></Textarea>{/*Inputted Review text*/}
-                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href="view-my-movies">Submit Review</Link></Button>{/*Submits review and takes back to movies page*/}
+                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href="view-my-movies">Submit Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
                     </Box>
                   </Flex>
                   <Divider/>
                   <Center>
                     <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='35px'>
-{/*Loop for each review the selected movie has*/}
-{/*Obtain the Text, username, and rating from each review*/}
-                      <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px">
+                      <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px" minWidth="700px">
                         <Flex>
                           <Text margin="10px" fontSize="md">User's Review: </Text>{/*Username of reviewer*/}
                           <StarRating/>{/*Reviewr's rating of the movie*/}
                         </Flex>
                         <Text margin="10px" fontSize="md"> User's Review of the movie</Text>{/*Review text*/}
                       </Box>
-{/*End loop*/}
+                      {getMovieReviewList(/*Selected movie's Review list -- OR -- ReviewID*/)} {/*delete previous movie print^^ once connected*/}
                     </Grid>
                   </Center>
                   <Center>
