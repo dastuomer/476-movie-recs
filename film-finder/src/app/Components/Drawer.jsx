@@ -33,6 +33,8 @@ import SearchBar from "./searchBar.jsx";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import CheckLogin from "@/app/api/navigate/route.jsx"
+import SearchBar from "./searchBar/searchBarFriends.jsx";
+import { Users } from "./searchBar/users";
 
 const NavDrawer = () =>  {
   const { isOpen, onClose, onToggle } = useDisclosure();
@@ -104,7 +106,7 @@ const NavDrawer = () =>  {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    <SearchBar />
+                    <SearchBar placeholder="Enter a friend's username..." dataSet={Users} value='first_name' />
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>

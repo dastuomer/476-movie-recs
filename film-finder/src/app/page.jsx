@@ -1,6 +1,7 @@
 "use client";
 // import Burger from "./components/burger.jsx";
 import * as React from "react";
+import {useState, useEffect} from "react";
 import Logo from "./components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import Carousel from "react-bootstrap/Carousel";
@@ -24,8 +25,30 @@ import {
 import TheReturnOfTheKing from "./components/movie-picture.jsx";
 import { SearchIcon } from "@chakra-ui/icons";
 import MovieCards from "./components/MovieCards.jsx";
+import SearchBar from "./components/searchBar/searchBarMain.jsx";
+import { Movies } from "./components/searchBar/movies-MOCK";
 
 export default function Page() {
+
+  const[data,setData] = useState([{}])
+
+  useEffect(() => {
+    fetch("http://localhost:5000/movies2").then(
+      res => res.json()
+    ).then(
+        data => {
+          setData(data)
+          console.log(data)
+        }
+
+    )
+  }, [])
+
+
+
+
+
+
   return (
     <ChakraProvider>
       <title>Film Finder - Home Page</title>
@@ -40,7 +63,7 @@ export default function Page() {
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
                   <div className="col-10">
-                    {/* Trying to make this search bar wider */}
+                    {/* Trying to make this search bar wider 
                     <InputGroup size="lg" w="100%" margin="15px">
                       <Input
                         placeholder="Search For a Movie"
@@ -49,10 +72,10 @@ export default function Page() {
                         borderColor="#4A5568"
                         borderWidth={1.5}
                         borderLeftRadius={50}/>
-                      <IconButton
-                        aria-label="Search database"
-                        icon={<SearchIcon />}/>
+                        
                     </InputGroup>
+                    */}
+                    <SearchBar placeholder="Enter a movie title..." dataSet={Movies}/>
                   </div>
                   </Center>
                   <Tabs variant="line" colorScheme="gray" position="relative">
@@ -78,6 +101,24 @@ export default function Page() {
                               marginTop={3}
                               borderRadius={50}
                             >
+
+
+
+<div>
+          {(typeof data.movies2 === 'undefined')?(
+            <p>Loading....</p>
+          ):(
+            data.movies2.map ((movie2, i) => (
+              <p key = {i} > {movie2} </p>
+            ))
+          )}
+      </div>
+
+
+
+
+
+
                               <div className="row">
                                 <div className="col-3">
                                   <TheReturnOfTheKing className="align-left" />
