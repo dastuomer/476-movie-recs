@@ -7,6 +7,11 @@ const {Schema} = mongoose;
 //Defines the user schema (needs a email, username, and password)
 const userSchema = new Schema(
     {
+        userid: {
+            type: String,
+            unique: true,
+            required: true
+        },
         email: {
             type: String,
             unique: true,
@@ -25,8 +30,7 @@ const userSchema = new Schema(
         pfp: {
             type: String
         }
-    },
-    { timestamps: true }
+    }
 );
 //Exports the model for use in other parts of the code.
 export default mongoose.models.User || mongoose.model("User", userSchema);

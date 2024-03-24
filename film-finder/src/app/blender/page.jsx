@@ -10,8 +10,12 @@ import {
 } from '@chakra-ui/react'
 
 import { Text, VStack, HStack, StackDivider, Flex, Spacer, Image } from '@chakra-ui/react'
+import CheckLogin from "@/app/api/navigate/route.jsx"
+import { getServerSession } from "next-auth"
 
 export default function Page() {
+    const ses = getServerSession();
+    CheckLogin(ses);
     return (
         <ChakraProvider>
             <title>Film Finder - Blender</title>

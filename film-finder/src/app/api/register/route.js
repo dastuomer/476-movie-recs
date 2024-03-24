@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 //Using POST method for sending info
 export const POST = async (request) => {
-    const {email, username, password } = await request.json();
+    const {email, username, password} = await request.json();
     //Connect to the DB
     await connect();
 
@@ -22,10 +22,15 @@ export const POST = async (request) => {
       }
 
     //Creates new DB entry with info from signup page
+
+    const accounts = await User.find();
+    const userid = Object.keys(accounts).length.toString();
+
     const newUser = new User({
-        email,
-        username,
-        password,
+        userid: userid,
+        email: email,
+        username: username,
+        password: password,
     });
     try{
         //Sends info to the DB and gives a success status

@@ -20,10 +20,14 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
+import CheckLogin from "@/app/api/navigate/route.jsx"
+import { getServerSession } from "next-auth"
 
 {/*Obtain user's movie list and each movie's Poster, Title, ~maybe Genre, and Average stars(~IMDB)*/}
 
 export default function Page() {
+  const ses = getServerSession();
+  CheckLogin(ses);
   return (
     <ChakraProvider>
       <title>Film Finder - Your Movies</title>

@@ -15,9 +15,12 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
+import CheckLogin from "@/app/api/navigate/route.jsx"
+import { getServerSession } from "next-auth"
 
 {/*Obtain Selected movie's Poster, ~maybe genre, and reviews*/}
-
+const ses = getServerSession();
+CheckLogin(ses);
 export default function Page() {
   return (
     <ChakraProvider>

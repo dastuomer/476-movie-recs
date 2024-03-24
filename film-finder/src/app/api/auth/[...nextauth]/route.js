@@ -21,7 +21,7 @@ export const authOptions = {
             await connect();
             try{
                 //Looks for an instance in the DB of a user with the inputed email, returns the database entry
-                const user = await User.findOne({email: credentials.email})
+                const user = await User.findOne({email: credentials.email});
                 if (user)
                 {
                     //Checks if password in DB and inputed password match
@@ -34,7 +34,8 @@ export const authOptions = {
             }
         }
     }),
-  ],
+  ]
+  
 }
 export const handler = NextAuth(authOptions);
 export {handler as GET, handler as POST};

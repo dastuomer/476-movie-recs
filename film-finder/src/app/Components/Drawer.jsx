@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -18,23 +17,33 @@ import {
   Stack,
   Text,
   Box,
+  Button,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Center,
   pseudoSelectors,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 //import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
 import SearchBar from "./searchBar.jsx";
+import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import CheckLogin from "@/app/api/navigate/route.jsx"
 
-export default function NavDrawer() {
+const NavDrawer = () =>  {
   const { isOpen, onClose, onToggle } = useDisclosure();
   const btnRef = React.useRef();
   const friendLink = React.useRef();
   const [isHovering, setIsHovering] = useState(false);
+
+  const {data: session} = useSession();
+  const [error, setError] = useState("");
+
+  //CheckLogin();
 
   // const handleMouseOver = () => {
   //   setIsHovering(true);
@@ -43,7 +52,6 @@ export default function NavDrawer() {
   // const handleMouseOut = () => {
   //   setIsHovering(false);
   // };
-
   return (
     <>
       {/* <Button ref={btnRef} colorScheme="teal" onClick={onOpen} positi>
@@ -124,12 +132,13 @@ export default function NavDrawer() {
               </Text>
             </Button> */}
           </DrawerBody>
-
           <DrawerFooter>
-            <Stack>
-              <Link href="login"> Logout </Link>
-              <Link href="signup"> Signup </Link>
-            </Stack>
+          {!session? 
+          (<Stack>
+            <Link href="signup"> Sign Up </Link>
+            <Link href="login"> Log In </Link>
+          </Stack>):
+          (<Button colorScheme='blue' onClick={() => {signOut();}}> Log Out</Button>)}
             {/* Make this button navigate back to the log in page */}
           </DrawerFooter>
         </DrawerContent>
@@ -137,3 +146,4 @@ export default function NavDrawer() {
     </>
   );
 }
+export default NavDrawer;

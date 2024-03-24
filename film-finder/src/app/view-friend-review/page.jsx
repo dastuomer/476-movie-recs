@@ -12,10 +12,13 @@ import {
     Flex,
     Image
 } from "@chakra-ui/react";
-
+import CheckLogin from "@/app/api/navigate/route.jsx"
+import { getServerSession } from "next-auth"
 {/*Obtain Selected User's Username, and Review list*/}
 
 export default function Page() {
+    const ses = getServerSession();
+    CheckLogin(ses);
     return (
         <ChakraProvider>
             <title>Film Finder - Friend's Reviews</title>

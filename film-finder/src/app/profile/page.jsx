@@ -47,6 +47,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import NavDrawer from "@/app/components/Drawer";
 import {signOut, useSession} from "next-auth/react";
 import {redirect} from "next/navigation";
+import CheckLogin from "@/app/api/navigate/route.jsx"
+import { getSession } from "next-auth/react"
 
 //import { poster } from "../utils/database.js";
 //const num1 = await poster('Spider-Man');
@@ -56,7 +58,9 @@ import {redirect} from "next/navigation";
 //const num5 = await poster('Mad Max: F');
 
 const Profile = () => {
-    const {data: session, status} = useSession();
+    //const ses = getServerSession();
+    //CheckLogin(ses);
+    const {data: session, status} = useSession();  
     return (
         <ChakraProvider>
             <title>Film Finder - User Profile</title>
@@ -73,9 +77,9 @@ const Profile = () => {
                         <Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>
                         <Center>
                             <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>  
-                        </Center>
+                        </Center> 
                         <Center>
-                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{session.user?.email}</Heading> )}   
+                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{session?.user.email}</Heading> )}   
                         </Center>
                             <Center>
                                 <Box w='50%'>
