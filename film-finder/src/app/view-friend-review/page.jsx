@@ -1,6 +1,5 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
-import TheReturnOfTheKing from "../components/movie-picture.jsx";
 import NavDrawer from "@/app/components/Drawer";
 import { ChakraProvider } from "@chakra-ui/react";
 import StarRating from "../components/stars.js";
@@ -13,7 +12,29 @@ import {
     Image
 } from "@chakra-ui/react";
 
-{/*Obtain Selected User's Username, and Review list*/}
+{/*Obtain Selected User's Username, and Review list (Search all reviews for matching UserID, and get ReviewIDs)*/ }
+
+function getUserReviewList(/*Selected User's review list*/) {
+    const reviewArray = [];
+    for (let i = 0; i < 10 /*Number of User's reviews*/; i++) {
+        {/*Obtain each Movie's Poster, Title, Review from Selected user, and Rating from Selected User*/}
+        reviewArray.push(
+            <Flex gap="20px" marginBottom="30px">
+                <div className="col-2">
+                    <Image className="align-left" width={200} height={200} src=""></Image>{/*Movie's Poster*/}
+                    <StarRating />{/*User's rating of the movies*/}
+                </div>
+                <div>
+                    <Text fontSize="25">Movie Title</Text>{/*Movie title*/}
+                    <Box borderColor="black" borderWidth="2px" borderRadius="5px" height="250px" width="1000px">
+                        <Text fontSize="16" margin="10px">Selected User's Review of the movie</Text>{/*Selected user's review text*/}
+                    </Box>
+                </div>
+            </Flex>
+        )
+    }
+    return reviewArray;
+}
 
 export default function Page() {
     return (
@@ -42,9 +63,7 @@ export default function Page() {
                                     <div className="row justify-content-center">
                                         <div className="col-11">
                                             <Box className="container-fluid" bg='#4A5568' w='100%' p={20} color='white' marginTop={3} borderRadius='20'>
-{/*Loop for each Review Selected user has made*/}
-{/*Obtain each movie's Poster, Title, Review and Selected User's rating*/}
-                                                <Flex gap="20px">
+                                                <Flex gap="20px" marginBottom="30px">
                                                     <div className="col-2">
                                                         <Image className="align-left" width={200} height={200} src=""></Image>{/*Movie's Poster*/}
                                                         <StarRating />{/*User's rating of the movies*/}
@@ -55,8 +74,8 @@ export default function Page() {
                                                             <Text fontSize="16" margin="10px">Selected User's Review of the movie</Text>{/*Selected user's review text*/}
                                                         </Box>
                                                     </div>
-                                                </Flex><br/>
-{/*End Loop*/}
+                                                </Flex>
+                                                {getUserReviewList(/*Selected User's review list*/)} {/*delete previous movie print^^ once connected*/}
                                             </Box>
                                         </div>
                                     </div>
