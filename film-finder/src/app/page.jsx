@@ -1,6 +1,7 @@
 "use client";
 // import Burger from "./components/burger.jsx";
 import * as React from "react";
+import {useState, useEffect} from "react";
 import Logo from "./components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import Carousel from "react-bootstrap/Carousel";
@@ -28,6 +29,26 @@ import SearchBar from "./components/searchBar/searchBarMain.jsx";
 import { Movies } from "./components/searchBar/movies-MOCK";
 
 export default function Page() {
+
+  const[data,setData] = useState([{}])
+
+  useEffect(() => {
+    fetch("http://localhost:5000/movies2").then(
+      res => res.json()
+    ).then(
+        data => {
+          setData(data)
+          console.log(data)
+        }
+
+    )
+  }, [])
+
+
+
+
+
+
   return (
     <ChakraProvider>
       <title>Film Finder - Home Page</title>
@@ -80,6 +101,24 @@ export default function Page() {
                               marginTop={3}
                               borderRadius={50}
                             >
+
+
+
+<div>
+          {(typeof data.movies2 === 'undefined')?(
+            <p>Loading....</p>
+          ):(
+            data.movies2.map ((movie2, i) => (
+              <p key = {i} > {movie2} </p>
+            ))
+          )}
+      </div>
+
+
+
+
+
+
                               <div className="row">
                                 <div className="col-3">
                                   <TheReturnOfTheKing className="align-left" />
