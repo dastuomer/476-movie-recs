@@ -10,13 +10,42 @@ import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 function SearchBar({ placeholder, dataSet, value}) {
     
     const [query, setQuery] = useState("");
+    const [error, setError] = useState("");
 
     const handleChange = (e) => {
         setQuery(e.target.value);
     }
 
-    const searchInput = () => {
+    {/*async function searchMovie(title)  {
+        try {
+            //Creates POST to send to route.js in the register folder
+            const res = await fetch("/api/movie_title", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "applications/json",},
+                body: JSON.stringify({
+                    title
+                })
+            })
+            //Error for if the username/email is in the DB already
+            if (res.status == 400) {
+                setError("Movie not found.");
+            }
+            //Signifies that account is created, automatically sends user to the profile page (can be changed)
+            if (res.status == 200) {
+                setError("Movie found!");
+                console.log(title);
+            }
+        }catch(error) {
+            setError("Error, please try again.");
+        }
+    }
+*/}
 
+    const fillSearch = (searchWord) =>{
+        setQuery(searchWord); // Deletes the div 
+        
+        
     }
 
     const clearInput = () => {
@@ -38,13 +67,13 @@ function SearchBar({ placeholder, dataSet, value}) {
                             onChange={handleChange}
                             value={query}/>
                        
-                    <InputRightElement id="button"> {query.length === 0 ? <SearchIcon /> : <CloseIcon onClick={clearInput}/>}</InputRightElement>
+                    <InputRightElement id="button"> {query.length === 0 ? <SearchIcon/> : <CloseIcon onClick={clearInput}/>}</InputRightElement>
                 </InputGroup>
             </Center>
             {query.length != 0 && (
-                <div className="dataResult">
+                <div className="dataResult"> {/*onClick={console.log(dataSet.Title)}*/}
                         {dataSet.filter(data=>data.Title.toLowerCase().includes(query.toLowerCase())).slice(0,7).map((dataSet) => {
-                            return <p className="hoverMe" key={dataSet.id}> {dataSet.Title} </p>
+                            return <p className="hoverMe" key={dataSet.id} onClick={()=>fillSearch(dataSet.Title)} > {dataSet.Title} </p>
                         })
                         }
                 </div>
@@ -52,6 +81,10 @@ function SearchBar({ placeholder, dataSet, value}) {
         </div>
         
     );
+
+    function selectInput(data){
+        document.getElementsByTagName(Input).value = data;
+    }
 
 }
 export default SearchBar;
