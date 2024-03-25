@@ -29,7 +29,6 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 //import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
-import SearchBar from "./searchBar.jsx";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import CheckLogin from "@/app/api/navigate/route.jsx"
