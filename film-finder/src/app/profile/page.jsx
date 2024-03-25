@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import Logo from "../components/logo.js";
 import {
@@ -45,22 +44,34 @@ import {
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import NavDrawer from "@/app/components/Drawer";
-import {signOut, useSession} from "next-auth/react";
-import {redirect} from "next/navigation";
-import CheckLogin from "@/app/api/navigate/route.jsx"
-import { getSession } from "next-auth/react"
+import { getServerSession } from "next-auth";
+import {redirect} from "next/navigation.js";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 
-//import { poster } from "../utils/database.js";
-//const num1 = await poster('Spider-Man');
-//const num2 = await poster('Gremlins 2');
-//const num3 = await poster('Interstellar');
-//const num4 = await poster('Gladia');
-//const num5 = await poster('Mad Max: F');
+const getUserInfo = async(e) => {
+    try {
+        const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, {cache: "no-store"});
+        if (!res.ok)
+        {   
+            throw new Error("Could not get user");
+        }
 
-const Profile = () => {
+        const convert = JSON.parse(JSON.stringify(await res.json()));
+        return await convert;
+    } catch (err) {
+        console.log("Error:", err);
+    }
+}
+
+const Profile = async() => {
     //const ses = getServerSession();
     //CheckLogin(ses);
-    const {data: session, status} = useSession();  
+    const session = await getServerSession(authOptions); 
+    //if (!session){
+        //redirect("/");
+    //} 
+    const {info} = await getUserInfo(session.user.email);
+    
     return (
         <ChakraProvider>
             <title>Film Finder - User Profile</title>
@@ -79,7 +90,7 @@ const Profile = () => {
                             <Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'></Image>  
                         </Center> 
                         <Center>
-                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{session?.user.email}</Heading> )}   
+                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{info.username}</Heading> )}   
                         </Center>
                             <Center>
                                 <Box w='50%'>
