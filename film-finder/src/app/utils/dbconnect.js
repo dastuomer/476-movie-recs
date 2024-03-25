@@ -17,3 +17,6 @@ const connect = async () => {
     }
 }
 export default connect;
+
+
+// USE 'connect' in all your API's!!!
