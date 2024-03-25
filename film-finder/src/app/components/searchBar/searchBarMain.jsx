@@ -42,10 +42,14 @@ function SearchBar({ placeholder, dataSet, value}) {
     }
 */}
 
-    const fillSearch = (searchWord) =>{
-        setQuery(searchWord); // Deletes the div 
-        
-        
+    const fillSearch = async (searchWord) =>{
+        setQuery(searchWord); // Fills the search bar with the title clicked
+        {/*try{
+            const res = await fetch(`http://localhost:3000/api/movie_title/${"Batman"}`);
+            console.log(res);
+        }
+        catch (error) {}
+        */}
     }
 
     const clearInput = () => {
@@ -81,10 +85,6 @@ function SearchBar({ placeholder, dataSet, value}) {
         </div>
         
     );
-
-    function selectInput(data){
-        document.getElementsByTagName(Input).value = data;
-    }
 
 }
 export default SearchBar;
