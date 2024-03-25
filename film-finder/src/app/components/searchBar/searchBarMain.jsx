@@ -10,9 +10,11 @@ import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 function SearchBar({ placeholder, dataSet, value}) {
     
     const [query, setQuery] = useState("");
-    const [error, setError] = useState("");
+    const [searchWord, setSearchWord] = useState("");
+
 
     const handleChange = (e) => {
+        setSearchWord(e.target.value);
         setQuery(e.target.value);
     }
 
@@ -43,35 +45,45 @@ function SearchBar({ placeholder, dataSet, value}) {
 */}
 
     const fillSearch = async (searchWord) =>{
-        setQuery(searchWord); // Fills the search bar with the title clicked
+        setQuery([])
+        setSearchWord(searchWord); // Fills the search bar with the title clicked
         {/*try{
             const res = await fetch(`http://localhost:3000/api/movie_title/${"Batman"}`);
             console.log(res);
         }
         catch (error) {}
         */}
+        
     }
 
     const clearInput = () => {
-        setQuery(""); // Removes all words from string
-        setQuery([]); // Deletes the div 
+        setSearchWord(""); // Removes all words from string
+        setQuery([]); // Deletes the div
+
     }
+
+    const formSubmit = (search) => {
+        console.log(search);
+    }
+    
 
     return (
         <div className="search">
             <Center>
                 <InputGroup size="lg" w="80%" margin="15px">
-                    <Input type="text" 
-                            placeholder={placeholder} 
-                            size="lg"
-                            w="100%"
-                            borderColor="#4A5568"
-                            borderWidth={1.5}
-                            borderRadius={50}
-                            onChange={handleChange}
-                            value={query}/>
-                       
-                    <InputRightElement id="button"> {query.length === 0 ? <SearchIcon/> : <CloseIcon onClick={clearInput}/>}</InputRightElement>
+                    <form className="form" onSubmit={formSubmit(searchWord)}>
+                        <Input type="text" 
+                                placeholder={placeholder} 
+                                size="lg"
+                                w="100%"
+                                borderColor="#4A5568"
+                                borderWidth={1.5}
+                                borderRadius={50}
+                                onChange={handleChange}
+                                value={searchWord}/>
+                        
+                        <InputRightElement id="button"> {query.length === 0 ? <SearchIcon/> : <CloseIcon onClick={clearInput}/>}</InputRightElement>
+                    </form>
                 </InputGroup>
             </Center>
             {query.length != 0 && (
@@ -88,27 +100,3 @@ function SearchBar({ placeholder, dataSet, value}) {
 
 }
 export default SearchBar;
-
-/* 
-
-<div className="search">
-            <div className="searchInputs">
-                <input type="text" placeholder={placeholder} onChange={e=> setQuery(e.target.value)}/>
-                <div className="searchIcon"> <SearchIcon/></div>
-            </div>
-            <div className="dataResult"></div>
-             <ul className="list">
-                {Movies.filter(movie=>movie.Title.includes(query)).map((movie) => (
-                    <li key={movie.id} className="listItem">{movie.Title}</li>
-                ))}
-            </ul>
-        </div>
-
-
-
-    {Users.filter(user=>user.first_name.includes(query)).map((user) => (
-    <li key={user.id} className="listItem">{user.first_name}</li>
-    ))}
-
-    ^^ Code for friends
-*/
