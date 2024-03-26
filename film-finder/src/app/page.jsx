@@ -5,6 +5,7 @@ import {useState, useEffect} from "react";
 import Logo from "./components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import Carousel from "react-bootstrap/Carousel";
+import StarRatingStatic from "./components/star_static.js";
 import Card from "react-bootstrap/Card";
 
 import {
@@ -73,6 +74,7 @@ export default function Page() {
                     */}
                     <SearchBar placeholder="Enter a movie title..." dataSet={Movies}/>
                   </div>
+                  <StarRatingStatic ratingNum={5}/>
                   </Center>
                   <Tabs variant="line" colorScheme="gray" position="relative">
                     <Center>
