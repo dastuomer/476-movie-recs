@@ -28,3 +28,7 @@
   #button {
     cursor: pointer;
   }
+
+  .form {
+    display: contents;
+  }
