@@ -18,8 +18,23 @@ import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
 import { getMovieInfo } from "../../view-my-movies/page.jsx";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 
 {/*Obtain Selected Movie Title from button used*/ }
+const getUserInfo = async(e) => {
+  try {
+      const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, {cache: "no-store"});
+      if (!res.ok)
+      {   
+          throw new Error("Could not get user");
+      }
+
+      const convert = JSON.parse(JSON.stringify(await res.json()));
+      return await convert;
+  } catch (err) {
+      console.log("Error:", err);
+  }
+}
 
 async function getSessionMovieInfo(MovieTitle) {
   const MInfo = await getMovieInfo(MovieTitle);
@@ -40,7 +55,6 @@ async function getSessionMovieInfo(MovieTitle) {
           <StarRating />{stars}{/*Inputted Movie Rating*/}
         </Flex>
         <Textarea w="100%" outlineColor="black" minHeight="200px" marginLeft="45px" placeholder="Write your review!"></Textarea>{/*Inputted Review text*/}
-        <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href="view-my-movies">Submit Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
       </Box>
     </Flex>
   );
@@ -120,9 +134,17 @@ const getReviewInfo = async (title, reviewsUserListEmail) => {
 
 export default async function Page({ params }) {
 
+  const session = await getServerSession(authOptions); 
+    if (!session){
+        redirect("/");
+    }
+    const {info} = await getUserInfo(session.user.email);
+
   console.log(params)
   const movieTitle = params.id
   console.log(movieTitle)
+
+  const reviewInfo = {email: info.email, username: info.username, title: movieTitle};
 
   return (
     <ChakraProvider>
@@ -156,7 +178,7 @@ export default async function Page({ params }) {
                   </Flex>
                   */}
                   {getSessionMovieInfo(movieTitle)}
-
+                  <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
                   <Divider />
                   <Center>
                     <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='35px'>

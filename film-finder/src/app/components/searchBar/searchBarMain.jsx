@@ -1,33 +1,30 @@
-"use client"
 import React, { useState } from "react";
 
 import "./search.css";
 import { SearchIcon } from "@chakra-ui/icons";
 import { CloseIcon } from "@chakra-ui/icons";
 import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
+// 
 
-
-function SearchBar({ placeholder, dataSet }) {
-    
+function SearchBar({ placeholder, dataSet }) { 
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
-
+    //const data = await getMovies();
     
-    const getMovies = () => {
+    const getMovies = async() => {
         try {
-        const res = fetch('http://localhost:3000/api/movie_title')
-        
+        const res = await fetch(`http://localhost:3000/api/movie_title?request=${query}`, {cache: "no-store"});
         if (!res.ok) {
         throw new Error("Failed to fetch movies");
         }
         console.log(res);
-        return res.json();
+        const convert = JSON.parse(JSON.stringify(await res.json()));
+        return convert;
 
         } catch (error) {
         console.log("Error loading movies", error);
         }
     }
-
 
     const handleChange = (e) => {
         setSearchWord(e.target.value);

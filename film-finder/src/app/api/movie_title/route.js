@@ -3,9 +3,10 @@ import Movie from "../../models/Movie";
 import connect from '../../utils/dbconnect';
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request) {
     await connect();
-    const movies = await Movie.findOne({title: "Miss Jerry"});
+    const search = request.nextUrl.searchParams.get("request");
+    const movies = await Movie.find({title: search}, {limit: 10});
     return NextResponse.json({ movies });
 }
 
@@ -20,3 +21,4 @@ export async function GET(movie_title) {
 }
 
 */}
+//

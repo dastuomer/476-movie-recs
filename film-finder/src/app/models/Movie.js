@@ -14,7 +14,7 @@ const movieSchema = new Schema(
     }
         
 );
-//Exports the model for use in other parts of the code.
+//Exports the model for use in other parts of the code. w
 
 const Movie = mongoose.models.movie_dataset_imdb || mongoose.model("movie_dataset_imdb", movieSchema)
 export default Movie;
