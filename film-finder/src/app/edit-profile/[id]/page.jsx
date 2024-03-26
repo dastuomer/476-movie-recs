@@ -344,7 +344,7 @@ const Edit = ({params}) => {
                             <div className="col-10">
                                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                                     <Center>
-                                        <Text fontSize="40" margin="20px"></Text>
+                                        <Text fontSize="40" margin="20px">Edit Profile</Text>
                                     </Center>
                                     <Center>
                                         <Box w="60%" bg="lightslategrey" borderRadius="100px" minHeight="800px">
@@ -357,7 +357,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Profile Picture:</Text>
                                                             </div>
                                                             <Input placeholder='image link' type='text' variant='filled' required></Input>
-                                                            <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                            <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleBanner}>
@@ -366,7 +366,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Banner :</Text>
                                                             </div>
                                                             <Input placeholder='image link' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleBio}>
@@ -375,7 +375,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Bio :</Text>
                                                             </div>
                                                             <Textarea placeholder='bio here' type='text' variant='filled' required></Textarea>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleGenres}>
@@ -384,7 +384,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Genres :</Text>
                                                             </div>
                                                             <Textarea placeholder='genres here' type='text' variant='filled' required></Textarea>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleActor}>
@@ -393,7 +393,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Favourite Actor :</Text>
                                                             </div>
                                                             <Input placeholder='image link' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleDirector}>
@@ -402,7 +402,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Favourite Director :</Text>
                                                             </div>
                                                             <Input placeholder='image link' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleSoundtrack}>
@@ -411,7 +411,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Favourite Soundtrack :</Text>
                                                             </div>
                                                             <Input placeholder='image link' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleCharacter}>
@@ -420,7 +420,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Favourite Character :</Text>
                                                             </div>
                                                             <Input placeholder='image link' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleMovie}>
@@ -429,7 +429,7 @@ const Edit = ({params}) => {
                                                                 <Text fontSize="20">Favourite Movie :</Text>
                                                             </div>
                                                             <Input placeholder='name' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="md" type='submit'>Change</Button>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     </Grid>
@@ -437,7 +437,7 @@ const Edit = ({params}) => {
                                                         <Text>{error && error}</Text>
                                                     </Center>
                                                     <Center>
-                                                        <Button colorScheme='blue' margin='5px'> <Link href="/profile">Back to Account</Link></Button>
+                                                        <Button colorScheme='blue' marginTop='20px'> <Link href="/profile">Back to Account</Link></Button>
                                                     </Center>
                                                 </Box>
                                             </Center>

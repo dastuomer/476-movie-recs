@@ -32,6 +32,8 @@ const Edit = ({ params }) => {
     const username = convert.get("username");
     const title = convert.get("title");
 
+    var starRating = 0;
+
     //Checks if user is logged in already and directs to profile automatically if true
     useEffect(() => {
         if (!session?.status === "authenticated") {
@@ -41,15 +43,17 @@ const Edit = ({ params }) => {
 
     const handleReview = async (e) => {
         e.preventDefault();
-        const rating = e.target[0].value;
-        const review = e.target[1].value;
+        const rating = e.target[5].value;
+        const review = e.target[6].value;
+        console.log(rating);
+        console.log(review);
         try {
             const res = await fetch(`http://localhost:3000/api/editreview/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ username, title, review }),
+                body: JSON.stringify({ username, title, review, rating }),
             });
             if (!res.ok) {
                 setError("Failed to change review.");
@@ -86,7 +90,7 @@ const Edit = ({ params }) => {
                                                     <form onSubmit={handleReview}>
                                                         <Flex>
                                                             <Text marginRight="10px" fontSize={20}>Your Movie Rating:</Text>
-                                                            <StarRating/>
+                                                            <StarRating starRating={starRating} id=''/>
                                                         </Flex>
                                                         <Textarea w="100%" outlineColor="black" minHeight="200px" placeholder="Write your review!" variant="filled" required></Textarea>
                                                         <Button colorScheme='blue' size="md" type='submit' marginTop="20px">Submit Review</Button>

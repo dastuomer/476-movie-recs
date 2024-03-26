@@ -90,7 +90,7 @@ const Profile = async() => {
                             (<Image borderRadius='full' boxSize='200px' borderColor='black' margin='-100px' zIndex='1' boxShadow='dark-lg' src = {info.pfp}></Image>)}  
                         </Center> 
                         <Center>
-                            {!session? (<Heading fontSize="4xl" align={"center"} mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" align={"center"} mt='100px'>{info.username}</Heading> )}   
+                            {!session? (<Heading fontSize="4xl" mt='100px'>Placeholder</Heading>):(<Heading fontSize="4xl" mt='100px'>{info.username}</Heading> )}   
                         </Center>
                             <Center>
                                 <Box w='50%'>
@@ -98,34 +98,19 @@ const Profile = async() => {
                                 </Box>
                             </Center>
                             <Flex>
-                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="view-friend-review">View User's Reviews</Link></Button>
+                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="view-my-movies">View Movies</Link></Button>
                                 <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href={`/edit-profile/${info.email}`}>Edit Profile Page</Link></Button>
                             </Flex>
                             <Divider />
                             <Tabs isFitted variant='solid-rounded' colorScheme='blue' margin='2px'>
                             <TabList mb='1em'>
-                                <Tab>Favourites</Tab>
                                 <Tab>Genres</Tab>
-                                <Tab>Actors</Tab>
-                                <Tab>Director</Tab>
-                                <Tab>Soundtrack</Tab>
-                                <Tab>Characters</Tab>
+                                <Tab>Favourite Actor</Tab>
+                                <Tab>Favourite Director</Tab>
+                                <Tab>Favourite Soundtrack</Tab>
+                                <Tab>Favourite Characters</Tab>
                             </TabList>
                             <TabPanels>
-                                <TabPanel>
-                                <Grid templateColumns='repeat(5, 1fr)'>
-                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
-                                <Image width='200px' height='300px' objectFit='cover' src=''></Image>
-                                <Text align='center'>1. Lord of the Rings : Return of the King</Text>
-                                <Text align='center'>2. Dune 2</Text>
-                                <Text align='center'>3. Interstellar</Text>
-                                <Text align='center'>4. Gladiator</Text>
-                                <Text align='center'> 5. Mad Max Fury Road</Text>
-                                </Grid>
-                                </TabPanel>
                                 <TabPanel>
                                 <Text>Favourite Genres: {!session? (" "):(info.genres)}</Text>
                                 </TabPanel>

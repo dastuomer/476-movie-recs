@@ -125,19 +125,19 @@ const Login = () => {
                                                             <div className="col-6">
                                                                 <Text fontSize="20">Email :</Text>
                                                             </div>
-                                                            <Input placeholder='email' type='text' required></Input>
+                                                            <Input placeholder='email' type='text' variant='filled' required></Input>
                                                         </Flex>
                                                         <Flex>
                                                             <div className="col-6">
                                                                 <Text fontSize="20">Username :</Text>
                                                             </div>
-                                                            <Input placeholder='username' type='text' required></Input>
+                                                            <Input placeholder='username' type='text' variant='filled' required></Input>
                                                         </Flex>
                                                         <Flex>
                                                             <div className="col-6">
                                                                 <Text fontSize="20">Password :</Text>
                                                             </div>
-                                                            <Input placeholder='pass' type='password' required></Input>
+                                                            <Input placeholder='pass' type='password' variant='filled' required></Input>
                                                         </Flex>
                                                         <Button colorScheme='blue' margin='5px' pos='absolute' marginTop="200px" type='submit'>Log In</Button>
                                                         <Text>{error && error}</Text>
