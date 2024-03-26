@@ -22,6 +22,7 @@ import {
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation.js"
 
 {/*Obtain user's movie list (Search Reviews for matching UserID, and get MovieIDs)*/ }
 
@@ -47,8 +48,10 @@ function getMovieList(/*User's Movie list*/) {
 }
 
 export default function Page() {
-  const ses = getServerSession();
-  CheckLogin(ses);
+  const session = getServerSession();
+  if (!session){
+    redirect("/");
+  }
   return (
     <ChakraProvider>
       <title>Film Finder - Your Movies</title>

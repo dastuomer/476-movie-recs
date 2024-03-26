@@ -25,12 +25,26 @@ export const POST = async (request) => {
 
     const accounts = await User.find();
     const userid = Object.keys(accounts).length.toString();
+    const pfp = "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg";
+    const banner = "https://image.cnbcfm.com/api/v1/image/104768589-movies-anywhere.JPG?v=1507816437&w=1920&h=1080";
+    const bio = "Default bio";
+    const blank = "";
+    const blanklink = "https://www.tarkett-me.com/media/img/M/THH_25094225_25187225_001.jpg";
 
     const newUser = new User({
         userid: userid,
         email: email,
         username: username,
         password: password,
+        pfp: pfp,
+        banner: banner,
+        bio: bio,
+        genres: blank,
+        actor: blanklink,
+        director: blanklink,
+        soundtrack: blanklink,
+        character: blanklink,
+        favmovie: blank,
     });
     try{
         //Sends info to the DB and gives a success status
