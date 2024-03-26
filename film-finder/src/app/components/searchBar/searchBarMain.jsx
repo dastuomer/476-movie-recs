@@ -6,11 +6,11 @@ import { CloseIcon } from "@chakra-ui/icons";
 import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 // 
 
-function SearchBar({ placeholder, dataSet }) { 
+function SearchBar({ placeholder, dataSet }) {  // REMOVE dataSet from here
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
-    //const data = await getMovies();
-    
+    //var dataSet = ""; Uncomment this when working
+
     const getMovies = async() => {
         try {
         const res = await fetch(`http://localhost:3000/api/movie_title?request=${query}`, {cache: "no-store"});
@@ -26,9 +26,11 @@ function SearchBar({ placeholder, dataSet }) {
         }
     }
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         setSearchWord(e.target.value);
         setQuery(e.target.value);
+        // dataSet = await getMovies(); <-- TESTING THIS VARIABLE 
+
     }
 
     {/*async function searchMovie(title)  {
