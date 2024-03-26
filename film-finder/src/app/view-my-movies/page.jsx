@@ -1,7 +1,7 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
-import StarRating from "../components/stars.js";
 import NavDrawer from "@/app/components/Drawer";
+import StarRatingStatic from "../components/star_static.js";
 import {
   Divider,
   Button,
@@ -46,7 +46,7 @@ async function getMovieList(userMovieList) {
       <div>
         <Text fontSize={25} >{title}</Text>{/*Movie title*/}
         <Text>{genre}</Text>{/*Movie Genres*/}
-        <StarRating />{stars}{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
+        <StarRatingStatic ratingNum={stars}/>{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
         <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href={`review-my-movie/${title}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
       </div>
     )
