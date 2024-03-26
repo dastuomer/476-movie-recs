@@ -1,6 +1,5 @@
 import * as React from "react";
 import Logo from "../../components/logo.js";
-import StarRating from "../../components/stars.js";
 import NavDrawer from "@/app/components/Drawer";
 import {
   Divider,
@@ -11,28 +10,28 @@ import {
   Link,
   Image,
   Grid,
-  Textarea,
-  Flex
+  Flex,
+  GridItem,
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
 import { getMovieInfo } from "../../view-my-movies/page.jsx";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
+import StarRatingStatic from "@/app/components/star_static.js";
 
 {/*Obtain Selected Movie Title from button used*/ }
-const getUserInfo = async(e) => {
+const getUserInfo = async (e) => {
   try {
-      const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, {cache: "no-store"});
-      if (!res.ok)
-      {   
-          throw new Error("Could not get user");
-      }
+    const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error("Could not get user");
+    }
 
-      const convert = JSON.parse(JSON.stringify(await res.json()));
-      return await convert;
+    const convert = JSON.parse(JSON.stringify(await res.json()));
+    return await convert;
   } catch (err) {
-      console.log("Error:", err);
+    console.log("Error:", err);
   }
 }
 
@@ -44,20 +43,24 @@ async function getSessionMovieInfo(MovieTitle) {
   const stars = Math.round((fields[2]) / 2.0)
   const genre = fields[3]
   const poster = fields[4]
-  return (
-    <Flex margin="50px">
+
+  let gridItmes = []
+  gridItmes.push(
+    <GridItem rowSpan={2} colSpan={1}>
       <Image width='400px' height='500px' objectFit='cover' margin="20px" src={poster}></Image>{/*Movie poster URL*/}
-      <Box w="55%">
-        <Text fontSize='4xl' margin="15px" marginLeft="30px" as="u"> {title} </Text>{/*Movie Title*/}
-        <Text margin="5px" marginLeft="30px">{genre}</Text>{/*Movie Genres*/}
-        <Flex marginTop="40px">
-          <Text marginLeft="45px" marginRight="10px" fontSize={20}>Rating:</Text>
-          <StarRating />{stars}{/*Inputted Movie Rating*/}
-        </Flex>
-        <Textarea w="100%" outlineColor="black" minHeight="200px" marginLeft="45px" placeholder="Write your review!"></Textarea>{/*Inputted Review text*/}
-      </Box>
-    </Flex>
-  );
+    </GridItem>
+  )
+  gridItmes.push(
+    <GridItem rowSpan={1} colSpan={2}>
+      <Text fontSize='6xl' margin="15px" marginLeft="30px" as="u"> {title} </Text>{/*Movie Title*/}
+      <Text fontSize="xl" margin="5px" marginLeft="30px">{genre}</Text>{/*Movie Genres*/}
+      <Flex marginTop="40px">
+        <Text marginLeft="35px" marginRight="10px" fontSize={20}>IMDB Movie Rating:</Text>
+        <StarRatingStatic ratingNum={stars} />{/*Inputted Movie Rating*/}
+      </Flex>
+    </GridItem>
+  )
+  return (gridItmes);
 };
 
 async function getReviewList(movieTitle) {
@@ -83,7 +86,7 @@ async function getReviewList(movieTitle) {
       <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px" minWidth="700px">
         <Flex>
           <Text margin="10px" fontSize="md">{username}'s Review: </Text>{/*Username of reviewer*/}
-          <StarRating />{stars}{/*Reviewr's rating of the movie*/}
+          <StarRatingStatic ratingNum={stars} />{/*Reviewr's rating of the movie*/}
         </Flex>
         <Text margin="10px" fontSize="md">{review}</Text>{/*Review text*/}
       </Box>
@@ -134,17 +137,14 @@ const getReviewInfo = async (title, reviewsUserListEmail) => {
 
 export default async function Page({ params }) {
 
-  const session = await getServerSession(authOptions); 
-    if (!session){
-        redirect("/");
-    }
-    const {info} = await getUserInfo(session.user.email);
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/");
+  }
+  const { info } = await getUserInfo(session.user.email);
 
-  console.log(params)
   const movieTitle = params.id
-  console.log(movieTitle)
-
-  const reviewInfo = {email: info.email, username: info.username, title: movieTitle};
+  const reviewInfo = { email: info.email, username: info.username, title: movieTitle };
 
   return (
     <ChakraProvider>
@@ -162,7 +162,8 @@ export default async function Page({ params }) {
                     <Text fontSize="5xl" as="b">Movie Reviews</Text>
                   </Center>
                   <Divider />
-                  {/*
+                  <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(3, 1fr)" margin="50px">
+                    {/*
                   <Flex margin="50px">
                     <Image width='400px' height='500px' objectFit='cover' margin="20px" src=""></Image>
                     <Box w="55%">
@@ -177,9 +178,17 @@ export default async function Page({ params }) {
                     </Box>
                   </Flex>
                   */}
-                  {getSessionMovieInfo(movieTitle)}
-                  <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
+                    {getSessionMovieInfo(movieTitle)}
+                    <GridItem rowSpan={1} colSpan={2}>
+                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
+                    </GridItem>
+                  </Grid>
                   <Divider />
+                  <Center>
+                    <Box bg="lightslategrey" borderRadius="100px">
+                      <Text fontSize="3xl" as="u" margin="10px">User Reviews</Text>
+                    </Box>
+                  </Center>
                   <Center>
                     <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='35px'>
                       {/*
