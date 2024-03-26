@@ -98,7 +98,7 @@ function SearchBar({ placeholder, dataSet }) {
                                 onChange={handleChange}
                                 value={searchWord}/>
                         
-                        <InputRightElement id="button"> {query.length === 0 ? <SearchIcon/> : <CloseIcon onClick={clearInput}/>}</InputRightElement>
+                        <InputRightElement id="button"> {searchWord.length === 0 ? <SearchIcon/> : <CloseIcon onClick={clearInput}/>}</InputRightElement>
                     </form>
                 </InputGroup>
             </Center>
