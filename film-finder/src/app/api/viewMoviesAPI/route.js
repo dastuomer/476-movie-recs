@@ -7,6 +7,6 @@ export async function GET(request) {
     const title = request.nextUrl.searchParams.get("title");
     //console.log(title);
     const movieInfo = await viewMoviesModel.findOne({ Title: title })
-    console.log(movieInfo)
+    //console.log(movieInfo)
     return NextResponse.json({ movieInfo });
 }
