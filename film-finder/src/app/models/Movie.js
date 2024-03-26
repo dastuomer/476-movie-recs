@@ -6,7 +6,7 @@ const {Schema} = mongoose;
 //Defines the user schema (needs a email, username, and password)
 const movieSchema = new Schema(
     {
-        plot: {
+        Title: {
             type: String,
             unique: true,
             required: true,
@@ -16,5 +16,5 @@ const movieSchema = new Schema(
 );
 //Exports the model for use in other parts of the code.
 
-const Movie = mongoose.models.film_poster || mongoose.model("film_poster", movieSchema)
+const Movie = mongoose.models.movie_dataset_imdb || mongoose.model("movie_dataset_imdb", movieSchema)
 export default Movie;

@@ -7,10 +7,26 @@ import { CloseIcon } from "@chakra-ui/icons";
 import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 
 
-function SearchBar({ placeholder, dataSet, value}) {
+function SearchBar({ placeholder, dataSet }) {
     
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
+
+    
+    const getMovies = () => {
+        try {
+        const res = fetch('http://localhost:3000/api/movie_title')
+        
+        if (!res.ok) {
+        throw new Error("Failed to fetch movies");
+        }
+        console.log(res);
+        return res.json();
+
+        } catch (error) {
+        console.log("Error loading movies", error);
+        }
+    }
 
 
     const handleChange = (e) => {
