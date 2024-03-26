@@ -28,7 +28,40 @@ const userSchema = new Schema(
             required: true,
         },
         pfp: {
-            type: String
+            type: String,
+            required: false,
+        },
+        banner: {
+            type: String,
+            required: false,
+        },
+        bio: {
+            type: String,
+            required: false,
+        },
+        genres: {
+            type: String,
+            required: false,
+        },
+        actor: {
+            type: String,
+            required: false,
+        },
+        director: {
+            type: String,
+            required: false,
+        },
+        soundtrack: {
+            type: String,
+            required: false,
+        },
+        character: {
+            type: String,
+            required: false,
+        },
+        favmovie: {
+            type: String,
+            required: false,
         }
     }
 );

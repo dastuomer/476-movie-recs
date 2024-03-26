@@ -3,6 +3,8 @@ import Logo from "../components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import { ChakraProvider } from "@chakra-ui/react";
 import StarRating from "../components/stars.js";
+import { redirect } from "next/navigation.js"
+import { getServerSession } from "next-auth"
 import {
     Divider,
     Input,
@@ -15,8 +17,10 @@ import {
 {/*Obtain Selected User's Username, and Review list*/}
 
 export default function Page() {
-    const ses = getServerSession();
-    CheckLogin(ses);
+    const session = getServerSession();
+    if (!session){
+        redirect("/");
+    }
     return (
         <ChakraProvider>
             <title>Film Finder - Friend's Reviews</title>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
-import StarRating from "../components/stars.js";
 import NavDrawer from "@/app/components/Drawer";
+import StarRatingStatic from "../components/star_static.js";
 import {
   Divider,
   Button,
@@ -22,33 +22,66 @@ import {
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation.js"
 
-{/*Obtain user's movie list (Search Reviews for matching UserID, and get MovieIDs)*/ }
+{/*Obtain User's email, and Movie list*/ }
 
-function getMovieList(/*User's Movie list*/) {
+async function getMovieList(userMovieList) {
   const moviesArray = [];
-  for (let i = 0; i < 10 /*Number of Movies in user's list*/; i++) {
-    {/*Obtain each movie's Poster, Title, ~maybe Genre, and Rating(~IMDB)*/}
+  for (let i = 0; i < userMovieList.length; i++) {
+
+    const MInfo = await getMovieInfo(userMovieList[i]);
+    let fields = Object.values(MInfo.movieInfo)
+    const title = fields[1]
+    const stars = Math.round((fields[2]) / 2.0)
+    const genre = fields[3]
+    const poster = fields[4]
+
     moviesArray.push(
       <div>
-        <Image width='200px' height='250px' objectFit='cover' src=""></Image>{/*src = Movie Poster URL*/}
+        <Image width='200px' height='250px' objectFit='cover' src={poster}></Image>{/*src = Movie Poster URL*/}
       </div>
     )
     moviesArray.push(
       <div>
-        <Text fontSize={25} >Movie Title</Text>{/*Movie title*/}
-        <Text> - Genre, Genre, Genre</Text>{/*Movie Genres*/}
-        <StarRating />{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
-        <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
+        <Text fontSize={25} >{title}</Text>{/*Movie title*/}
+        <Text>{genre}</Text>{/*Movie Genres*/}
+        <StarRatingStatic ratingNum={stars}/>{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
+        <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href={`review-my-movie/${title}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
       </div>
     )
   }
   return moviesArray;
 }
 
-export default function Page() {
-  const ses = getServerSession();
-  CheckLogin(ses);
+export const getMovieInfo = async (userMovieListTitle) => {
+  try {
+    //console.log(`http://localhost:3000/api/viewMoviesAPI?title=${userMovieListTitle}`)
+    const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?title=${userMovieListTitle}`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      throw new Error("failed to fetch movie info");
+    }
+
+    const myJSON = JSON.parse(JSON.stringify(await res.json()));
+    //console.log(myJSON)
+    return await myJSON;
+  } catch (error) {
+    console.log("Error loading movie info: ", error);
+  }
+
+};
+
+export default async function Page() {
+  const session = getServerSession();
+  if (!session){
+    redirect("/");
+  }
+
+  const testmovies = ['Toy Story (1995)', 'V for Vendetta (2005)', 'The AristoCats (1970)']
+
   return (
     <ChakraProvider>
       <title>Film Finder - Your Movies</title>
@@ -64,48 +97,25 @@ export default function Page() {
                   <Center>
                     <Input size="lg" variant="outline" margin="50px" placeholder="Search your movies" />{/*Search filter's user's movie list displayed*/}
                   </Center>
-                  <Tabs isFitted variant='solid-rounded' colorScheme='blue' margin='2px'>{/*~maybe remove these tabs*/}
-                    <TabList mb='1em'>
-                      <Tab>All</Tab>
-                      <Tab>Comedy</Tab>
-                      <Tab>Action</Tab>
-                      <Tab>Drama</Tab>
-                      <Tab>Horror</Tab>
-                    </TabList>
-                    <Divider />
-                    <TabPanels>
-                      <TabPanel>
-                        <div>
-                          <Text colorScheme='blue' fontSize="45" >My Movies </Text>
-                          <br />
-                        </div>
-                        <Box borderWidth="2px" borderColor="grey" borderRadius="lg" minHeight="850px">
-                          <Grid templateColumns='repeat(6, 1fr)' gap='10px' margin='15px'>
-                            <Image width='200px' height='250px' objectFit='cover' src=""></Image>{/*Movie Poster URL*/}
-                            <div>
-                              <Text fontSize={25} >Movie Title</Text>{/*Movie title*/}
-                              <Text> - Genre, Genre, Genre</Text>{/*Movie Genres*/}
-                              <StarRating />{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
-                              <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
-                            </div>
-                            {getMovieList(/*User's Movie list -- OR -- UserID*/)} {/*delete previous movie print^^ once connected*/}
-                          </Grid>
-                        </Box>
-                      </TabPanel>
-                      <TabPanel>{/*Each tab panel would display the movies from the user's list but filter for only each repective genre*/}
-
-                      </TabPanel>
-                      <TabPanel>
-
-                      </TabPanel>
-                      <TabPanel>
-
-                      </TabPanel>
-                      <TabPanel>
-
-                      </TabPanel>
-                    </TabPanels>
-                  </Tabs>
+                  <Divider />
+                  <div>
+                    <Text colorScheme='blue' fontSize="45" >My Movies </Text>
+                    <br />
+                  </div>
+                  <Box borderWidth="2px" borderColor="grey" borderRadius="lg" minHeight="850px">
+                    <Grid templateColumns='repeat(6, 1fr)' gap='10px' margin='15px'>
+                      {/*
+                      <Image width='200px' height='250px' objectFit='cover' src=""></Image>
+                      <div>
+                        <Text fontSize={25} >Movie Title</Text>
+                        <Text> - Genre, Genre, Genre</Text>
+                        <StarRating />
+                        <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>
+                      </div>
+                      */}
+                      {getMovieList(testmovies)} {/*delete previous movie print^^ once connected*/}
+                    </Grid>
+                  </Box>
                 </Box>
               </div>
               <div className="col-1">

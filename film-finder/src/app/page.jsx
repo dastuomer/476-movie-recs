@@ -1,19 +1,15 @@
 "use client";
-// import Burger from "./components/burger.jsx";
 import * as React from "react";
 import {useState, useEffect} from "react";
 import Logo from "./components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
+import StarRatingStatic from "./components/star_static.js";
 
 import {
   ChakraProvider,
   Box,
-  IconButton,
   Button,
-  Input,
-  InputGroup,
   Tabs,
   TabList,
   TabPanels,
@@ -23,7 +19,6 @@ import {
   Flex
 } from "@chakra-ui/react";
 import TheReturnOfTheKing from "./components/movie-picture.jsx";
-import { SearchIcon } from "@chakra-ui/icons";
 import MovieCards from "./components/MovieCards.jsx";
 import SearchBar from "./components/searchBar/searchBarMain.jsx";
 import { Movies } from "./components/searchBar/movies-MOCK";
@@ -43,11 +38,6 @@ export default function Page() {
 
     )
   }, [])
-
-
-
-
-
 
   return (
     <ChakraProvider>
@@ -104,15 +94,15 @@ export default function Page() {
 
 
 
-<div>
-          {(typeof data.movies2 === 'undefined')?(
-            <p>Loading....</p>
-          ):(
-            data.movies2.map ((movie2, i) => (
-              <p key = {i} > {movie2} </p>
-            ))
-          )}
-      </div>
+                                <div>
+                                          {(typeof data.movies2 === 'undefined')?(
+                                            <p>Loading....</p>
+                                          ):(
+                                            data.movies2.map ((movie2, i) => (
+                                              <p key = {i} > {movie2} </p>
+                                            ))
+                                          )}
+                                      </div>
 
 
 
