@@ -20,7 +20,6 @@ const StarRating = () => {
              );
         })}
         
-        <p>The rating is {rating}/5</p>
         </div>;
 }
 
