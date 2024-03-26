@@ -74,7 +74,6 @@ export default function Page() {
                     */}
                     <SearchBar placeholder="Enter a movie title..." dataSet={Movies}/>
                   </div>
-                  <StarRatingStatic ratingNum={5}/>
                   </Center>
                   <Tabs variant="line" colorScheme="gray" position="relative">
                     <Center>
