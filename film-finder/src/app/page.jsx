@@ -27,6 +27,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 import MovieCards from "./components/MovieCards.jsx";
 import SearchBar from "./components/searchBar/searchBarMain.jsx";
 import { Movies } from "./components/searchBar/movies-MOCK";
+import { getServerSession } from "next-auth";
 
 export default function Page() {
 
@@ -43,11 +44,6 @@ export default function Page() {
 
     )
   }, [])
-
-
-
-
-
 
   return (
     <ChakraProvider>

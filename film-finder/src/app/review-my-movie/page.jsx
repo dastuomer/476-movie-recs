@@ -17,10 +17,15 @@ import {
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation.js"
 
 {/*Obtain Selected movie's Poster, ~maybe genre, and reviews*/}
 
 export default function Page() {
+  const session = getServerSession();
+  if (!session){
+    redirect("/");
+  }
   return (
     <ChakraProvider>
       <title>Film Finder - Review Movie</title>

@@ -90,7 +90,7 @@ const Register = () => {
             //Signifies that account is created, automatically sends user to the profile page (can be changed)
             if (res.status == 200) {
                 setError("");
-                router.push("/profile");
+                router.push("/login");
             }
         }catch(error) {
             setError("Error, please try again.");

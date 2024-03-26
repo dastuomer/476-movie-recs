@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react';
+import { redirect } from "next/navigation.js"
+import { getServerSession } from "next-auth"
 import axios from 'axios'; // Importing Axios for making HTTP requests
 
 function App() {
@@ -20,6 +22,11 @@ function App() {
       console.error('Error fetching recommendations:', error);
     }
   };
+
+  //const session = getServerSession();
+  //if (!session){
+    //redirect("/");
+  //}
 
   return (
     <div>
