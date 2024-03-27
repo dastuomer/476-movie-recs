@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 
 const {Schema} = mongoose;
 
-//Defines the user schema (needs a email, username, and password)
+//Defines the movie title schema for the search bar
 const movieSchema = new Schema(
     {
-        Title: {
+        
+        Title_Year: {
             type: String,
             unique: true,
             required: true,
@@ -14,7 +15,7 @@ const movieSchema = new Schema(
     }
         
 );
-//Exports the model for use in other parts of the code. w
 
-const Movie = mongoose.models.movie_dataset_imdb || mongoose.model("movie_dataset_imdb", movieSchema)
+const Movie = mongoose.models.films || mongoose.model("films", movieSchema)
 export default Movie;
+//Exports the model for use in other parts of the code. 
