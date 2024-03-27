@@ -9,7 +9,7 @@ export async function GET(request) {
         console.log(search);
         if (!search) { throw new Error }
         await connectMongoDB();
-        const movieInfo = await viewMoviesModel.findOne({title: search}, "title poster plot ratings5")
+        const movieInfo = await viewMoviesModel.findOne({$or: [{title: search}, {Title_Year: search}]})
         console.log(movieInfo)
         return NextResponse.json({ movieInfo });
     } catch (error) {

@@ -15,7 +15,6 @@ import {
   Heading
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
-import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation.js"
 import { authOptions } from "../api/auth/[...nextauth]/route.js";
