@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import * as React from "react";
 import {useState, useEffect} from "react";
 import Logo from "./components/logo.js";
@@ -24,7 +24,7 @@ import SearchBar from "./components/searchBar/searchBarMain.jsx";
 import { Movies } from "./components/searchBar/movies-MOCK";
 
 export default function Page() {
-
+{/*
   const[data,setData] = useState([{}])
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Page() {
 
     )
   }, [])
-
+*/}
   return (
     <ChakraProvider>
       <title>Film Finder - Home Page</title>
@@ -93,7 +93,7 @@ export default function Page() {
                             >
 
 
-
+{/*
                                 <div>
                                           {(typeof data.movies2 === 'undefined')?(
                                             <p>Loading....</p>
@@ -104,7 +104,7 @@ export default function Page() {
                                           )}
                                       </div>
 
-
+                                            */}
 
 
 

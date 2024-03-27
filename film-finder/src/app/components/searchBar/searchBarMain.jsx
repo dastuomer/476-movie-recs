@@ -1,61 +1,40 @@
 import React, { useState } from "react";
 
 import "./search.css";
-import { SearchIcon } from "@chakra-ui/icons";
-import { CloseIcon } from "@chakra-ui/icons";
+import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 // 
 
-function SearchBar({ placeholder, dataSet }) { 
+function SearchBar({ placeholder, dataSet}) {
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
-    //const data = await getMovies();
-    
+
     const getMovies = async() => {
         try {
         const res = await fetch(`http://localhost:3000/api/movie_title?request=${query}`, {cache: "no-store"});
         if (!res.ok) {
         throw new Error("Failed to fetch movies");
         }
-        console.log(res);
         const convert = JSON.parse(JSON.stringify(await res.json()));
-        return convert;
+        console.log(convert);
+        return await convert;
 
         } catch (error) {
         console.log("Error loading movies", error);
         }
     }
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         setSearchWord(e.target.value);
         setQuery(e.target.value);
+        await getMovies();
+        //console.log(movies);
     }
 
-    {/*async function searchMovie(title)  {
-        try {
-            //Creates POST to send to route.js in the register folder
-            const res = await fetch("/api/movie_title", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "applications/json",},
-                body: JSON.stringify({
-                    title
-                })
-            })
-            //Error for if the username/email is in the DB already
-            if (res.status == 400) {
-                setError("Movie not found.");
-            }
-            //Signifies that account is created, automatically sends user to the profile page (can be changed)
-            if (res.status == 200) {
-                setError("Movie found!");
-                console.log(title);
-            }
-        }catch(error) {
-            setError("Error, please try again.");
-        }
+    const callGetMovies = async () => {
+        await getMovies();
     }
-*/}
+    
 
     const fillSearch = async (searchWord) =>{
         setQuery([])
@@ -84,7 +63,7 @@ function SearchBar({ placeholder, dataSet }) {
         <div className="search">
             <Center>
                 <InputGroup size="lg" w="80%" margin="15px">
-                    <form className="form" onSubmit={formSubmit(searchWord)}>
+                    <form className="form" onSubmit={callGetMovies}>
                         <Input type="text" 
                                 placeholder={placeholder} 
                                 size="lg"
@@ -99,14 +78,17 @@ function SearchBar({ placeholder, dataSet }) {
                     </form>
                 </InputGroup>
             </Center>
+            <p>{callGetMovies}</p>
+            {/*
             {query.length != 0 && (
-                <div className="dataResult"> {/*onClick={console.log(dataSet.Title)}*/}
+                <div className="dataResult">
                         {dataSet.filter(data=>data.Title.toLowerCase().includes(query.toLowerCase())).slice(0,7).map((dataSet) => {
                             return <p className="hoverMe" key={dataSet.id} onClick={()=>fillSearch(dataSet.Title)} > {dataSet.Title} </p>
                         })
                         }
                 </div>
             )}
+            */}
         </div>
         
     );

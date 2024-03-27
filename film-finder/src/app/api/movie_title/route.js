@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
     await connect();
     const search = request.nextUrl.searchParams.get("request");
-    const movies = await Movie.find({title: search}, {limit: 10});
+    const movies = await Movie.find({title: search}); //{title: "The Dark Knight"}
     return NextResponse.json({ movies });
 }
 
