@@ -2,44 +2,12 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
 import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Divider,
   Button,
-  IconButton,
   Input,
-  useDisclosure,
-  Avatar,
-  AvatarBadge,
-  HStack,
-  Stack,
   Text,
   Box,
   Center,
-  Circle,
-  Heading,
-  Image,
   Grid,
-  Textarea,
-  WrapItem,
-  Container, 
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  extendTheme,
-  ColorModeScript,
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
@@ -48,13 +16,12 @@ import { useRouter } from "next/navigation.js"
 import {signIn, useSession } from "next-auth/react";
 import Link from "next/link.js"
 
-//IMPORTANT NOTE: default function is changed to export both HTML and the code for managing account creation
 const Login = () => {
+    //Used for error display
+    const [error, setError] = useState("");
     //Redirects current page
     const router = useRouter();
-    //Used to help show errors
-    const [error, setError] = useState("");
-    //Checks the current user session and if they are logged in. 
+    //Checks the current user session and if they are logged in
     const session = useSession();
 
     //Checks if user is logged in already and directs to profile automatically if true
@@ -77,12 +44,14 @@ const Login = () => {
         const email = e.target[0].value;
         const username = e.target[1].value;
         const password = e.target[2].value;
+
         //Will give an error message if the email entered doesnt pass REGEX check
         if (!isValidEmail(email)) {
             setError("This is not a valid email.");
             return;
         }
-        //Attempts to sign in the user given the user's inputs.
+
+        //Attempts to sign in the user given the user's inputs
         const res = await signIn("credentials", {
             redirect: false,
             email,
@@ -93,6 +62,7 @@ const Login = () => {
         //Will tell the user that their login isnt found in the DB or they typed in something wrong.
         if (res?.error) {
             setError("Invalid email or password res error.");
+            
             //Sent to profile page upon successful login
             if (res?.url) router.replace("/profile")
         } else {

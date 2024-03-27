@@ -2,44 +2,12 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
 import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Divider,
   Button,
-  IconButton,
   Input,
-  useDisclosure,
-  Avatar,
-  AvatarBadge,
-  HStack,
-  Stack,
   Text,
   Box,
   Center,
-  Circle,
-  Heading,
-  Image,
   Grid,
-  Textarea,
-  WrapItem,
-  Container, 
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  extendTheme,
-  ColorModeScript,
   Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
@@ -47,32 +15,33 @@ import { useState } from "react";
 import { useRouter } from "next/navigation.js"
 import Link from "next/link.js"
 
-//IMPORTANT NOTE: default function is changed to export both HTML and the code for managing account creation
 const Register = () => {
-    //Used to help show errors
+    //Used for error display
     const [error, setError] = useState("");
     //Redirects current page
     const router = useRouter();
-    //REGEX check on the email field
+    //REGEX check for email submission
     const isValidEmail = (email) => {
         const emailReg = /^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+/i;
         return emailReg.test(email);
     };
-    //Called when submit button is clicked, manages user account creation.
+
+    //Handler for account creation
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //Gets values of the 3 fields, stores in variables
+        //Gets values of the input fields
         const email = e.target[0].value;
         const username = e.target[1].value;
         const password = e.target[2].value;
-        //Will deny account creation if email is not valid. 
-        //NOTE: we could add more limitations here like password length and such.
+
+        //Will check for a valid email with the REGEX function
         if (!isValidEmail(email)) {
             setError("This is not a valid email.");
             return;
         }
+
         try {
-            //Creates POST to send to route.js in the register folder
+            //Creates POST to send to route.js (API) in the register folder
             const res = await fetch("/api/register", {
                 method: "POST",
                 headers: {
@@ -83,10 +52,12 @@ const Register = () => {
                     password
                 })
             })
+
             //Error for if the username/email is in the DB already
             if (res.status == 400) {
                 setError("Already registered.");
             }
+            
             //Signifies that account is created, automatically sends user to the profile page (can be changed)
             if (res.status == 200) {
                 setError("");

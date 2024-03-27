@@ -1,5 +1,5 @@
 import * as React from "react";
-import Logo from "../components/logo.js";
+import Logo from "../../components/logo.js";
 import {
   Divider,
   Button,
@@ -37,12 +37,12 @@ const getUserInfo = async(e) => {
     }
 }
 
-const Profile = async() => {
+const Profile = async({params}) => {
     const session = await getServerSession(authOptions); 
     if (!session){
         redirect("/");
     }
-    const {info} = await getUserInfo(session.user.email);
+    const {info} = await getUserInfo(params.id);
     
     return (
         <ChakraProvider>
@@ -72,8 +72,7 @@ const Profile = async() => {
                                 </Box>
                             </Center>
                             <Flex>
-                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="view-my-movies">View Movies</Link></Button>
-                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href={`/edit-profile/${info.email}`}>Edit Profile Page</Link></Button>
+                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="/view-friends">Back to Friends</Link></Button>
                             </Flex>
                             <Divider />
                             <Tabs isFitted variant='solid-rounded' colorScheme='blue' margin='2px'>

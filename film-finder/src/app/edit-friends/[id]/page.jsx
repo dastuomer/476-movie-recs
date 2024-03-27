@@ -2,37 +2,29 @@
 import * as React from "react";
 import Logo from "../../components/logo.js";
 import {
-    Button,
-    Text,
-    Box,
-    Center,
-    Textarea,
-    Flex
+  Button,
+  Input,
+  Text,
+  Box,
+  Center,
+  Grid,
+  Textarea,
+  Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation.js"
 import { useSession } from "next-auth/react";
 import Link from "next/link.js"
-import StarRating from "@/app/components/stars.js";
 
 //IMPORTANT NOTE: default function is changed to export both HTML and the code for managing account creation
-const Edit = ({ params }) => {
+const Edit = ({params}) => {
     //Redirects current page
     const router = useRouter();
     //Used to help show errors
     const [error, setError] = useState("");
     //Checks the current user session and if they are logged in. 
     const session = useSession();
-
-    const gotten = JSON.parse(decodeURIComponent(JSON.stringify(params)));
-    const midstep = gotten.id;
-    const convert = new URLSearchParams(midstep);
-    const id = convert.get("email");
-    const username = convert.get("username");
-    const title = convert.get("title");
-
-    var starRating = 0;
 
     //Checks if user is logged in already and directs to profile automatically if true
     useEffect(() => {
@@ -41,35 +33,36 @@ const Edit = ({ params }) => {
         }
     }, [session, router])
 
-    const handleReview = async (e) => {
+    const handleFriend= async(e) => {
         e.preventDefault();
-        const rating = e.target[5].value;
-        const review = e.target[6].value;
-        console.log(rating);
-        console.log(review);
+        const username = e.target[0].value;
+        const {id} = params;
+
         try {
-            const res = await fetch(`http://localhost:3000/api/editreview/${id}`, {
+            const res = await fetch(`http://localhost:3000/api/editfriend/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ username, title, review, rating }),
+                body: JSON.stringify({username}),
             });
-            if (!res.ok) {
-                setError("Failed to change review.");
-                throw new Error("Failed to change review.");
+            if (!res.ok)
+            {   
+                setError("User not found!");
+                throw new Error("User not found!");
             }
             else {
-                setError("Review Updated!");
+                setError("Friend List Updated!");
             }
         } catch (err) {
             console.log("Error:", err);
         }
     }
 
+    //Handles the login attempt from the user.
     return (
-        <ChakraProvider>
-            <title>Film Finder - Login</title>
+            <ChakraProvider>
+                <title>Film Finder - Login</title>
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
@@ -80,25 +73,28 @@ const Edit = ({ params }) => {
                             <div className="col-10">
                                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                                     <Center>
-                                        <Box w="60%" bg="lightslategrey" borderRadius="100px" minHeight="800px" marginTop="50px" >
+                                        <Text fontSize="40" margin="20px">Add/Remove Friends</Text>
+                                    </Center>
+                                    <Center>
+                                        <Box w="60%" bg="lightslategrey" borderRadius="100px" minHeight="800px">
                                             <Center>
-                                                <Text fontSize="40" margin="50px" as="u">{title}</Text>
-                                            </Center>
-                                            <Center>
-                                                <Box w="80%" marginTop="px">
-                                                    <form onSubmit={handleReview}>
+                                                <Box w="90%" marginTop="100px">
+                                                    <Grid templateColumns="1fr" gap="20px">
+                                                    <form onSubmit={handleFriend}>
                                                         <Flex>
-                                                            <Text marginRight="10px" fontSize={20}>Your Movie Rating:</Text>
-                                                            <StarRating starRating={starRating} id=''/>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Enter Friend Username</Text>
+                                                            </div>
+                                                            <Input placeholder='Username' type='text' variant='filled' required></Input>
+                                                            <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Add</Button>
                                                         </Flex>
-                                                        <Textarea w="100%" outlineColor="black" minHeight="200px" placeholder="Write your review!" variant="filled" required></Textarea>
-                                                        <Button colorScheme='blue' size="md" type='submit' marginTop="20px">Submit Review</Button>
                                                     </form>
+                                                    </Grid>
                                                     <Center>
                                                         <Text>{error && error}</Text>
                                                     </Center>
                                                     <Center>
-                                                        <Button colorScheme='blue' margin='5px' marginTop="200px"> <Link href="/view-my-movies">Back to Movies</Link></Button>
+                                                        <Button colorScheme='blue' marginTop='20px' marginBottom='20px'> <Link href="/view-friends">Back to Friends</Link></Button>
                                                     </Center>
                                                 </Box>
                                             </Center>
@@ -110,7 +106,7 @@ const Edit = ({ params }) => {
                     </div>
                 </div>
             </Box>
-        </ChakraProvider>
+            </ChakraProvider>
     )
 }
 export default Edit;

@@ -3,7 +3,6 @@ import Logo from "../components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import StarRatingStatic from "../components/star_static.js";
 import {
-  Divider,
   Button,
   Input,
   Text,
@@ -12,11 +11,6 @@ import {
   Link,
   Image,
   Grid,
-  Tab,
-  TabList,
-  TabPanels,
-  Tabs,
-  TabPanel,
   Flex,
   Heading
 } from "@chakra-ui/react";
