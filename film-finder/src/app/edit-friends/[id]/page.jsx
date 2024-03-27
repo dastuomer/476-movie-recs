@@ -59,6 +59,32 @@ const Edit = ({params}) => {
         }
     }
 
+    const removeFriend= async(e) => {
+        e.preventDefault();
+        const username = e.target[0].value;
+        const {id} = params;
+        
+        try {
+            const res = await fetch(`http://localhost:3000/api/removefriend/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({username}),
+            });
+            if (!res.ok)
+            {   
+                setError("User not found!");
+                throw new Error("User not found!");
+            }
+            else {
+                setError("Friend List Updated!");
+            }
+        } catch (err) {
+            console.log("Error:", err);
+        }
+    }
+
     //Handles the login attempt from the user.
     return (
             <ChakraProvider>
@@ -89,7 +115,17 @@ const Edit = ({params}) => {
                                                             <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Add</Button>
                                                         </Flex>
                                                     </form>
+                                                    <form onSubmit={removeFriend}>
+                                                        <Flex>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Enter Friend Username</Text>
+                                                            </div>
+                                                            <Input placeholder='Username' type='text' variant='filled' required></Input>
+                                                            <Button colorScheme='red' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Remove</Button>
+                                                        </Flex>
+                                                    </form>
                                                     </Grid>
+                                                    
                                                     <Center>
                                                         <Text>{error && error}</Text>
                                                     </Center>
