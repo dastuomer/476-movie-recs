@@ -9,6 +9,7 @@ function SearchBar({ placeholder, dataSet}) {
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
 
+
     const getMovies = async() => {
         try {
         const res = await fetch(`http://localhost:3000/api/movie_title?request=${query}`, {cache: "no-store"});
