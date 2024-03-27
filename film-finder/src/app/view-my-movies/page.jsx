@@ -17,7 +17,8 @@ import {
   TabPanels,
   Tabs,
   TabPanel,
-  Flex
+  Flex,
+  Heading
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
@@ -39,15 +40,19 @@ async function getMovieList(userMovieList) {
 
     moviesArray.push(
       <div>
-        <Image width='200px' height='250px' objectFit='cover' src={poster}></Image>{/*src = Movie Poster URL*/}
+        <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
+          <Image width='250px' height='300px' objectFit='cover' src={poster}></Image>{/*src = Movie Poster URL*/}
+        </Box>
       </div>
     )
     moviesArray.push(
       <div>
-        <Text fontSize={25} >{title}</Text>{/*Movie title*/}
-        <Text>{genre}</Text>{/*Movie Genres*/}
-        <StarRatingStatic ratingNum={stars}/>{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
-        <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href={`review-my-movie/${title}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
+        
+          <Text fontSize={25} >{title}</Text>{/*Movie title*/}
+          <Text>{genre}</Text>{/*Movie Genres*/}
+          <StarRatingStatic ratingNum={stars}/>{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
+          <Button colorScheme='blue' marginTop='5px' > <Link href={`review-my-movie/${title}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
+        
       </div>
     )
   }
@@ -95,15 +100,16 @@ export default async function Page() {
               <div className="col-10">
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
-                    <Input size="lg" variant="outline" margin="50px" placeholder="Search your movies" />{/*Search filter's user's movie list displayed*/}
+                    <Heading colorScheme='blue' fontSize="45" marginTop="30px">My Movies </Heading>
                   </Center>
-                  <Divider />
                   <div>
-                    <Text colorScheme='blue' fontSize="45" >My Movies </Text>
+                    <Center>
+                      <Input size="lg" variant="outline" margin="20px" placeholder="Search your movies" />{/*Search filter's user's movie list displayed*/}
+                    </Center>
                     <br />
                   </div>
-                  <Box borderWidth="2px" borderColor="grey" borderRadius="lg" minHeight="850px">
-                    <Grid templateColumns='repeat(6, 1fr)' gap='10px' margin='15px'>
+                  <Box borderWidth="2px" borderColor="#171923" minHeight="850px">
+                    <Grid templateColumns='repeat(6, 1fr)' gap='20px'>
                       {/*
                       <Image width='200px' height='250px' objectFit='cover' src=""></Image>
                       <div>
@@ -113,7 +119,10 @@ export default async function Page() {
                         <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>
                       </div>
                       */}
-                      {getMovieList(testmovies)} {/*delete previous movie print^^ once connected*/}
+                      
+                        
+                          {getMovieList(testmovies)} {/*delete previous movie print^^ once connected*/}
+                        
                     </Grid>
                   </Box>
                 </Box>

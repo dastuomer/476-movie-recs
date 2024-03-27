@@ -350,86 +350,86 @@ const Edit = ({params}) => {
                                         <Box w="60%" bg="lightslategrey" borderRadius="100px" minHeight="800px">
                                             <Center>
                                                 <Box w="90%" marginTop="100px">
-                                                    <Grid templateColumns="1fr" gap="10px">
+                                                    <Grid templateColumns="1fr" gap="20px">
                                                     <form onSubmit={handlePfp}>
                                                         <Flex>
-                                                            <div className="col-6">
+                                                            <div className="col-4">
                                                                 <Text fontSize="20">Profile Picture:</Text>
                                                             </div>
-                                                            <Input placeholder='image link' type='text' variant='filled' required></Input>
+                                                            <Input placeholder='Image link' type='text' variant='filled' required></Input>
                                                             <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleBanner}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Banner :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Banner:</Text>
                                                             </div>
-                                                            <Input placeholder='image link' type='text' variant='filled' required></Input>
+                                                            <Input placeholder='Image link' type='text' variant='filled' required></Input>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleBio}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Bio :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Bio:</Text>
                                                             </div>
-                                                            <Textarea placeholder='bio here' type='text' variant='filled' required></Textarea>
+                                                            <Textarea placeholder='Type bio here' type='text' variant='filled' required></Textarea>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleGenres}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Genres :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Genres:</Text>
                                                             </div>
-                                                            <Textarea placeholder='genres here' type='text' variant='filled' required></Textarea>
+                                                            <Textarea placeholder='List genres here' type='text' variant='filled' required></Textarea>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleActor}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Favourite Actor :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Favourite Actor:</Text>
                                                             </div>
-                                                            <Input placeholder='image link' type='text' variant='filled' required></Input>
+                                                            <Input placeholder='Image link' type='text' variant='filled' required></Input>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleDirector}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Favourite Director :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Favourite Director:</Text>
                                                             </div>
-                                                            <Input placeholder='image link' type='text' variant='filled' required></Input>
+                                                            <Input placeholder='Image link' type='text' variant='filled' required></Input>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleSoundtrack}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Favourite Soundtrack :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Favourite Soundtrack:</Text>
                                                             </div>
-                                                            <Input placeholder='image link' type='text' variant='filled' required></Input>
+                                                            <Input placeholder='Image link' type='text' variant='filled' required></Input>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleCharacter}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Favourite Character :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Favourite Character:</Text>
                                                             </div>
-                                                            <Input placeholder='image link' type='text' variant='filled' required></Input>
+                                                            <Input placeholder='Image link' type='text' variant='filled' required></Input>
                                                         <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     <form onSubmit={handleMovie}>
                                                         <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Favourite Movie :</Text>
+                                                            <div className="col-4">
+                                                                <Text fontSize="20">Favourite Movie:</Text>
                                                             </div>
-                                                            <Input placeholder='name' type='text' variant='filled' required></Input>
-                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px' size="lg" type='submit'>Change</Button>
+                                                            <Input placeholder='Movie name' type='text' variant='filled' required></Input>
+                                                        <Button colorScheme='blue' marginLeft='20px' marginRight='10px'  size="lg" type='submit'>Change</Button>
                                                         </Flex>
                                                     </form>
                                                     </Grid>
@@ -437,7 +437,7 @@ const Edit = ({params}) => {
                                                         <Text>{error && error}</Text>
                                                     </Center>
                                                     <Center>
-                                                        <Button colorScheme='blue' marginTop='20px'> <Link href="/profile">Back to Account</Link></Button>
+                                                        <Button colorScheme='blue' marginTop='20px' marginBottom='20px'> <Link href="/profile">Back to Account</Link></Button>
                                                     </Center>
                                                 </Box>
                                             </Center>

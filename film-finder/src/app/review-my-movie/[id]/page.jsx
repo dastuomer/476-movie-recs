@@ -12,6 +12,7 @@ import {
   Grid,
   Flex,
   GridItem,
+  Heading
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
@@ -46,16 +47,18 @@ async function getSessionMovieInfo(MovieTitle) {
 
   let gridItmes = []
   gridItmes.push(
-    <GridItem rowSpan={2} colSpan={1}>
-      <Image width='400px' height='500px' objectFit='cover' margin="20px" src={poster}></Image>{/*Movie poster URL*/}
+    <GridItem rowSpan={4} colSpan={2}>
+      <Box width='350px' height='500px' borderWidth="2px" borderColor="#171923" margin="20px" marginLeft="40px"> 
+        <Image width='350px' height='500px' objectFit='cover' src={poster}></Image>{/*Movie poster URL*/}
+      </Box>
     </GridItem>
   )
   gridItmes.push(
-    <GridItem rowSpan={1} colSpan={2}>
-      <Text fontSize='6xl' margin="15px" marginLeft="30px" as="u"> {title} </Text>{/*Movie Title*/}
-      <Text fontSize="xl" margin="5px" marginLeft="30px">{genre}</Text>{/*Movie Genres*/}
+    <GridItem rowSpan={3} colSpan={3}>
+      <Heading fontSize='6xl' > {title} </Heading>{/*Movie Title*/}
+      <Text fontSize="xl" marginLeft="10px">{genre}</Text>{/*Movie Genres*/}
       <Flex marginTop="40px">
-        <Text marginLeft="35px" marginRight="10px" fontSize={20}>IMDB Movie Rating:</Text>
+        <Text marginLeft="10px" marginRight="10px" fontSize={20}>IMDB Movie Rating:</Text>
         <StarRatingStatic ratingNum={stars} />{/*Inputted Movie Rating*/}
       </Flex>
     </GridItem>
@@ -83,9 +86,9 @@ async function getReviewList(movieTitle) {
     const review = Rfields[5]
 
     reviewsArray.push(
-      <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px" minWidth="700px">
-        <Flex>
-          <Text margin="10px" fontSize="md">{username}'s Review: </Text>{/*Username of reviewer*/}
+      <Box w="100%" borderWidth="5px" borderRadius="lg" borderColor="#171923" marginBottom="15px" minWidth="700px">
+        <Flex margin="3px">
+          <Text margin="5px" fontSize="md">{username}'s Review: </Text>{/*Username of reviewer*/}
           <StarRatingStatic ratingNum={stars} />{/*Reviewr's rating of the movie*/}
         </Flex>
         <Text margin="10px" fontSize="md">{review}</Text>{/*Review text*/}
@@ -159,47 +162,21 @@ export default async function Page({ params }) {
               <div className="col-10">
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
-                    <Text fontSize="5xl" as="b">Movie Reviews</Text>
+                    <Heading fontSize="5xl" as="b">Movie Reviews</Heading>
                   </Center>
                   <Divider />
-                  <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(3, 1fr)" margin="50px">
-                    {/*
-                  <Flex margin="50px">
-                    <Image width='400px' height='500px' objectFit='cover' margin="20px" src=""></Image>
-                    <Box w="55%">
-                      <Text fontSize='4xl' margin="15px" marginLeft="30px" as="u"> Movie Title </Text>
-                      <Text margin="5px" marginLeft="30px"> - Genre, Genre, Genre</Text>
-                      <Flex marginTop="40px">
-                        <Text marginLeft="45px" marginRight="10px" fontSize={20}>Rating:</Text>
-                        <StarRating />
-                      </Flex>
-                      <Textarea w="100%" outlineColor="black" minHeight="200px" marginLeft="45px" placeholder="Write your review!"></Textarea>
-                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href="view-my-movies">Submit Review</Link></Button>
-                    </Box>
-                  </Flex>
-                  */}
+                  <Grid templateRows="repeat(4, 1fr)" templateColumns="repeat(6, 1fr)">
                     {getSessionMovieInfo(movieTitle)}
-                    <GridItem rowSpan={1} colSpan={2}>
-                      <Button colorScheme='blue' margin='30px' marginLeft="55px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
+                  <GridItem rowSpan={2} colSpan={4}>
+                      <Button colorScheme='blue' marginLeft="10px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>{/*Submits review, Adds movie to User's movie list, and takes back to view my movies page*/}
                     </GridItem>
                   </Grid>
                   <Divider />
                   <Center>
-                    <Box bg="lightslategrey" borderRadius="100px">
-                      <Text fontSize="3xl" as="u" margin="10px">User Reviews</Text>
-                    </Box>
+                    <Heading fontSize='4xl' >User Reviews</Heading>
                   </Center>
                   <Center>
-                    <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='35px'>
-                      {/*
-                      <Box w="95%" borderWidth="3px" borderRadius="lg" borderColor="grey" marginBottom="15px" minWidth="700px">
-                        <Flex>
-                          <Text margin="10px" fontSize="md">User's Review: </Text>
-                          <StarRating />
-                        </Flex>
-                        <Text margin="10px" fontSize="md"> User's Review of the movie</Text>
-                      </Box>
-                      */}
+                    <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='20px'>
                       {getReviewList(movieTitle)}
                     </Grid>
                   </Center>
