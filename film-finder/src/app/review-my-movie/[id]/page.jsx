@@ -59,7 +59,6 @@ export const getUserInfo = async (e) => {
 async function getSessionMovieInfo(movieID) {
   const MInfo = await getMovieInfo(movieID);
 
-  const id = MInfo.movieInfo._id;
   const title = MInfo.movieInfo.title;
   const genres = MInfo.movieInfo.genres;
   const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0);
