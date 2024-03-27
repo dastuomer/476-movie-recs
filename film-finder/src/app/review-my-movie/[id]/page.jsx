@@ -21,6 +21,25 @@ import { getMovieInfo } from "../../view-my-movies/page.jsx";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 import StarRatingStatic from "@/app/components/star_static.js";
 
+
+function iterateArray(arr)
+{
+  var items = "";
+  if (Array.isArray(arr))
+  {
+    for (let i = 0; i < arr.length; i++)
+    {
+      items += arr[i] + ", ";
+    }
+    if (items.length > 0)
+    {
+      return items.substring(0, items.length - 2);
+    }
+    return items;
+  }
+  return arr;
+}
+
 export const getUserInfo = async (e) => {
   try {
     const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, { cache: "no-store" });
@@ -39,11 +58,16 @@ export const getUserInfo = async (e) => {
 async function getSessionMovieInfo(movieID) {
   const MInfo = await getMovieInfo(movieID);
 
-  const id = MInfo.movieInfo._id
-  const title = MInfo.movieInfo.title
-  const genres = MInfo.movieInfo.genres
-  const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0)
-  const poster = MInfo.movieInfo.poster
+  const id = MInfo.movieInfo._id;
+  const title = MInfo.movieInfo.title;
+  const genres = MInfo.movieInfo.genres;
+  const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0);
+  const poster = MInfo.movieInfo.poster;
+  const plot = MInfo.movieInfo.plot;
+  const year = MInfo.movieInfo.year;
+  const rated = MInfo.movieInfo.rated;
+  const directors = MInfo.movieInfo.directors;
+  const actors = MInfo.movieInfo.cast;
 
   let gridItmes = []
   gridItmes.push(
@@ -56,7 +80,11 @@ async function getSessionMovieInfo(movieID) {
   gridItmes.push(
     <GridItem rowSpan={3} colSpan={3}>
       <Heading fontSize='6xl' > {title} </Heading>{/*Movie Title*/}
-      <Text fontSize="xl" marginLeft="10px">{genres}</Text>{/*Movie Genres*/}
+      <Text fontSize="xl" marginLeft="10px">{iterateArray(genres)}, {year}, {rated}</Text>{/*Movie Genres*/}
+      <Text fontSize="xl" marginLeft="10px">{plot}</Text>{/*Plot*/}
+      <br></br>
+      <Text fontSize="xl" marginLeft="10px">Directors: {iterateArray(directors)}</Text>{/*Plot*/}
+      <Text fontSize="xl" marginLeft="10px">Actors: {iterateArray(actors)}</Text>{/*Plot*/}
       <Flex marginTop="40px">
         <Text marginLeft="10px" marginRight="10px" fontSize={20}>IMDB Movie Rating:</Text>
         <StarRatingStatic ratingNum={stars} />{/*Inputted Movie Rating*/}
@@ -151,7 +179,7 @@ export default async function Page({ params }) {
   const movieID = params.id
 
   let grid = await getSessionMovieInfo(movieID)
-  const reviewInfo = { email: info.email, username: info.username, title: grid[2] };
+  const reviewInfo = { email: info.email, username: info.username, title: grid[2] , movieID: movieID};
   //console.log(reviewInfo)
   grid[2] = ''
 
