@@ -63,6 +63,7 @@ async function getSessionMovieInfo(movieID) {
       </Flex>
     </GridItem>
   )
+  gridItmes.push(title)
   return (gridItmes);
 };
 
@@ -138,17 +139,23 @@ const getReviewInfo = async (movieID, reviewsUserListEmail) => {
 
 };
 
+
+
 export default async function Page({ params }) {
 
-  //const session = await getServerSession(authOptions);
-  //if (!session) {
-  //redirect("/");
-  //}
-  //const { info } = await getUserInfo(session.user.email);
+  const session = await getServerSession(authOptions);
+  if (!session) {
+  redirect("/");
+  }
+  const { info } = await getUserInfo(session.user.email);
 
   const movieID = params.id
-  //const reviewInfo = { email: info.email, username: info.username, title: movieTitle };
 
+  let grid = await getSessionMovieInfo(movieID)
+  const reviewInfo = { email: info.email, username: info.username, title: grid[2] };
+  console.log(reviewInfo)
+  grid[2] = ''
+  
   return (
     <ChakraProvider>
       <title>Film Finder - Review Movie</title>
@@ -166,9 +173,9 @@ export default async function Page({ params }) {
                   </Center>
                   <Divider />
                   <Grid templateRows="repeat(4, 1fr)" templateColumns="repeat(6, 1fr)">
-                    {getSessionMovieInfo(movieID)}
+                    {grid}
                     <GridItem rowSpan={2} colSpan={4}>
-                      {/*<Button colorScheme='blue' marginLeft="10px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>*/}
+                      <Button colorScheme='blue' marginLeft="10px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>
                     </GridItem>
                   </Grid>
                   <Divider />

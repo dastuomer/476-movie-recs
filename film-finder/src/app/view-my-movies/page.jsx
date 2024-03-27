@@ -109,14 +109,14 @@ export const getMovieInfo = async (userMovieListID) => {
 };
 
 export default async function Page() {
-  //const session = await getServerSession(authOptions);
-  //if (!session) {
-  //redirect("/");
-  //}
-  //const { info } = await getUserInfo(session.user.email);
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/");
+  }
+  const { info } = await getUserInfo(session.user.email);
 
-  //const userEmail = info.email
-  const testEmail = "muck@gmail.com"
+  const userEmail = info.email
+  //const testEmail = "muck@gmail.com"
 
   return (
     <ChakraProvider>
@@ -150,7 +150,7 @@ export default async function Page() {
                         <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>
                       </div>
                       */}
-                      {getMovieList(testEmail)} {/*delete previous movie print^^ once connected*/}
+                      {getMovieList(userEmail)} {/*delete previous movie print^^ once connected*/}
                     </Grid>
                   </Box>
                 </Box>
