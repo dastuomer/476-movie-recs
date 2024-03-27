@@ -1,4 +1,4 @@
-//File used CLIENT-SIDE in order to check the current user session. Connected directly to layout.js .
+//File for storing the session variable in every page
 "use client";
 import React from "react";
 import { SessionProvider } from "next-auth/react";

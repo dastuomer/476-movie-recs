@@ -1,4 +1,4 @@
-//TThis file is used for establishing mongoose connection, which are used so far for CLIENT-SIDE DB CONNECTIONS
+//This file is used for establishing mongoose connection, which are used for most of our MongoDB connections
 import mongoose from "mongoose";
 
 const connect = async () => {
@@ -17,6 +17,4 @@ const connect = async () => {
     }
 }
 export default connect;
-
-
 // USE 'connect' in all your API's!!!

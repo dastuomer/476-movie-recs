@@ -23,6 +23,7 @@ import { HamburgerIcon, CloseIcon, UnlockIcon, EmailIcon } from "@chakra-ui/icon
 import Link from "next/link";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation.js"
 
 //import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 /*
@@ -51,6 +52,7 @@ const NavDrawer = () =>  {
 
   const {data: session} = useSession();
   const [error, setError] = useState("");
+  const router = useRouter();
 
   //CheckLogin();
 
@@ -92,24 +94,24 @@ const NavDrawer = () =>  {
             <HStack margin={3}>
             {!session?(<Avatar size="lg"><AvatarBadge boxSize="1.25em" bg="green.500" /></Avatar>):(<Avatar size="lg"><AvatarBadge boxSize="1.25em" bg="green.500" /></Avatar>)}
               <Stack>
-              {!session?(<Text fontSize="2xl" align={"center"}><Link href="profile">Guest</Link></Text>):(<Text fontSize="md" align={"center"}><Link href="profile">{session.user.email}</Link></Text>)}
+              {!session?(<Text fontSize="2xl" align={"center"}><Link href="profile">Guest</Link></Text>):(<Text fontSize="md" align={"center"}><Link href="/profile">{session.user.email}</Link></Text>)}
               </Stack>
             </HStack>
             <Box marginTop={3} marginLeft={3} marginRight={3}>
-            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="view-my-movies">My movies</Link></Text>)}
+            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="/view-my-movies" >My movies</Link></Text>)}
             </Box>
             <Box marginTop={3} marginLeft={3} marginRight={3}>
-            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="blender">Blends</Link></Text>)}
+            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="/blender">Blends</Link></Text>)}
             </Box>
             <Box marginTop={3} marginLeft={3} marginRight={3}>
-            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="view-friends">View Friends</Link></Text>)}
+            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="/view-friends">View Friends</Link></Text>)}
             </Box>
           </DrawerBody>
           <DrawerFooter>
           {!session? 
           (<HStack spacing={10}>
-            <Button leftIcon={<EmailIcon />}w={100} size="lg" colorScheme="blue"> <Link href="signup">Sign Up </Link></Button>
-            <Button leftIcon={<UnlockIcon />}w={100} size="lg" colorScheme="blue" marginRight={3}> <Link href="login">Log In </Link></Button>
+            <Button leftIcon={<EmailIcon />}w={100} size="lg" colorScheme="blue"> <Link href="/signup">Sign Up </Link></Button>
+            <Button leftIcon={<UnlockIcon />}w={100} size="lg" colorScheme="blue" marginRight={3}> <Link href="/login">Log In </Link></Button>
           </HStack>):
           (<Button colorScheme='blue' onClick={() => {signOut();}}> Log Out</Button>)}
             {/* Make this button navigate back to the log in page */}

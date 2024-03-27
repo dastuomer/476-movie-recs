@@ -21,7 +21,10 @@ import NavDrawer from "@/app/components/Drawer";
 import { redirect } from "next/navigation.js"
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
-
+/*
+This entire page is almost identical to the profile page, but it takes in a parameter when navigating to the page. This parameter is the email of
+a friend to the main user. This page allows the real user views their friend's profile page.
+*/
 const getUserInfo = async(e) => {
     try {
         const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, {cache: "no-store"});

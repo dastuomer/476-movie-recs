@@ -15,39 +15,41 @@ import {
   Heading
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
-import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation.js"
 import { authOptions } from "../api/auth/[...nextauth]/route.js";
 import { getUserInfo } from "@/app/review-my-movie/[id]/page.jsx"
 
-{/*Obtain User's email, and Movie list*/ }
-
+//Function used for displaying all movies that the user has reviewd on the page
 async function getMovieList(email) {
-
   let usersMovies = []
+  //Gets list of reviewed movies
   const UMInfo = await getUsersMovies(email)
-  //console.log(UMInfo)
 
+  //Stores all of the movie objects in an array
   for (let x = 0; x < UMInfo.movieList.length; x++) {
     usersMovies.push(UMInfo.movieList[x].movieID)
   }
 
   const moviesArray = [];
+  //Will go through every movie object and display it on the page
   for (let i = 0; i < usersMovies.length; i++) {
-
+    //Gets info of current movie object
     const MInfo = await getMovieInfo(usersMovies[i]);
+    //Assign variables for relevant information that will be displayed on the website
     const id = MInfo.movieInfo._id
     const title = MInfo.movieInfo.title
     const genres = MInfo.movieInfo.genres
     const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0)
     const poster = MInfo.movieInfo.poster
 
+    //Push the movie poster onto the website
     moviesArray.push(
       <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
         <Image width='250px' height='300px' objectFit='cover' src={poster}></Image>{/*src = Movie Poster URL*/}
       </Box>
     )
+    //Push the movie info onto the website
     moviesArray.push(
       <div>
         <Text fontSize={25} >{title}</Text>{/*Movie title*/}
@@ -57,23 +59,21 @@ async function getMovieList(email) {
       </div>
     )
   }
-  console.log("##### DONE #####")
   return moviesArray;
 }
 
+//Function to get the list of movies the user has reviewed
 const getUsersMovies = async (email) => {
   try {
-    //console.log(`http://localhost:3000/api/viewMoviesAPI?email=${email}`)
+    //Sends a request to the route file at /api/viewMoviesAPI, will return a list of all moviesthe user has watched
     const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?email=${email}`, {
       cache: 'no-store',
     });
-
     if (!res.ok) {
       throw new Error("failed to fetch movie list");
     }
-
+    //Converts the request into usable data and returns it
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading movie list: ", error);
@@ -81,35 +81,33 @@ const getUsersMovies = async (email) => {
 
 };
 
+//Gets the info of each movie that will be displayed on the website
 export const getMovieInfo = async (userMovieListID) => {
   try {
-    //console.log(`http://localhost:3000/api/viewMoviesAPI?id=${userMovieListID}`)
+    //Sends a request to the route file at /api/viewMoviesAPI, which will return the info of a movie
     const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?id=${userMovieListID}`, {
       cache: 'no-store',
     });
-
     if (!res.ok) {
       throw new Error("failed to fetch movie info");
     }
-
+    //Converts the request into usable data and returns it
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading movie info: ", error);
   }
-
 };
 
 export default async function Page() {
+  //Checks to see if the user is logged in, will reroute to main page if not
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/");
   }
+  //Gets info of current user
   const { info } = await getUserInfo(session.user.email);
-
-  const userEmail = info.email
-  //const testEmail = "muck@gmail.com"
+  const userEmail = info.email;
 
   return (
     <ChakraProvider>
@@ -132,16 +130,8 @@ export default async function Page() {
                   <br />
                   <Box borderWidth="2px" borderColor="#171923" minHeight="850px">
                     <Grid templateColumns='repeat(6, 1fr)' gap='20px'>
-                      {/*
-                      <Image width='200px' height='250px' objectFit='cover' src=""></Image>
-                      <div>
-                        <Text fontSize={25} >Movie Title</Text>
-                        <Text> - Genre, Genre, Genre</Text>
-                        <StarRating />
-                        <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>
-                      </div>
-                      */}
-                      {await getMovieList(userEmail)} {/*delete previous movie print^^ once connected*/}
+                      {/*Populatest the page with the movies that the user has reviewed*/}
+                      {await getMovieList(userEmail)}
                     </Grid>
                   </Box>
                 </Box>

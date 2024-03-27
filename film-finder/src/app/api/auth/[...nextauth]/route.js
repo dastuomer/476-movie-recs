@@ -1,12 +1,11 @@
-//This file is for authorizing login attempts.
+//This route file is for authorizing user login attempts
 import NextAuth from "next-auth";
-import { Account, User as AuthUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/app/models/User";
 import connect from "@/app/utils/dbconnect"
 
 export const authOptions = {
-    //This defines a kind of login and the components of the login
+  //This defines the login credentials of a user that are passed to this file
   providers: [
     CredentialsProvider({
         id: "credentials",
@@ -17,19 +16,20 @@ export const authOptions = {
             password: {label: "Password", type: "password"}
         },
         async authorize(credentials) {
-            //Connect to the DB
+            //Connect to the MognoDB database
             await connect();
             try{
                 //Looks for an instance in the DB of a user with the inputed email, returns the database entry
                 const user = await User.findOne({email: credentials.email});
                 if (user)
                 {
-                    //Checks if password in DB and inputed password match
+                        //Checks if password in DB and inputed password match
                         if (credentials.password === user.password) {
                             return user;
                         }
                 }     
             }catch (err){
+                //Throws an error if the user doesn't exist
                 throw new Error(err);
             }
         }

@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation.js"
 import { useSession } from "next-auth/react";
 import Link from "next/link.js"
 
-//IMPORTANT NOTE: default function is changed to export both HTML and the code for managing account creation
 const Edit = ({params}) => {
     //Redirects current page
     const router = useRouter();
@@ -25,29 +24,30 @@ const Edit = ({params}) => {
     const [error, setError] = useState("");
     //Checks the current user session and if they are logged in. 
     const session = useSession();
-
-    //Checks if user is logged in already and directs to profile automatically if true
+    //Checks if user is logged in, if not they are taken to the home page
     useEffect(() => {
         if (!session?.status === "authenticated") {
             router.replace("/");
         }
     }, [session, router])
-
+    //AJAX check to make sure that users are submitting accepted image links in certain fields
     const checkLink = (link) => {
         return(link.match(/\.(jpeg|jpg|gif|png)$/) != null);
     }
-
+    //All handle___ functions listed below are for handling the submission of all parts of a user's profile. Apply the following
+    //comments to all handle functions under pfp.
     const handlePfp= async(e) => {
         e.preventDefault();
+        //Gets info from form and gets the email of user
         const pfp = e.target[0].value;
         const {id} = params;
-
+        //Calls function that checks to make sure a link is being submitted
         if (!checkLink(pfp)) {
             setError("This is not a valid image link.");
             return;
         }
-
         try {
+            //Sends a request to the route file at /api/editprofile/pfp, passes image link which is saved in database
             const res = await fetch(`http://localhost:3000/api/editprofile/pfp/${id}`, {
                 method: "PUT",
                 headers: {
@@ -57,10 +57,12 @@ const Edit = ({params}) => {
             });
             if (!res.ok)
             {   
+                //Gives the user an error if the profile cannot be updated
                 setError("Failed to update.");
                 throw new Error("Failed to update.");
             }
             else {
+                //Lets the user know their profile has updated
                 setError("Profile Updated!");
             }
         } catch (err) {
@@ -72,12 +74,10 @@ const Edit = ({params}) => {
         e.preventDefault();
         const banner = e.target[0].value;
         const {id} = params;
-
         if (!checkLink(banner)) {
             setError("This is not a valid image link.");
             return;
         }
-
         try {
             const res = await fetch(`http://localhost:3000/api/editprofile/banner/${id}`, {
                 method: "PUT",
@@ -128,7 +128,6 @@ const Edit = ({params}) => {
         e.preventDefault();
         const genres = e.target[0].value;
         const {id} = params;
-        
         try {
             const res = await fetch(`http://localhost:3000/api/editprofile/genres/${id}`, {
                 method: "PUT",
@@ -154,12 +153,10 @@ const Edit = ({params}) => {
         e.preventDefault();
         const actor = e.target[0].value;
         const {id} = params;
-
         if (!checkLink(actor)) {
             setError("This is not a valid image link.");
             return;
         }
-
         try {
             const res = await fetch(`http://localhost:3000/api/editprofile/actor/${id}`, {
                 method: "PUT",
@@ -190,7 +187,6 @@ const Edit = ({params}) => {
             setError("This is not a valid image link.");
             return;
         }
-
         try {
             const res = await fetch(`http://localhost:3000/api/editprofile/director/${id}`, {
                 method: "PUT",
@@ -221,7 +217,6 @@ const Edit = ({params}) => {
             setError("This is not a valid image link.");
             return;
         }
-
         try {
             const res = await fetch(`http://localhost:3000/api/editprofile/soundtrack/${id}`, {
                 method: "PUT",
@@ -247,12 +242,10 @@ const Edit = ({params}) => {
         e.preventDefault();
         const character = e.target[0].value;
         const {id} = params;
-
         if (!checkLink(character)) {
             setError("This is not a valid image link.");
             return;
         }
-
         try {
             const res = await fetch(`http://localhost:3000/api/editprofile/character/${id}`, {
                 method: "PUT",
@@ -299,7 +292,6 @@ const Edit = ({params}) => {
         }
     }
 
-    //Handles the login attempt from the user.
     return (
             <ChakraProvider>
                 <title>Film Finder - Login</title>
@@ -320,6 +312,7 @@ const Edit = ({params}) => {
                                             <Center>
                                                 <Box w="90%" marginTop="100px">
                                                     <Grid templateColumns="1fr" gap="20px">
+                                                    {/*Form for submitting a profile picture. Many more similar forms after this one.*/}
                                                     <form onSubmit={handlePfp}>
                                                         <Flex>
                                                             <div className="col-4">
