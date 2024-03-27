@@ -31,3 +31,5 @@ export async function poster(name) {
     throw err;
   }
 }
+
+// THIS IS LEGACY CONTENT, DOESNT WORK 
