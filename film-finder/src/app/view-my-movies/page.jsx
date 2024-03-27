@@ -18,19 +18,30 @@ import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation.js"
+import { authOptions } from "../api/auth/[...nextauth]/route.js";
+import { getUserInfo } from "@/app/review-my-movie/[id]/page.jsx"
 
 {/*Obtain User's email, and Movie list*/ }
 
-async function getMovieList(userMovieList) {
-  const moviesArray = [];
-  for (let i = 0; i < userMovieList.length; i++) {
+async function getMovieList(email) {
 
-    const MInfo = await getMovieInfo(userMovieList[i]);
-    let fields = Object.values(MInfo.movieInfo)
-    const title = fields[1]
-    const stars = Math.round((fields[2]) / 2.0)
-    const genre = fields[3]
-    const poster = fields[4]
+  let usersMovies = []
+  const UMInfo = await getUsersMovies(email)
+  console.log(UMInfo)
+
+  for (let x = 0; x < UMInfo.movieList.length; x++) {
+    usersMovies.push(UMInfo.movieList[x].movieID)
+  }
+
+  const moviesArray = [];
+  for (let i = 0; i < usersMovies.length; i++) {
+
+    const MInfo = await getMovieInfo(usersMovies[i]);
+    const id = MInfo.movieInfo._id
+    const title = MInfo.movieInfo.title
+    const genres = MInfo.movieInfo.genres
+    const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0)
+    const poster = MInfo.movieInfo.poster
 
     moviesArray.push(
       <div>
@@ -41,22 +52,40 @@ async function getMovieList(userMovieList) {
     )
     moviesArray.push(
       <div>
-        
-          <Text fontSize={25} >{title}</Text>{/*Movie title*/}
-          <Text>{genre}</Text>{/*Movie Genres*/}
-          <StarRatingStatic ratingNum={stars}/>{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
-          <Button colorScheme='blue' marginTop='5px' > <Link href={`review-my-movie/${title}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
-        
+        <Text fontSize={25} >{title}</Text>{/*Movie title*/}
+        <Text>{genres}</Text>{/*Movie Genres*/}
+        <StarRatingStatic ratingNum={stars} />{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
+        <Button colorScheme='blue' marginTop='5px' > <Link href={`review-my-movie/${id}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
       </div>
     )
   }
   return moviesArray;
 }
 
-export const getMovieInfo = async (userMovieListTitle) => {
+const getUsersMovies = async (email) => {
   try {
-    //console.log(`http://localhost:3000/api/viewMoviesAPI?title=${userMovieListTitle}`)
-    const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?title=${userMovieListTitle}`, {
+    console.log(`http://localhost:3000/api/viewMoviesAPI?email=${email}`)
+    const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?email=${email}`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      throw new Error("failed to fetch movie list");
+    }
+
+    const myJSON = JSON.parse(JSON.stringify(await res.json()));
+    console.log(myJSON)
+    return await myJSON;
+  } catch (error) {
+    console.log("Error loading movie list: ", error);
+  }
+
+};
+
+export const getMovieInfo = async (userMovieListID) => {
+  try {
+    //console.log(`http://localhost:3000/api/viewMoviesAPI?id=${userMovieListID}`)
+    const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?id=${userMovieListID}`, {
       cache: 'no-store',
     });
 
@@ -74,12 +103,14 @@ export const getMovieInfo = async (userMovieListTitle) => {
 };
 
 export default async function Page() {
-  const session = getServerSession();
-  if (!session){
+  const session = await getServerSession(authOptions);
+  if (!session) {
     redirect("/");
   }
+  const { info } = await getUserInfo(session.user.email);
 
-  const testmovies = ['Toy Story (1995)', 'V for Vendetta (2005)', 'The AristoCats (1970)']
+  const userEmail = info.email
+  //const testEmail = "muck@gmail.com"
 
   return (
     <ChakraProvider>
@@ -113,10 +144,7 @@ export default async function Page() {
                         <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>
                       </div>
                       */}
-                      
-                        
-                          {getMovieList(testmovies)} {/*delete previous movie print^^ once connected*/}
-                        
+                      {getMovieList(userEmail)} {/*delete previous movie print^^ once connected*/}
                     </Grid>
                   </Box>
                 </Box>
