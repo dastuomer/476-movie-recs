@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const reviewMovieSchema = new Schema({
     userEmail: String,
-    movieTitle: String,
+    movieID: String,
     username: String,
     rating: Number,
     review: String
