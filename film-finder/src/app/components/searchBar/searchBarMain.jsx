@@ -8,7 +8,7 @@ import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 function SearchBar({ placeholder, dataSet}) {
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
-
+    
 
     const getMovies = async() => {
         try {
@@ -79,7 +79,6 @@ function SearchBar({ placeholder, dataSet}) {
                     </form>
                 </InputGroup>
             </Center>
-            <p>{callGetMovies}</p>
             {/*
             {query.length != 0 && (
                 <div className="dataResult">
