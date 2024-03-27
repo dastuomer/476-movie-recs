@@ -27,7 +27,7 @@ async function getMovieList(email) {
 
   let usersMovies = []
   const UMInfo = await getUsersMovies(email)
-  console.log(UMInfo)
+  //console.log(UMInfo)
 
   for (let x = 0; x < UMInfo.movieList.length; x++) {
     usersMovies.push(UMInfo.movieList[x].movieID)
@@ -44,11 +44,9 @@ async function getMovieList(email) {
     const poster = MInfo.movieInfo.poster
 
     moviesArray.push(
-      <div>
-        <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
-          <Image width='250px' height='300px' objectFit='cover' src={poster}></Image>{/*src = Movie Poster URL*/}
-        </Box>
-      </div>
+      <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
+        <Image width='250px' height='300px' objectFit='cover' src={poster}></Image>{/*src = Movie Poster URL*/}
+      </Box>
     )
     moviesArray.push(
       <div>
@@ -59,12 +57,13 @@ async function getMovieList(email) {
       </div>
     )
   }
+  console.log("##### DONE #####")
   return moviesArray;
 }
 
 const getUsersMovies = async (email) => {
   try {
-    console.log(`http://localhost:3000/api/viewMoviesAPI?email=${email}`)
+    //console.log(`http://localhost:3000/api/viewMoviesAPI?email=${email}`)
     const res = await fetch(`http://localhost:3000/api/viewMoviesAPI?email=${email}`, {
       cache: 'no-store',
     });
@@ -94,7 +93,7 @@ export const getMovieInfo = async (userMovieListID) => {
     }
 
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    //console.log(myJSON)
+    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading movie info: ", error);
@@ -127,12 +126,10 @@ export default async function Page() {
                   <Center>
                     <Heading colorScheme='blue' fontSize="45" marginTop="30px">My Movies </Heading>
                   </Center>
-                  <div>
-                    <Center>
-                      <Input size="lg" variant="outline" margin="20px" placeholder="Search your movies" />{/*Search filter's user's movie list displayed*/}
-                    </Center>
-                    <br />
-                  </div>
+                  <Center>
+                    <Input size="lg" variant="outline" margin="20px" placeholder="Search your movies" />{/*Search filter's user's movie list displayed*/}
+                  </Center>
+                  <br />
                   <Box borderWidth="2px" borderColor="#171923" minHeight="850px">
                     <Grid templateColumns='repeat(6, 1fr)' gap='20px'>
                       {/*
@@ -144,7 +141,7 @@ export default async function Page() {
                         <Button colorScheme='blue' margin='5px' pos='absolute' > <Link href="review-my-movie">Reviews</Link></Button>
                       </div>
                       */}
-                      {getMovieList(userEmail)} {/*delete previous movie print^^ once connected*/}
+                      {await getMovieList(userEmail)} {/*delete previous movie print^^ once connected*/}
                     </Grid>
                   </Box>
                 </Box>
