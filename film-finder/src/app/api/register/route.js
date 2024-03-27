@@ -30,7 +30,7 @@ export const POST = async (request) => {
     const bio = "Default bio";
     const blank = "";
     const blanklink = "https://www.tarkett-me.com/media/img/M/THH_25094225_25187225_001.jpg";
-    const blankObj = ["fn"];
+    const blankObj = [];
 
     const newUser = new User({
         userid: userid,
