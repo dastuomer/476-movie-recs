@@ -1,35 +1,44 @@
-import TheReturnOfTheKing from "./movie-picture.jsx";
+
 import StarRatingStatic from "./star_static.js";
 import { Button } from "@chakra-ui/react";
 
-export default function Results() {
-    
-  return (
-    <div className="row">
-        <div className="col-3">
-            <TheReturnOfTheKing className="align-left" />
-            <Button marginTop={5} borderRadius={50}>
-                <a href='/review-my-movie'>+ Review Movie</a>
-            </Button>
-        </div>
+export default function Results({ movieID }) {
 
-        <div className="col-9 fs-3">
-            <p className="h1">Generic movie</p>
+    const getEverything = async (movieID) => {
 
-            <p className="h4 mt-5">
-                This is a plot summary This is a plot summary This is
-                a plot summary This is a plot summary This is a plot
-                summary This is a plot summary This is a plot summary
-                This is a plot summary This is a plot summary This is
-                a plot summary This is a plot summary This is a plot
-                summary This is a plot summary This is a plot summary
-            </p>
+        const getMovieInfo = async (movieID) => {
+            try {
+                //console.log(`http://localhost:3000/api/recsAPI?id=${movieID}`)
+                const res = await fetch(`http://localhost:3000/api/recsAPI?id=${movieID}`, {
+                    cache: 'no-store',
+                });
 
-            <div className="h3 mt-5">
-                <span> IMDb Rating: <StarRatingStatic ratingNum={4}/> </span>
-            </div>
-        </div>
-    </div>
-   
-  );
+                if (!res.ok) {
+                    throw new Error("failed to fetch movie info");
+                }
+
+                const myJSON = JSON.parse(JSON.stringify(await res.json()));
+                console.log(myJSON)
+                return await myJSON;
+            } catch (error) {
+                console.log("Error loading movie info: ", error);
+            }
+        }
+        const MInfo = getMovieInfo(movieID);
+
+        const id = MInfo.movieInfo._id;
+        const title = MInfo.movieInfo.title;
+        const genres = MInfo.movieInfo.genres;
+        const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0);
+        const poster = MInfo.movieInfo.poster;
+        const plot = MInfo.movieInfo.plot;
+        const year = MInfo.movieInfo.year;
+        const rated = MInfo.movieInfo.rated;
+        const directors = MInfo.movieInfo.directors;
+        const actors = MInfo.movieInfo.cast;
+
+        title.getElementById("title").innerHTML = title;
+        console.log(title.getElementById("title").innerHTML)
+    }
+    getEverything(movieID);
 }
