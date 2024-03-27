@@ -1,10 +1,9 @@
 //File that defines what the user database entry will look like. Specifies datatype, uniqueness, and requiredness of each element
 import mongoose from "mongoose";
-//import { Link } from "react-bootstrap/lib/Navbar";
 
 const {Schema} = mongoose;
 
-//Defines the user schema (needs a email, username, and password)
+//Defines the user schema (requires a email, username, and password)
 const userSchema = new Schema(
     {
         userid: {

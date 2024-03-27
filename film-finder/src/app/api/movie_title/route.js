@@ -4,21 +4,11 @@ import connect from '../../utils/dbconnect';
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-    await connect();
+    //Get info from request
     const search = request.nextUrl.searchParams.get("request");
-    const movies = await Movie.find({title: search}); //{title: "The Dark Knight"}
-    return NextResponse.json({ movies });
-}
-
-
-// Below is for a single movie title
-{/*
-export async function GET(movie_title) {
-    movie_title = "Transformers";
+    //Connect to DB
     await connect();
-    const movies = await Movie.findOne({title: movie_title});
+    //Gets movie title and returns it
+    const movies = await Movie.find({title: search}); 
     return NextResponse.json({ movies });
 }
-
-*/}
-//

@@ -25,7 +25,6 @@ const Register = () => {
         const emailReg = /^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+/i;
         return emailReg.test(email);
     };
-
     //Handler for account creation
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,15 +32,13 @@ const Register = () => {
         const email = e.target[0].value;
         const username = e.target[1].value;
         const password = e.target[2].value;
-
         //Will check for a valid email with the REGEX function
         if (!isValidEmail(email)) {
             setError("This is not a valid email.");
             return;
         }
-
         try {
-            //Creates POST to send to route.js (API) in the register folder
+            //Creates a POST request to send to the route file in /api/register
             const res = await fetch("/api/register", {
                 method: "POST",
                 headers: {
@@ -52,13 +49,11 @@ const Register = () => {
                     password
                 })
             })
-
             //Error for if the username/email is in the DB already
             if (res.status == 400) {
                 setError("Already registered.");
             }
-            
-            //Signifies that account is created, automatically sends user to the profile page (can be changed)
+            //Signifies that account is created, automatically sends user to the login page
             if (res.status == 200) {
                 setError("");
                 router.push("/login");
@@ -87,6 +82,7 @@ const Register = () => {
                                             <Center>
                                                 <Box w="60%" marginTop="100px">
                                                     <Grid templateColumns="1fr" gap="75px">
+                                                    {/*Form for the user to submit their account credentials*/}
                                                     <form onSubmit={handleSubmit}>
                                                         <Flex>
                                                             <div className="col-6">

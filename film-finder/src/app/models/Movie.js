@@ -16,6 +16,7 @@ const movieSchema = new Schema(
         
 );
 
+//Exports the model for use in other parts of the code.
 const Movie = mongoose.models.films || mongoose.model("films", movieSchema)
 export default Movie;
-//Exports the model for use in other parts of the code. 
+ 

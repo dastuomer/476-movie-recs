@@ -22,14 +22,16 @@ import { redirect } from "next/navigation.js"
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 
+//Getst the info of the current user from the database using the session variable of the user
 const getUserInfo = async(e) => {
     try {
+        //Sends a request to the route file at /api/userinfo to get the user object from the database, sends an email as a parameter
         const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, {cache: "no-store"});
         if (!res.ok)
         {   
             throw new Error("Could not get user");
         }
-
+        //Converts the request to usable data and returns it
         const convert = JSON.parse(JSON.stringify(await res.json()));
         return await convert;
     } catch (err) {
@@ -38,12 +40,13 @@ const getUserInfo = async(e) => {
 }
 
 const Profile = async() => {
+    //Checks to see if the user is logged in, taken to main page if not
     const session = await getServerSession(authOptions); 
     if (!session){
         redirect("/");
     }
+    //Info of current user based on session information
     const {info} = await getUserInfo(session.user.email);
-    
     return (
         <ChakraProvider>
             <title>Film Finder - User Profile</title>
@@ -55,6 +58,8 @@ const Profile = async() => {
                                 <a href='/'><Logo/></a>
                             </div>
                       <div className="col-10">  
+                        {/*Throughout this page, many things are wrapped in session checks. This is to avoid potential errors.*/}
+                        {/*Most elements of the page are retrived from the user's database entry, which has things such as links for images among other things.*/}
                         <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                         <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px' fontSize = "3xl" zIndex='1'>Favourite Movie: {!session? (" "):(info.favmovie)}</Text>
                         {!session? (<Image boxSize='400px' w='100%' borderBottom='5px' borderColor='black' objectFit='cover' filter='auto' src='https://m.media-amazon.com/images/S/pv-target-images/706d70385bb0d8ca7c350a00336616229c320b6420b7f23a3bded803bb56e22a.jpg'></Image>):
@@ -72,7 +77,9 @@ const Profile = async() => {
                                 </Box>
                             </Center>
                             <Flex>
+                                {/*Redirect to view movies page*/}
                                 <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="/view-my-movies">View Movies</Link></Button>
+                                {/*Redirects to edit profile page, passes user email as a parameter*/}
                                 <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href={`/edit-profile/${info.email}`}>Edit Profile Page</Link></Button>
                             </Flex>
                             <Divider />

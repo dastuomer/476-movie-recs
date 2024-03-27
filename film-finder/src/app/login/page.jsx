@@ -23,14 +23,12 @@ const Login = () => {
     const router = useRouter();
     //Checks the current user session and if they are logged in
     const session = useSession();
-
     //Checks if user is logged in already and directs to profile automatically if true
     useEffect(() => {
         if (session?.status === "authenticated") {
             router.replace("/profile");
         }
     }, [session, router])
-    
     //REGEX check on the email field
     const isValidEmail = (email) => {
         const emailReg = /^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+/i;
@@ -44,25 +42,21 @@ const Login = () => {
         const email = e.target[0].value;
         const username = e.target[1].value;
         const password = e.target[2].value;
-
         //Will give an error message if the email entered doesnt pass REGEX check
         if (!isValidEmail(email)) {
             setError("This is not a valid email.");
             return;
         }
-
-        //Attempts to sign in the user given the user's inputs
+        //Attempts to sign in the user given the user's inputs. signIn uses the route file in /api/auth
         const res = await signIn("credentials", {
             redirect: false,
             email,
             username,
             password
         })
-
         //Will tell the user that their login isnt found in the DB or they typed in something wrong.
         if (res?.error) {
             setError("Invalid email or password.");
-            
             //Sent to profile page upon successful login
             if (res?.url) router.replace("/profile")
         } else {
@@ -90,6 +84,7 @@ const Login = () => {
                                             <Center>
                                                 <Box w="60%" marginTop="100px">
                                                     <Grid templateColumns="1fr" gap="75px">
+                                                    {/*Form that calls the handleSubmit function when filled out, used for login*/}
                                                     <form onSubmit={handleSubmit}>
                                                         <Flex>
                                                             <div className="col-6">
