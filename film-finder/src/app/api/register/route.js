@@ -30,6 +30,7 @@ export const POST = async (request) => {
     const bio = "Default bio";
     const blank = "";
     const blanklink = "https://www.tarkett-me.com/media/img/M/THH_25094225_25187225_001.jpg";
+    const blankObj = ["fn"];
 
     const newUser = new User({
         userid: userid,
@@ -45,6 +46,7 @@ export const POST = async (request) => {
         soundtrack: blanklink,
         character: blanklink,
         favmovie: blank,
+        friends: blankObj
     });
     try{
         //Sends info to the DB and gives a success status

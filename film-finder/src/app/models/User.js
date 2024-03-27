@@ -62,6 +62,10 @@ const userSchema = new Schema(
         favmovie: {
             type: String,
             required: false,
+        },
+        friends: {
+            type: Array,
+            required: false,
         }
     }
 );
