@@ -79,7 +79,7 @@ plot = "boy is in love"
 #plot = clean_plot(plot)
 query_vec = vectorizer.transform([plot])
 similarity = cosine_similarity(query_vec, tfidf).flatten()
-indices = np.argpartition(similarity, -5)[-5:]
+indices = np.argpartition(similarity, -10)[-10:]
 #results = movies.iloc[indices].iloc[::-1]
 #return results
 #results 
