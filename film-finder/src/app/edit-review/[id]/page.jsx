@@ -68,6 +68,29 @@ const Edit = ({ params }) => {
         }
     }
 
+    const removeReview= async(e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch(`http://localhost:3000/api/deletereview/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({email}),
+            });
+            if (!res.ok)
+            {   
+                setError("Review not found!");
+                throw new Error("Review not found!");
+            }
+            else {
+                setError("Review Deleted!");
+            }
+        } catch (err) {
+            console.log("Error:", err);
+        }
+    }
+
     return (
         <ChakraProvider>
             <title>Film Finder - Login</title>
@@ -94,6 +117,7 @@ const Edit = ({ params }) => {
                                                         </Flex>
                                                         <Textarea w="100%" outlineColor="black" minHeight="200px" placeholder="Write your review!" variant="filled" required></Textarea>
                                                         <Button colorScheme='blue' size="md" type='submit' marginTop="20px">Submit Review</Button>
+                                                        <Button colorScheme='red' size="md" marginTop="20px" onClick={removeReview}>Delete Review</Button>
                                                     </form>
                                                     <Center>
                                                         <Text>{error && error}</Text>

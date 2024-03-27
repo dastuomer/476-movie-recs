@@ -72,7 +72,7 @@ const Profile = async() => {
                                 </Box>
                             </Center>
                             <Flex>
-                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="view-my-movies">View Movies</Link></Button>
+                                <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href="/view-my-movies">View Movies</Link></Button>
                                 <Button colorScheme='blue' margin='5px' algin="" size='md'> <Link href={`/edit-profile/${info.email}`}>Edit Profile Page</Link></Button>
                             </Flex>
                             <Divider />

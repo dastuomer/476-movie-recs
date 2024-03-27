@@ -12,7 +12,8 @@ import {
   Grid,
   Flex,
   GridItem,
-  Heading
+  Heading,
+  HStack
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import CheckLogin from "@/app/api/navigate/route.jsx"
@@ -80,13 +81,13 @@ async function getSessionMovieInfo(movieID) {
   gridItmes.push(
     <GridItem rowSpan={3} colSpan={3}>
       <Heading fontSize='6xl' > {title} </Heading>{/*Movie Title*/}
-      <Text fontSize="xl" marginLeft="10px">{iterateArray(genres)}, {year}, {rated}</Text>{/*Movie Genres*/}
-      <Text fontSize="xl" marginLeft="10px">{plot}</Text>{/*Plot*/}
+      <Text fontSize="xl" >{iterateArray(genres)}, {year}, {rated}</Text>{/*Movie Genres*/}
+      <Text fontSize="xl" >{plot}</Text>{/*Plot*/}
       <br></br>
-      <Text fontSize="xl" marginLeft="10px">Directors: {iterateArray(directors)}</Text>{/*Plot*/}
-      <Text fontSize="xl" marginLeft="10px">Actors: {iterateArray(actors)}</Text>{/*Plot*/}
-      <Flex marginTop="40px">
-        <Text marginLeft="10px" marginRight="10px" fontSize={20}>IMDB Movie Rating:</Text>
+      <Text fontSize="xl" >Directors: {iterateArray(directors)}</Text>{/*Plot*/}
+      <Text fontSize="xl" >Actors: {iterateArray(actors)}</Text>{/*Plot*/}
+      <Flex marginTop="40px" >
+        <Text fontSize={20}>IMDB Movie Rating:</Text>
         <StarRatingStatic ratingNum={stars} />{/*Inputted Movie Rating*/}
       </Flex>
     </GridItem>
@@ -202,7 +203,7 @@ export default async function Page({ params }) {
                   <Grid templateRows="repeat(4, 1fr)" templateColumns="repeat(6, 1fr)">
                     {grid}
                     <GridItem rowSpan={2} colSpan={4}>
-                      <Button colorScheme='blue' marginLeft="10px"> <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>
+                      <Button colorScheme='blue' > <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>
                     </GridItem>
                   </Grid>
                   <Divider />

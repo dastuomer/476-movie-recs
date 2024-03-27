@@ -61,7 +61,7 @@ const Login = () => {
 
         //Will tell the user that their login isnt found in the DB or they typed in something wrong.
         if (res?.error) {
-            setError("Invalid email or password res error.");
+            setError("Invalid email or password.");
             
             //Sent to profile page upon successful login
             if (res?.url) router.replace("/profile")
