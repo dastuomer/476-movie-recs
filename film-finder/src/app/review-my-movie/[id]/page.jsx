@@ -21,7 +21,6 @@ import { getMovieInfo } from "../../view-my-movies/page.jsx";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 import StarRatingStatic from "@/app/components/star_static.js";
 
-{/*Obtain Selected Movie Title from button used*/ }
 export const getUserInfo = async (e) => {
   try {
     const res = await fetch(`http://localhost:3000/api/userinfo?request=${e}`, { cache: "no-store" });
@@ -30,6 +29,7 @@ export const getUserInfo = async (e) => {
     }
 
     const convert = JSON.parse(JSON.stringify(await res.json()));
+    console.log(convert)
     return await convert;
   } catch (err) {
     console.log("Error:", err);
@@ -48,7 +48,7 @@ async function getSessionMovieInfo(movieID) {
   let gridItmes = []
   gridItmes.push(
     <GridItem rowSpan={4} colSpan={2}>
-      <Box width='350px' height='500px' borderWidth="2px" borderColor="#171923" margin="20px" marginLeft="40px">
+      <Box width='350px' height='504px' borderWidth="2px" borderColor="#171923" margin="20px" marginLeft="40px">
         <Image width='350px' height='500px' objectFit='cover' src={poster}></Image>{/*Movie poster URL*/}
       </Box>
     </GridItem>
@@ -96,6 +96,7 @@ async function getReviewList(movieID) {
       </Box>
     )
   }
+  console.log("#### DONE ####")
   return reviewsArray;
 };
 
@@ -111,7 +112,7 @@ const getReviewUsersList = async (movieID) => {
     }
 
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    //console.log(myJSON)
+    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading review user info: ", error);
@@ -131,7 +132,7 @@ const getReviewInfo = async (movieID, reviewsUserListEmail) => {
     }
 
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    //console.log(myJSON)
+    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading review info: ", error);
@@ -139,13 +140,11 @@ const getReviewInfo = async (movieID, reviewsUserListEmail) => {
 
 };
 
-
-
 export default async function Page({ params }) {
 
   const session = await getServerSession(authOptions);
   if (!session) {
-  redirect("/");
+    redirect("/");
   }
   const { info } = await getUserInfo(session.user.email);
 
@@ -153,9 +152,9 @@ export default async function Page({ params }) {
 
   let grid = await getSessionMovieInfo(movieID)
   const reviewInfo = { email: info.email, username: info.username, title: grid[2] };
-  console.log(reviewInfo)
+  //console.log(reviewInfo)
   grid[2] = ''
-  
+
   return (
     <ChakraProvider>
       <title>Film Finder - Review Movie</title>
@@ -184,7 +183,7 @@ export default async function Page({ params }) {
                   </Center>
                   <Center>
                     <Grid templateColumns='repeat(2, 1fr)' gap='10px' margin='20px'>
-                      {getReviewList(movieID)}
+                      {await getReviewList(movieID)}
                     </Grid>
                   </Center>
                   <Center>
