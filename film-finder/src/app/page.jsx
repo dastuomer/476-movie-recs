@@ -1,5 +1,6 @@
 "use client"
 import * as React from "react";
+import {useEffect, useState } from "react";
 import Logo from "./components/logo.js";
 import NavDrawer from "@/app/components/Drawer";
 import Carousel from "react-bootstrap/Carousel";
@@ -16,11 +17,11 @@ import Results from "./components/results.jsx";
 import { Movies } from "./components/searchBar/movies-MOCK";
 
 export default function Page() {
-{/*
+
   const[data,setData] = useState([{}])
 
   useEffect(() => {
-    fetch("http://localhost:5000/movies2").then(
+    fetch("http://localhost:5000/plot_recommend").then(
       res => res.json()
     ).then(
         data => {
@@ -30,7 +31,7 @@ export default function Page() {
 
     )
   }, [])
-*/}
+
   return (
     <ChakraProvider>
       <title>Film Finder - Home Page</title>
@@ -61,18 +62,7 @@ export default function Page() {
                       >
                         <Results/>
 
-                              {/*
-                                <div>
-                                          {(typeof data.movies2 === 'undefined')?(
-                                            <p>Loading....</p>
-                                          ):(
-                                            data.movies2.map ((movie2, i) => (
-                                              <p key = {i} > {movie2} </p>
-                                            ))
-                                          )}
-                                      </div>
-
-                                            */}
+                 
 
 
                             </Box>
@@ -84,6 +74,31 @@ export default function Page() {
                       <p className="h1 mt-4">Recommended for you</p>
                       <div data-interval="false">
                         {" "}
+                        <div>
+    {typeof data.plot_recommendations === 'undefined' ? (
+      <p>Loading....</p>
+    ) : (
+      <Carousel>
+        {data.plot_recommendations.map((movie, i) => (
+          <Carousel.Item key={i}>
+            <div>
+              <p>Title: {movie.title}</p>
+              <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
+              <img width='250px' height='300px' objectFit='cover' src={movie.poster} alt={movie.title} />{/*src = Movie Poster URL*/}
+      </Box>
+              
+              <p>Year: {movie.year}</p>
+              <p>Plot: {movie.plot}</p>
+              
+              {/* Add more fields as needed */}
+            </div>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    )}
+  </div>
+
+                       { /*
                         <Carousel>
                           <Carousel.Item color="blue">
                             <MovieCards />
@@ -92,6 +107,7 @@ export default function Page() {
                             <MovieCards />
                           </Carousel.Item>
                         </Carousel>
+    */}
                       </div>
                     </div>
                   </div>

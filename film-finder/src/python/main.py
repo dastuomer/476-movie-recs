@@ -39,10 +39,10 @@ movies22_dict = movies22.to_dict(orient='records')
 for record in movies22_dict:
         record['_id'] = str(record['_id'])
 
-movies33 = pd.read_csv(r"C:\Users\Nabeera\Documents\GitHub\476-movie-recs\film-finder\src\python\movie_dataset.csv")
+#movies33 = pd.read_csv(r"C:\Users\Nabeera\Documents\GitHub\476-movie-recs\film-finder\src\python\movie_dataset.csv")
 movies = pd.DataFrame(data_list)
 print(type(movies["title"]))
-print(type(movies33))
+#print(type(movies33))
 
 vectorizer = TfidfVectorizer(ngram_range=(1,2))
 #print(movies[25]["title"])
@@ -86,10 +86,18 @@ indices = np.argpartition(similarity, -5)[-5:]
 plot_results = movies.iloc[indices].iloc[::-1]
 #return results
 #results 
+#plot_results_short = plot_results['title','plot','poster']
+plot_results_short_dict = plot_results.to_dict(orient='records')
+
+sel = ['title','plot','poster']
+selected_data = [{column: record[column] for column in sel} for record in plot_results_short_dict]
+
+#selected_data = {key: plot_results_short_dict[key] for key in sel}
 
 
 plot_results_dict = plot_results.to_dict(orient='records')
-
+for record in plot_results_dict:
+        record['_id'] = str(record['_id'])
 
 
 ####################################################
@@ -137,7 +145,7 @@ def movies():
 @app.route("/plot_recommend")
 def movies_recommend():
     #recommend_ratings(movie_id)
-    return jsonify({"plot_recommendations": plot_results_dict})
+    return jsonify({"plot_recommendations": selected_data})
     #return {"movies2": ["IT", "Works","YIPEE"]}
 
 @app.route("/rating_recommend")
