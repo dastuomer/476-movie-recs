@@ -3,6 +3,7 @@ import StarRatingStatic from "./star_static.js";
 import { Button } from "@chakra-ui/react";
 
 export default function Results() {
+    
   return (
     <div className="row">
         <div className="col-3">
@@ -25,7 +26,7 @@ export default function Results() {
             </p>
 
             <div className="h3 mt-5">
-                <span> Average Review: <StarRatingStatic ratingNum={4}/> </span>
+                <span> IMDb Rating: <StarRatingStatic ratingNum={4}/> </span>
             </div>
         </div>
     </div>
