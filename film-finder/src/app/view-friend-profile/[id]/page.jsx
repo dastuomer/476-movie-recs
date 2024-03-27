@@ -90,19 +90,19 @@ const Profile = async({params}) => {
                                 <TabPanel>
                                 <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Actor</Text>
-                                    {!session? (<Image width='100%' height='700px' objectFit='cover' src='https://www.giantfreakinrobot.com/wp-content/uploads/2021/11/tom-hardy-mad-max.jpg'></Image>):(<Image width='100%' height='700px' objectFit='cover' src={info.character}></Image>)}
+                                    {!session? (<Image width='100%' height='700px' objectFit='cover' src='https://www.giantfreakinrobot.com/wp-content/uploads/2021/11/tom-hardy-mad-max.jpg'></Image>):(<Image width='100%' height='700px' objectFit='cover' src={info.actor}></Image>)}
                                 </Box>
                                 </TabPanel>
                                 <TabPanel>
                                 <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Director</Text>
-                                    {!session? (<Image width='100%' height='700px' objectFit='cover' src='https://static01.nyt.com/images/2020/01/05/arts/05martin-scorsese3/05martin-scorsese3-facebookJumbo.jpg?year=2020&h=550&w=1050&s=0f5a5899d5c57e3c87edbc90e8b8228d7cbefa0f663d4992e768874ce09cd2f4&k=ZQJBKqZ0VN'></Image>):(<Image width='100%' height='700px' objectFit='cover' src={info.character}></Image>)}
+                                    {!session? (<Image width='100%' height='700px' objectFit='cover' src='https://static01.nyt.com/images/2020/01/05/arts/05martin-scorsese3/05martin-scorsese3-facebookJumbo.jpg?year=2020&h=550&w=1050&s=0f5a5899d5c57e3c87edbc90e8b8228d7cbefa0f663d4992e768874ce09cd2f4&k=ZQJBKqZ0VN'></Image>):(<Image width='100%' height='700px' objectFit='cover' src={info.director}></Image>)}
                                 </Box>
                                 </TabPanel>
                                 <TabPanel>
                                 <Box border='solid' borderColor='#171923'>
                                     <Text pos='absolute' textColor='white' backdropFilter='auto' backdropBlur='10px'>Favourite Soundtrack</Text>
-                                    {!session? (<Image width='100%' height='700px' objectFit='cover' src='https://ninamunteanudotnet.files.wordpress.com/2023/05/gargantua-black-hole.jpg'></Image>):(<Image width='100%' height='700px' objectFit='cover' src={info.character}></Image>)}
+                                    {!session? (<Image width='100%' height='700px' objectFit='cover' src='https://ninamunteanudotnet.files.wordpress.com/2023/05/gargantua-black-hole.jpg'></Image>):(<Image width='100%' height='700px' objectFit='cover' src={info.soundtrack}></Image>)}
                                 </Box>
                                 </TabPanel>
                                 <TabPanel>

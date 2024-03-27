@@ -8,6 +8,7 @@ import {Center, Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 function SearchBar({ placeholder, dataSet}) {
     const [query, setQuery] = useState("");
     const [searchWord, setSearchWord] = useState("");
+    
 
     const getMovies = async() => {
         try {
@@ -58,7 +59,6 @@ function SearchBar({ placeholder, dataSet}) {
         console.log(search);
     }
     
-
     return (
         <div className="search">
             <Center>
@@ -78,14 +78,13 @@ function SearchBar({ placeholder, dataSet}) {
                     </form>
                 </InputGroup>
             </Center>
-            <p>{callGetMovies}</p>
             {/*
             {query.length != 0 && (
                 <div className="dataResult">
                         {dataSet.filter(data=>data.Title.toLowerCase().includes(query.toLowerCase())).slice(0,7).map((dataSet) => {
                             return <p className="hoverMe" key={dataSet.id} onClick={()=>fillSearch(dataSet.Title)} > {dataSet.Title} </p>
                         })
-                        }
+                    }
                 </div>
             )}
             */}

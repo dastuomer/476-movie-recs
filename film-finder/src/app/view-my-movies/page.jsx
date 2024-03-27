@@ -51,9 +51,9 @@ async function getMovieList(email) {
     moviesArray.push(
       <div>
         <Text fontSize={25} >{title}</Text>{/*Movie title*/}
-        <Text>{genres}</Text>{/*Movie Genres*/}
-        <StarRatingStatic ratingNum={stars} />{/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
-        <Button colorScheme='blue' marginTop='5px' > <Link href={`review-my-movie/${id}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
+        <Text>Average Score: <StarRatingStatic ratingNum={stars} /></Text>{/*Movie Genres*/}
+        {/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
+        <Button colorScheme='blue' > <Link href={`review-my-movie/${id}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
       </div>
     )
   }

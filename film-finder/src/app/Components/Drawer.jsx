@@ -9,7 +9,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   IconButton,
-  Input,
   useDisclosure,
   Avatar,
   AvatarBadge,
@@ -18,21 +17,13 @@ import {
   Text,
   Box,
   Button,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Center,
-  pseudoSelectors,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, UnlockIcon, EmailIcon } from "@chakra-ui/icons";
 //import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import SearchBar from "./searchBar/searchBarFriends.jsx";
-import { Users } from "./searchBar/users";
+
 //import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
 /*
 const getUserInfo = async(e) => {
@@ -116,10 +107,10 @@ const NavDrawer = () =>  {
           </DrawerBody>
           <DrawerFooter>
           {!session? 
-          (<Stack>
-            <Link href="signup"> Sign Up </Link>
-            <Link href="login"> Log In </Link>
-          </Stack>):
+          (<HStack spacing={10}>
+            <Button leftIcon={<EmailIcon />}w={100} size="lg" colorScheme="blue"> <Link href="signup">Sign Up </Link></Button>
+            <Button leftIcon={<UnlockIcon />}w={100} size="lg" colorScheme="blue" marginRight={3}> <Link href="login">Log In </Link></Button>
+          </HStack>):
           (<Button colorScheme='blue' onClick={() => {signOut();}}> Log Out</Button>)}
             {/* Make this button navigate back to the log in page */}
           </DrawerFooter>

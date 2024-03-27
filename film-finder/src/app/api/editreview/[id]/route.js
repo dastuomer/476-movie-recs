@@ -5,19 +5,19 @@ import { NextResponse } from "next/server";
 
 export async function PUT(request, {params}) {
     const {id} = params;
-    const {username: username, title: title, review: review, rating: rating} = await request.json();
+    const {username: username, title: title, review: review, rating: rating, email: email} = await request.json();
     await connect();
-    const check = await reviewMovieModel.findOne({userEmail: id, movieTitle: title});
+    const check = await reviewMovieModel.findOne({userEmail: email, movieID: id});
     if (check)
     {
-        await reviewMovieModel.findOneAndUpdate({userEmail: id, movieTitle: title}, {review: review, rating: rating});
+        await reviewMovieModel.findOneAndUpdate({userEmail: email, movieID: id}, {review: review, rating: rating});
         return NextResponse.json({message: "Updated!"}, {status: 200});
     }
     else
     {
         const newReview = new reviewMovieModel({
-            userEmail: id,
-            movieTitle: title,
+            userEmail: email,
+            movieID: id,
             username: username,
             review: review,
             rating: rating,

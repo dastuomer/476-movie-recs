@@ -28,7 +28,8 @@ const Edit = ({ params }) => {
     const gotten = JSON.parse(decodeURIComponent(JSON.stringify(params)));
     const midstep = gotten.id;
     const convert = new URLSearchParams(midstep);
-    const id = convert.get("email");
+    const id = convert.get("movieID");
+    const email = convert.get("email")
     const username = convert.get("username");
     const title = convert.get("title");
 
@@ -53,7 +54,7 @@ const Edit = ({ params }) => {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ username, title, review, rating }),
+                body: JSON.stringify({ username, title, review, rating, email }),
             });
             if (!res.ok) {
                 setError("Failed to change review.");
