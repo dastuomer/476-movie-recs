@@ -59,7 +59,6 @@ function SearchBar({ placeholder, dataSet}) {
         console.log(search);
     }
     
-
     return (
         <div className="search">
             <Center>
@@ -86,7 +85,7 @@ function SearchBar({ placeholder, dataSet}) {
                         {dataSet.filter(data=>data.Title.toLowerCase().includes(query.toLowerCase())).slice(0,7).map((dataSet) => {
                             return <p className="hoverMe" key={dataSet.id} onClick={()=>fillSearch(dataSet.Title)} > {dataSet.Title} </p>
                         })
-                        }
+                    }
                 </div>
             )}
             */}
