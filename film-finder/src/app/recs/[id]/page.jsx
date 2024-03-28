@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import MovieCards from "@/app/components/MovieCards.jsx";
 import SearchBar from "@/app/components/searchBar/searchBarMain.jsx";
-import { Movies } from "@/app/components/searchBar/movies-MOCK";
 import StarRatingStatic from "@/app/components/star_static.js";
 
 export default function Page({ params }) {
@@ -75,7 +74,7 @@ export default function Page({ params }) {
                                                 <div className="row">
                                                     <div className="col-3">
                                                         <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
-                                                            <Image width='250px' height='300px' objectFit='cover' src={Poster}></Image>
+                                                            <Image width="100%" height="100%" objectFit='cover' src={Poster}></Image>
                                                         </Box>
                                                         <Button marginTop={5} borderRadius={50}>
                                                             <a href={`/review-my-movie/${movieId}`}>+ Review Movie</a>

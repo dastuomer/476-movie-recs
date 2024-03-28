@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Inter } from "next/font/google";
 import "./globals.css";
-//import Logo from "../components/logo.js";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/app/utils/SessionProvider";
 

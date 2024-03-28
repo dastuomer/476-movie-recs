@@ -10,16 +10,9 @@ import {
   Box,
   Center,
   Flex,
-  Button,
-  Image,
   Text,
-  Grid
 } from "@chakra-ui/react";
-import MovieCards from "./components/MovieCards.jsx";
 import SearchBar from "./components/searchBar/searchBarMain.jsx";
-import Results from "./components/results.jsx";
-import { Movies } from "./components/searchBar/movies-MOCK";
-import StarRatingStatic from "./components/star_static.js";
 
 export default function Page() {
   const [data, setData] = useState([{}])
@@ -50,7 +43,7 @@ export default function Page() {
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
                     <div className="col-10">
-                      <SearchBar placeholder="Enter a movie title..." dataSet={Movies} />
+                      <SearchBar/>
                     </div>
                   </Center>
                   <div className="row justify-content-center">
