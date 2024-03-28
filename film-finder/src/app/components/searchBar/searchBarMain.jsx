@@ -1,8 +1,5 @@
-import React, { useState } from "react";
 import "./search.css";
-import { SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import { Center, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { redirect } from "next/navigation.js"
 import { useRouter } from 'next/navigation'
 
 function SearchBar() {

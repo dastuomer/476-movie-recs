@@ -18,20 +18,17 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { getServerSession } from "next-auth"
 import { getMovieInfo } from "../../view-my-movies/page.jsx";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
+import { redirect } from "next/navigation.js"
 import StarRatingStatic from "@/app/components/star_static.js";
 
 //Function to iterate over array so movie info can be shown correctly
-function iterateArray(arr)
-{
+function iterateArray(arr) {
   var items = "";
-  if (Array.isArray(arr))
-  {
-    for (let i = 0; i < arr.length; i++)
-    {
+  if (Array.isArray(arr)) {
+    for (let i = 0; i < arr.length; i++) {
       items += arr[i] + ", ";
     }
-    if (items.length > 0)
-    {
+    if (items.length > 0) {
       return items.substring(0, items.length - 2);
     }
     return items;
@@ -49,7 +46,6 @@ export const getUserInfo = async (e) => {
     }
     //Convert the user object to be readable and return it
     const convert = JSON.parse(JSON.stringify(await res.json()));
-    console.log(convert)
     return await convert;
   } catch (err) {
     console.log("Error:", err);
@@ -61,7 +57,6 @@ async function getSessionMovieInfo(movieID) {
   //Calls getMovieInfo in order to get the movie object from the DB
   const MInfo = await getMovieInfo(movieID);
   //Sets variables for all info used from the movie object
-
   const title = MInfo.movieInfo.title;
   const genres = MInfo.movieInfo.genres;
   const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0);
@@ -132,7 +127,6 @@ async function getReviewList(movieID) {
       </Box>
     )
   }
-  console.log("#### DONE ####")
   return reviewsArray;
 };
 
@@ -148,7 +142,6 @@ const getReviewUsersList = async (movieID) => {
     }
     //Converts into readable data and returns it
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading review user info: ", error);
@@ -168,7 +161,6 @@ const getReviewInfo = async (movieID, reviewsUserListEmail) => {
     }
     //Converts the request into readable data and returns it
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading review info: ", error);
@@ -185,10 +177,10 @@ export default async function Page({ params }) {
   //Gets user info for the page
   const { info } = await getUserInfo(session.user.email);
 
-  const movieID = params.id
+  const movieID = await params.id
   let grid = await getSessionMovieInfo(movieID)
   //Sets up a variable to pass into the edit review page
-  const reviewInfo = { email: info.email, username: info.username, title: grid[2] , movieID: movieID};
+  const reviewInfo = { email: info.email, username: info.username, title: grid[2], movieID: movieID };
   grid[2] = ''
   return (
     <ChakraProvider>
@@ -211,7 +203,7 @@ export default async function Page({ params }) {
                     {grid}
                     <GridItem rowSpan={2} colSpan={4}>
                       {/*Button that directs the user to the edit review page, passes info of the movie to the page*/}
-                      <Button colorScheme='blue' > <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button> 
+                      <Button colorScheme='blue' > <Link href={`/edit-review/${new URLSearchParams(reviewInfo).toString()}`}>Write a Review</Link></Button>
                     </GridItem>
                   </Grid>
                   <Divider />

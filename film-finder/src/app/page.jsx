@@ -10,14 +10,9 @@ import {
   Box,
   Center,
   Flex,
-  Button,
-  Image
+  Text,
 } from "@chakra-ui/react";
-import MovieCards from "./components/MovieCards.jsx";
 import SearchBar from "./components/searchBar/searchBarMain.jsx";
-import Results from "./components/results.jsx";
-import { Movies } from "./components/searchBar/movies-MOCK";
-import StarRatingStatic from "./components/star_static.js";
 
 export default function Page() {
   const [data, setData] = useState([{}])
@@ -48,7 +43,7 @@ export default function Page() {
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
                     <div className="col-10">
-                      <SearchBar placeholder="Enter a movie title..." dataSet={Movies} />
+                      <SearchBar/>
                     </div>
                   </Center>
                   <div className="row justify-content-center">
@@ -58,32 +53,20 @@ export default function Page() {
                         bg="#4A5568"
                         w="100%"
                         p={20}
-                        color="white"
+                        minHeight="525px"
                         marginTop={3}
                         borderRadius={50}
                       >
-                        <div className="row">
-                          <div className="col-3">
-                            <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
-                              <Image width='250px' height='300px' objectFit='cover' src=""></Image>
-                            </Box>
-                            <Button marginTop={5} borderRadius={50}>
-                              <a href='/review-my-movie'>+ Review Movie</a>
-                            </Button>
-                          </div>
 
-                          <div className="col-9 fs-3">
-                            <p className="h1">title</p>
-                            <p className="h4 mt-5">
-                              plot
-                            </p>
-                            <div className="h3 mt-5">
-                              <span> IMDb Rating: <StarRatingStatic ratingNum={4} /> </span>
-                            </div>
-                          </div>
-
-                        </div>
-
+                        <Center>
+                          <Text fontSize="7xl" as="b">Search for a movie here!</Text>
+                        </Center>
+                        <Center marginTop="15px">
+                          <Text fontSize="2xl">Find a movie you love, post a review, add friends, and even read their reviews!</Text>
+                        </Center>
+                        <Center marginTop="170px">
+                          <Text fontSize="2xl" as="b">Search for a movie and get AI-generated movie recommendations below!</Text>
+                        </Center>
 
                       </Box>
                     </div>
