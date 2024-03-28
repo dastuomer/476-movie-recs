@@ -107,10 +107,12 @@ async function getReviewList(movieID) {
   }
 
   //Will go through all of the user reviews, get relevant info, and put it on the page
+  //console.time(getReviewList);
   const reviewsArray = [];
   for (let i = 0; i < reviewsUserList.length; i++) {
     //Gets the info of each movie review
     const RInfo = await getReviewInfo(movieID, reviewsUserList[i])
+    //console.timeEnd(getReviewList);
     //Sets the info to varaibles for use on the website
     const username = RInfo.reviewInfo.username
     const stars = RInfo.reviewInfo.rating

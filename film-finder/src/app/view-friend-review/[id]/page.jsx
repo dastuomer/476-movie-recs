@@ -61,7 +61,6 @@ async function getMovieList(email) {
         {/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
       </Box>
     )
-
   }
   return moviesArray;
 }
@@ -82,7 +81,6 @@ const getUsersMovies = async (email) => {
   } catch (error) {
     console.log("Error loading movie list: ", error);
   }
-
 };
 
 //Gets the info of each movie that will be displayed on the website

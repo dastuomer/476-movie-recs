@@ -53,6 +53,7 @@ const getFriendInfo = async (e) => {
 
 //Function that will get all the friends a user has and displays them on the page, takes an array of friends as a parameter
 async function getFriends(friends) {
+  // Testing: console.time(getFriends);
   const friendArray = [];
   //Iterates through the array of friends and displays the friend on the page
   for (let i = 0; i < friends.length; i++) {
@@ -81,6 +82,7 @@ async function getFriends(friends) {
       </div>
     )
   }
+  // For testing: console.timeEnd(getFriends);
   return friendArray;
 }
 

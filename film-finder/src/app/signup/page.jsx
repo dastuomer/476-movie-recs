@@ -14,7 +14,6 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { useState } from "react";
 import { useRouter } from "next/navigation.js"
 import Link from "next/link.js"
-
 const Register = () => {
     //Used for error display
     const [error, setError] = useState("");
@@ -27,6 +26,7 @@ const Register = () => {
     };
     //Handler for account creation
     const handleSubmit = async (e) => {
+        // Used for timeliness -> console.time(handleSubmit);
         e.preventDefault();
         //Gets values of the input fields
         const email = e.target[0].value;
@@ -62,6 +62,7 @@ const Register = () => {
         } catch (error) {
             setError("Error, please try again.");
         }
+        // Used for timeliness -> console.timeEnd(handleSubmit);
     }
     return (
         <ChakraProvider>
