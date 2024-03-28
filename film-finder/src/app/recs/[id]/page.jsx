@@ -121,7 +121,6 @@ const[data,setData] = useState([{}])
 							<img width='250px' height='300px' objectFit='cover' src={movie.poster} alt={movie.title} />{/*src = Movie Poster URL*/}
 			</Box>
 
-							<p>Year: {movie.year}</p>
 							<p>Plot: {movie.plot}</p>
 
 							{/* Add more fields as needed */}

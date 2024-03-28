@@ -7,8 +7,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from flask_pymongo import PyMongo
 from pymongo import MongoClient 
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
-
+#building the app 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 # Set up MongoDB connection 
@@ -16,20 +18,15 @@ client = MongoClient('mongodb+srv://476team:FilmFinder!!@filmfinder.sjnushj.mong
 db = client['test'] 
 collection = db['films']
 
-print (collection.find({"title": "Traffic in Souls"}))
 
 
-#app.config["MONGO_URI"] = "mongodb+srv://476team:FilmFinder!!@filmfinder.sjnushj.mongodb.net/?retryWrites=true&w=majority&appName=FilmFinder"
-#mongo = PyMongo(app) #.db#maybe
 try:
     db.command('ismaster')
     print("Connected successfully to MongoDB Atlas")
 except Exception as e:
     print("Connection failed:", e)
 
-#cursor = mongo.db.collection_name.find()
 cursor = collection.find()
-# Convert MongoDB cursor to list of dictionaries
 data_list = list(cursor)
 
 # Convert list of dictionaries to DataFrame
@@ -39,31 +36,12 @@ movies22_dict = movies22.to_dict(orient='records')
 for record in movies22_dict:
         record['_id'] = str(record['_id'])
 
-#movies33 = pd.read_csv(r"C:\Users\Nabeera\Documents\GitHub\476-movie-recs\film-finder\src\python\movie_dataset.csv")
 movies = pd.DataFrame(data_list)
 print(type(movies["title"]))
-#print(type(movies33))
 
 vectorizer = TfidfVectorizer(ngram_range=(1,2))
-#print(movies[25]["title"])
 movies['title'] = movies['title'].astype(str)
 tfidf = vectorizer.fit_transform(movies["title"])
-
-
-#def search(title):
-title = "Resurrection Man"
-#title = clean_title(title)
-query_vec = vectorizer.transform([title])
-similarity = cosine_similarity(query_vec, tfidf).flatten()
-indices = np.argpartition(similarity, -5)[-5:]
-results = movies.iloc[indices].iloc[::-1]
-#return results
-#results 
-
-results_dict = results.to_dict(orient='records')
-
-for record in results_dict:
-        record['_id'] = str(record['_id'])
 
 
 #plot summary stuff 
@@ -71,151 +49,32 @@ movies['plot'] = movies['plot'].fillna('')
 vectorizer = TfidfVectorizer(ngram_range=(1,2))
 
 tfidf = vectorizer.fit_transform(movies["plot"])
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-
 
 
 def plott(plot,movies):
-    #plot = movies.title 
-    #plot = movies.loc[movies['title'] == title, 'plot'].values[0]
     query_vec = vectorizer.transform([plot])
-    similarity = cosine_similarity(query_vec, tfidf).flatten()
-    indices = np.argpartition(similarity, -10)[-10:]
-    plot_results = movies.iloc[indices].iloc[::-1]
+    similarscore = cosine_similarity(query_vec, tfidf).flatten()
+    index = np.argpartition(similarscore, -10)[-10:]
+    plot_results = movies.iloc[index].iloc[::-1]
     plot_results_short_dict = plot_results.to_dict(orient='records')
     sel = ['title','plot','poster']
     selected_data = [{column: record[column] for column in sel} for record in plot_results_short_dict]
     return selected_data
 
 
-
-'''
-#def search(title):
-plot = "boy is in love"
-#plot = clean_plot(plot)
-query_vec = vectorizer.transform([plot])
-similarity = cosine_similarity(query_vec, tfidf).flatten()
-indices = np.argpartition(similarity, -10)[-10:]
-plot_results = movies.iloc[indices].iloc[::-1]
-plot_results_short_dict = plot_results.to_dict(orient='records')
-sel = ['title','plot','poster']
-selected_data = [{column: record[column] for column in sel} for record in plot_results_short_dict]
-
-#selected_data = {key: plot_results_short_dict[key] for key in sel}
-'''
-
-#plot_results_dict = plot_results.to_dict(orient='records')
-#for record in plot_results_dict:
-        #record['_id'] = str(record['_id'])
-
-
-####################################################
-##Ratings recommendations ##
-#ratings_data = pd.read_csv(r"C:\Users\Nabeera\Documents\GitHub\476-movie-recs\film-finder\src\python\movie_reviews.csv")
-##test to get a movie for ratings 
-movie_id = 25
-'''
-def recommend_ratings(movie_id):
-    similar_users = ratings_data[(ratings_data["movieId"] == movie_id) & (ratings_data["rating"] > 4)]["userId"].unique()
-    similar_user_recs = ratings_data[(ratings_data["userId"].isin(similar_users)) & (ratings_data["rating"] > 4)]["movieId"]
-    similar_user_recs = similar_user_recs.value_counts() / len(similar_users)
-
-    similar_user_recs = similar_user_recs[similar_user_recs > .10]
-    all_users = ratings_data[(ratings_data["movieId"].isin(similar_user_recs.index)) & (ratings_data["rating"] > 4)]
-    all_user_recs = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
-    rec_percentages = pd.concat([similar_user_recs, all_user_recs], axis=1)
-    rec_percentages.columns = ["similar", "all"]
-    
-    rec_percentages["score"] = rec_percentages["similar"] / rec_percentages["all"]
-    rec_percentages = rec_percentages.sort_values("score", ascending=False)
-    
-    return rec_percentages.head(10).merge(movies,left_on="movieId", right_on="movie_id")[["score", "Title_Year", "plot"]]
-
-ratingdf = recommend_ratings(movie_id)
-ratings_results_dict = ratingdf.to_dict(orient='records')
-'''
-
 #app = Flask(__name__)
 CORS(app)
-
-# Movies API route
-@app.route("/movies2")
-def movies1():
-    
-    return jsonify({"movies": results_dict})
-     #shows eveything in our databse 
-    #return jsonify({"movies": movies22_dict})
-
-
-    #return {"movies2": ["IT", "Works","YIPEE"]}
-
-
-
-
-@app.route("/rating_recommend")
-def rating_recommend():
-    
-    return jsonify({"plot_recommendations": ratings_results_dict})
-    #return {"movies2": ["IT", "Works","YIPEE"]}
-
-@app.route("/enter-movie", methods=["POST"])
-def enter_movie():
-    print("Received POST request for /enter-movie")
-    #if request.headers['Content-Type'] != 'application/json':
-        #return jsonify({'error': 'Unsupported Media Type'}), 415
-    #data = request.get_json()
-    data = request.data
-    data_str = data.decode("utf-8")
-
-    print (data_str)
-    session['data_str'] = data_str
-    global rec
-    rec = plott(data_str,movies)
-    #print({"plot_recommendations": rec})
-    
-    return rec
-    #return data_str, 201
 
 
 
 @app.route("/plot_recommend/<search>")
 def movies_recommend(search):
-    #recommend_ratings(movie_id)
-    #selectd = enter_movie()
     data_str = session.get('data_str', None)
-    #if data_str is None:
-        #return jsonify({'error': 'Data not found in session'}), 400
-    rec = enter_movie()
-
+    #rec = enter_movie()
     data_str = search
-
     sel = plott(data_str, movies)
-    #data_str = sel.decode("utf-8")
-   # rec = plott("Guns",movies)
-    #return jsonify({"plot_recommendations": selected_data})  ## this is right
     print(sel)
     return jsonify({"plot_recommendations": sel}) 
-    #return {"movies2": ["IT", "Works","YIPEE"]}
-
-''''
-@app.route("/example", methods=["GET", "POST"])
-def example():
-    if request.method == "GET":
-        # Handle GET request
-        return jsonify({"message": "GET request received"})
-    elif request.method == "POST":
-        # Handle POST request
-        data = request.data
-        data_str = data.decode("utf-8")
-
-
-        data = request.json  # Assuming JSON data is sent in the POST request
-        # Process the data...
-        return jsonify({"message": "POST request received", "data": data})
-'''
-
-
 
 
 
