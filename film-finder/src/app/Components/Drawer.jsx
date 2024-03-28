@@ -94,14 +94,11 @@ const NavDrawer = () =>  {
             <HStack margin={3}>
             {!session?(<Avatar size="lg"><AvatarBadge boxSize="1.25em" bg="green.500" /></Avatar>):(<Avatar size="lg"><AvatarBadge boxSize="1.25em" bg="green.500" /></Avatar>)}
               <Stack>
-              {!session?(<Text fontSize="2xl" align={"center"}><Link href="profile">Guest</Link></Text>):(<Text fontSize="md" align={"center"}><Link href="/profile">{session.user.email}</Link></Text>)}
+              {!session?(<Text fontSize="2xl" align={"center"}><Link href="/">Guest</Link></Text>):(<Text fontSize="md" align={"center"}><Link href="/profile">{session.user.email}</Link></Text>)}
               </Stack>
             </HStack>
             <Box marginTop={3} marginLeft={3} marginRight={3}>
             {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="/view-my-movies" >My movies</Link></Text>)}
-            </Box>
-            <Box marginTop={3} marginLeft={3} marginRight={3}>
-            {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="/blender">Blends</Link></Text>)}
             </Box>
             <Box marginTop={3} marginLeft={3} marginRight={3}>
             {!session?(<Text fontFamily={"sans-serif"} fontSize="xl"></Text>):(<Text fontFamily={"sans-serif"} fontSize="xl"><Link href="/view-friends">View Friends</Link></Text>)}
