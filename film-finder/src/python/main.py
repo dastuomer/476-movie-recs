@@ -74,30 +74,40 @@ tfidf = vectorizer.fit_transform(movies["plot"])
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
+
+
+def plott(plot,movies):
+    #plot = movies.title 
+    #plot = movies.loc[movies['title'] == title, 'plot'].values[0]
+    query_vec = vectorizer.transform([plot])
+    similarity = cosine_similarity(query_vec, tfidf).flatten()
+    indices = np.argpartition(similarity, -10)[-10:]
+    plot_results = movies.iloc[indices].iloc[::-1]
+    plot_results_short_dict = plot_results.to_dict(orient='records')
+    sel = ['title','plot','poster']
+    selected_data = [{column: record[column] for column in sel} for record in plot_results_short_dict]
+    return selected_data
+
+
+
+'''
 #def search(title):
 plot = "boy is in love"
 #plot = clean_plot(plot)
 query_vec = vectorizer.transform([plot])
 similarity = cosine_similarity(query_vec, tfidf).flatten()
 indices = np.argpartition(similarity, -10)[-10:]
-#results = movies.iloc[indices].iloc[::-1]
-#return results
-#results 
 plot_results = movies.iloc[indices].iloc[::-1]
-#return results
-#results 
-#plot_results_short = plot_results['title','plot','poster']
 plot_results_short_dict = plot_results.to_dict(orient='records')
-
 sel = ['title','plot','poster']
 selected_data = [{column: record[column] for column in sel} for record in plot_results_short_dict]
 
 #selected_data = {key: plot_results_short_dict[key] for key in sel}
+'''
 
-
-plot_results_dict = plot_results.to_dict(orient='records')
-for record in plot_results_dict:
-        record['_id'] = str(record['_id'])
+#plot_results_dict = plot_results.to_dict(orient='records')
+#for record in plot_results_dict:
+        #record['_id'] = str(record['_id'])
 
 
 ####################################################
@@ -131,7 +141,7 @@ CORS(app)
 
 # Movies API route
 @app.route("/movies2")
-def movies():
+def movies1():
     
     return jsonify({"movies": results_dict})
      #shows eveything in our databse 
@@ -145,7 +155,9 @@ def movies():
 @app.route("/plot_recommend")
 def movies_recommend():
     #recommend_ratings(movie_id)
-    return jsonify({"plot_recommendations": selected_data})
+    selectd = enter_movie()
+    #return jsonify({"plot_recommendations": selected_data})  ## this is right
+    return jsonify({"plot_recommendations": selectd}) 
     #return {"movies2": ["IT", "Works","YIPEE"]}
 
 @app.route("/rating_recommend")
@@ -156,9 +168,24 @@ def rating_recommend():
 
 @app.route("/enter-movie", methods=["POST"])
 def enter_movie():
-    data = request.get_json()
+    print("Received POST request for /enter-movie")
+    #if request.headers['Content-Type'] != 'application/json':
+        #return jsonify({'error': 'Unsupported Media Type'}), 415
+    #data = request.get_json()
+    data = request.data
+    data_str = data.decode("utf-8")
 
-    return jsonify(data), 201
+    print (data_str)
+    
+    rec = plott(data_str,movies)
+    print({"plot_recommendations": rec})
+
+
+
+    #return data_str, 201
+    return rec
+
+
 
 
 

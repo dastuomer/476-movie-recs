@@ -71,6 +71,7 @@ async function getFriends(friends) {
           <GridItem colSpan={4} rowSpan={1}>
             {/*Takes the user to a clone of the profile page that uses the friend's info in order to see the friend's profile page*/}
             <Button colorScheme='blue' marginLeft="10px" size="md"> <Link href={`/view-friend-profile/${finfo.email}`}>View Profile</Link></Button>
+            <Button colorScheme='blue' marginLeft="10px" size="md"> <Link href={`/view-friend-review/${finfo.email}`}>View Reviews</Link></Button>
           </GridItem>
           <GridItem colSpan={3} rowSpan={2}>
             <Text margin="5px">{finfo.bio}</Text>
@@ -82,6 +83,7 @@ async function getFriends(friends) {
   }
   return friendArray;
 }
+
 
 export default async function Page() {
   //Checks to see if the user is logged in, reroutes to main page if not

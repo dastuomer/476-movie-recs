@@ -14,7 +14,8 @@ export async function GET(request) {
     } catch (error) {
         const email = request.nextUrl.searchParams.get("email");
         await connectMongoDB();
-        const movieList = await reviewMovieModel.find({ userEmail: email }, "movieID")
+        const movieList = await reviewMovieModel.find({ userEmail: email })
+        console.log(movieList);
         return NextResponse.json({ movieList });
     }
 
