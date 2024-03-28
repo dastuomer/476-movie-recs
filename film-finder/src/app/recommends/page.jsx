@@ -25,7 +25,7 @@ function App() {
 
   //const session = getServerSession();
   //if (!session){
-    //redirect("/");
+  //redirect("/");
   //}
 
   return (

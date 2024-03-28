@@ -1,7 +1,7 @@
 //File that defines what the user database entry will look like. Specifies datatype, uniqueness, and requiredness of each element
 import mongoose from "mongoose";
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 //Defines the user schema (requires a email, username, and password)
 const userSchema = new Schema(
