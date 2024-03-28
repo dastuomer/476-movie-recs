@@ -19,21 +19,7 @@ import SearchBar from "@/app/components/searchBar/searchBarMain.jsx";
 import StarRatingStatic from "@/app/components/star_static.js";
 
 export default function Page({params}) {
-    {/*
-  const[data,setData] = useState([{}])
-
-  useEffect(() => {
-    fetch("http://localhost:5000/movies2").then(
-      res => res.json()
-    ).then(
-        data => {
-          setData(data)
-          console.log(data)
-        }
-
-    )
-  }, [])
-*/}
+  
 
 const gotten = JSON.parse(decodeURIComponent(JSON.stringify(params)));
 const midstep = gotten.id;
