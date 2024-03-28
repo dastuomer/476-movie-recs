@@ -46,7 +46,6 @@ export const getUserInfo = async (e) => {
     }
     //Convert the user object to be readable and return it
     const convert = JSON.parse(JSON.stringify(await res.json()));
-    console.log(convert)
     return await convert;
   } catch (err) {
     console.log("Error:", err);
@@ -143,7 +142,6 @@ const getReviewUsersList = async (movieID) => {
     }
     //Converts into readable data and returns it
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading review user info: ", error);
@@ -163,7 +161,6 @@ const getReviewInfo = async (movieID, reviewsUserListEmail) => {
     }
     //Converts the request into readable data and returns it
     const myJSON = JSON.parse(JSON.stringify(await res.json()));
-    console.log(myJSON)
     return await myJSON;
   } catch (error) {
     console.log("Error loading review info: ", error);

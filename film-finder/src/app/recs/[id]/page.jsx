@@ -37,7 +37,6 @@ export default function Page({ params }) {
     const midstep = gotten.id;
     const convert = new URLSearchParams(midstep);
     const movieId = convert.get("movieId");
-    console.log(convert)
     const Poster = convert.get("poster")
     const Title = convert.get("title");
     const Plot = convert.get("plot");

@@ -125,9 +125,6 @@ export default async function Page() {
                   <Center>
                     <Heading colorScheme='blue' fontSize="45" marginTop="30px">My Movies </Heading>
                   </Center>
-                  <Center>
-                    <SearchBar/>
-                  </Center>
                   <br />
                   <Box borderWidth="2px" borderColor="#171923" minHeight="850px">
                     <Grid templateColumns='repeat(6, 1fr)' gap='20px'>
