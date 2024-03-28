@@ -6,3 +6,12 @@ All Dependancies:
 -react
 -boostrap
 -react bootstrap
+
+install python 
+pymongo 
+flask 
+scikit-learn
+pandas
+pip install flask-cors 
+numpy
+axios
