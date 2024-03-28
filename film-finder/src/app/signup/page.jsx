@@ -2,13 +2,13 @@
 import * as React from "react";
 import Logo from "../components/logo.js";
 import {
-  Button,
-  Input,
-  Text,
-  Box,
-  Center,
-  Grid,
-  Flex
+    Button,
+    Input,
+    Text,
+    Box,
+    Center,
+    Grid,
+    Flex
 } from "@chakra-ui/react";
 import { ChakraProvider } from '@chakra-ui/react'
 import { useState } from "react";
@@ -42,7 +42,8 @@ const Register = () => {
             const res = await fetch("/api/register", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "applications/json",},
+                    "Content-Type": "applications/json",
+                },
                 body: JSON.stringify({
                     email,
                     username,
@@ -58,13 +59,13 @@ const Register = () => {
                 setError("");
                 router.push("/login");
             }
-        }catch(error) {
+        } catch (error) {
             setError("Error, please try again.");
         }
-    } 
+    }
     return (
         <ChakraProvider>
-             <title>Film Finder - Signup</title>
+            <title>Film Finder - Signup</title>
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
@@ -82,29 +83,29 @@ const Register = () => {
                                             <Center>
                                                 <Box w="60%" marginTop="100px">
                                                     <Grid templateColumns="1fr" gap="75px">
-                                                    {/*Form for the user to submit their account credentials*/}
-                                                    <form onSubmit={handleSubmit}>
-                                                        <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Email :</Text>
-                                                            </div>
-                                                            <Input placeholder='email' type='text' variant='filled' required></Input>
-                                                        </Flex>
-                                                        <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Username :</Text>
-                                                            </div>
-                                                            <Input placeholder='username' type='text' variant='filled' required></Input>
-                                                        </Flex>
-                                                        <Flex>
-                                                            <div className="col-6">
-                                                                <Text fontSize="20">Password :</Text>
-                                                            </div>
-                                                            <Input placeholder='pass' type='password' variant='filled' required></Input>
-                                                        </Flex>
-                                                        <Button colorScheme='blue' margin='5px' pos='absolute' marginTop="150px" type='submit'>Create account</Button>
-                                                        <Text>{error && error}</Text>
-                                                    </form>
+                                                        {/*Form for the user to submit their account credentials*/}
+                                                        <form onSubmit={handleSubmit}>
+                                                            <Flex>
+                                                                <div className="col-6">
+                                                                    <Text fontSize="20">Email :</Text>
+                                                                </div>
+                                                                <Input placeholder='email' type='text' variant='filled' required></Input>
+                                                            </Flex>
+                                                            <Flex>
+                                                                <div className="col-6">
+                                                                    <Text fontSize="20">Username :</Text>
+                                                                </div>
+                                                                <Input placeholder='username' type='text' variant='filled' required></Input>
+                                                            </Flex>
+                                                            <Flex>
+                                                                <div className="col-6">
+                                                                    <Text fontSize="20">Password :</Text>
+                                                                </div>
+                                                                <Input placeholder='pass' type='password' variant='filled' required></Input>
+                                                            </Flex>
+                                                            <Button colorScheme='blue' margin='5px' pos='absolute' marginTop="150px" type='submit'>Create account</Button>
+                                                            <Text>{error && error}</Text>
+                                                        </form>
                                                     </Grid>
                                                     <Center>
                                                         <Text marginTop="325px">Already have an account?</Text>
@@ -121,6 +122,6 @@ const Register = () => {
                 </div>
             </Box>
         </ChakraProvider>
-        )
+    )
 };
 export default Register;

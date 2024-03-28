@@ -14,11 +14,11 @@ import {
     Image
 } from "@chakra-ui/react";
 
-{/*Obtain Selected User's Username, and Review list*/}
+{/*Obtain Selected User's Username, and Review list*/ }
 
 export default function Page() {
     const session = getServerSession();
-    if (!session){
+    if (!session) {
         redirect("/");
     }
     return (
