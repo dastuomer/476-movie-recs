@@ -294,7 +294,7 @@ const Edit = ({params}) => {
 
     return (
             <ChakraProvider>
-                <title>Film Finder - Login</title>
+                <title>Film Finder - Edit Your Profile</title>
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">

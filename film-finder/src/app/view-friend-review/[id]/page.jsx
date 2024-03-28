@@ -61,7 +61,6 @@ async function getMovieList(email) {
         {/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
       </Box>
     )
-
   }
   return moviesArray;
 }
@@ -82,7 +81,6 @@ const getUsersMovies = async (email) => {
   } catch (error) {
     console.log("Error loading movie list: ", error);
   }
-
 };
 
 //Gets the info of each movie that will be displayed on the website
@@ -115,7 +113,7 @@ export default async function Page({params}) {
 
   return (
     <ChakraProvider>
-      <title>Film Finder - Your Movies</title>
+      <title>Film Finder - View {info.username}'s Reviews</title>
       <Box backgroundColor="#2D3748">
         <div className="container-fluid">
           <div className="row justify-content-center">

@@ -48,7 +48,7 @@ const Profile = async ({ params }) => {
 
     return (
         <ChakraProvider>
-            <title>Film Finder - User Profile</title>
+            <title>Film Finder - {info.username}'s Profile</title>
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
