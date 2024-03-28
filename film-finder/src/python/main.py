@@ -112,10 +112,10 @@ selected_data = [{column: record[column] for column in sel} for record in plot_r
 
 ####################################################
 ##Ratings recommendations ##
-ratings_data = pd.read_csv(r"C:\Users\Nabeera\Documents\GitHub\476-movie-recs\film-finder\src\python\movie_reviews.csv")
+#ratings_data = pd.read_csv(r"C:\Users\Nabeera\Documents\GitHub\476-movie-recs\film-finder\src\python\movie_reviews.csv")
 ##test to get a movie for ratings 
 movie_id = 25
-
+'''
 def recommend_ratings(movie_id):
     similar_users = ratings_data[(ratings_data["movieId"] == movie_id) & (ratings_data["rating"] > 4)]["userId"].unique()
     similar_user_recs = ratings_data[(ratings_data["userId"].isin(similar_users)) & (ratings_data["rating"] > 4)]["movieId"]
@@ -134,7 +134,7 @@ def recommend_ratings(movie_id):
 
 ratingdf = recommend_ratings(movie_id)
 ratings_results_dict = ratingdf.to_dict(orient='records')
-
+'''
 
 #app = Flask(__name__)
 CORS(app)
