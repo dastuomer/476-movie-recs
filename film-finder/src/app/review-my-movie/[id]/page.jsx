@@ -61,7 +61,6 @@ async function getSessionMovieInfo(movieID) {
   //Calls getMovieInfo in order to get the movie object from the DB
   const MInfo = await getMovieInfo(movieID);
   //Sets variables for all info used from the movie object
-
   const title = MInfo.movieInfo.title;
   const genres = MInfo.movieInfo.genres;
   const stars = Math.round(MInfo.movieInfo.imdb.rating / 2.0);
