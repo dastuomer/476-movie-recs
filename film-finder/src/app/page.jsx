@@ -43,7 +43,7 @@ export default function Page() {
                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                   <Center>
                     <div className="col-10">
-                      <SearchBar/>
+                      <SearchBar />
                     </div>
                   </Center>
                   <div className="row justify-content-center">
@@ -69,49 +69,6 @@ export default function Page() {
                         </Center>
 
                       </Box>
-                    </div>
-                  </div>
-
-                  <div className="row justify-content-center">
-                    <div className="col-9">
-                      <p className="h1 mt-4">Recommended for you</p>
-                      <div data-interval="false">
-                        {" "}
-                        <div>
-		{typeof data.plot_recommendations === 'undefined' ? (
-			<p>Loading....</p>
-		) : (
-			<Carousel>
-				{data.plot_recommendations.map((movie, i) => (
-					<Carousel.Item key={i}>
-						<div>
-							<p>Title: {movie.title}</p>
-							<Box borderWidth="3px" borderColor="#171923" minHeight="300px">
-							<img width='250px' height='300px' objectFit='cover' src={movie.poster} alt={movie.title} />{/*src = Movie Poster URL*/}
-			</Box>
-
-							<p>Year: {movie.year}</p>
-							<p>Plot: {movie.plot}</p>
-
-							{/* Add more fields as needed */}
-						</div>
-					</Carousel.Item>
-				))}
-			</Carousel>
-		)}
-	</div>
-
-                        { /*
-                        <Carousel>
-                          <Carousel.Item color="blue">
-                            <MovieCards />
-                          </Carousel.Item>
-                          <Carousel.Item>
-                            <MovieCards />
-                          </Carousel.Item>
-                        </Carousel>
-    */}
-                      </div>
                     </div>
                   </div>
                 </Box>
