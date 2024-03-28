@@ -47,3 +47,11 @@ pip install flask-cors
 numpy
 axios
 
+-chakraUI
+-mongoDB
+-mongoose
+-next-auth
+-react
+-boostrap
+-react bootstrap
+
