@@ -57,7 +57,6 @@ export default function Page() {
                         marginTop={3}
                         borderRadius={50}
                       >
-
                         <Center>
                           <Text fontSize="7xl" as="b">Search for a movie here!</Text>
                         </Center>
@@ -67,7 +66,6 @@ export default function Page() {
                         <Center marginTop="170px">
                           <Text fontSize="2xl" as="b">Search for a movie and get AI-generated movie recommendations below!</Text>
                         </Center>
-
                       </Box>
                     </div>
                   </div>
