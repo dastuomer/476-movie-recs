@@ -17,7 +17,7 @@ import SearchBar from "@/app/components/searchBar/searchBarMain.jsx";
 import { Movies } from "@/app/components/searchBar/movies-MOCK";
 import StarRatingStatic from "@/app/components/star_static.js";
 
-export default function Page({params}) {
+export default function Page({ params }) {
     {/*
   const[data,setData] = useState([{}])
 
@@ -34,15 +34,15 @@ export default function Page({params}) {
   }, [])
 */}
 
-const gotten = JSON.parse(decodeURIComponent(JSON.stringify(params)));
-const midstep = gotten.id;
-const convert = new URLSearchParams(midstep);
-const movieId = convert.get("movieId");
-console.log(convert)
-const Poster = convert.get("poster")
-const Title = convert.get("title");
-const Plot = convert.get("plot");
-const Rating = convert.get("rating");
+    const gotten = JSON.parse(decodeURIComponent(JSON.stringify(params)));
+    const midstep = gotten.id;
+    const convert = new URLSearchParams(midstep);
+    const movieId = convert.get("movieId");
+    console.log(convert)
+    const Poster = convert.get("poster")
+    const Title = convert.get("title");
+    const Plot = convert.get("plot");
+    const Rating = convert.get("rating");
 
     return (
         <ChakraProvider>
@@ -58,7 +58,7 @@ const Rating = convert.get("rating");
                                 <Box w='100%' minH='1400px' borderWidth='5px' boxShadow='dark-lg' borderColor='#171923' borderRadius='lg' backgroundColor='#A0AEC0'>
                                     <Center>
                                         <div className="col-10">
-                                            <SearchBar placeholder="Enter a movie title..." />
+                                            <SearchBar />
                                         </div>
                                     </Center>
                                     <div className="row justify-content-center">
@@ -68,7 +68,7 @@ const Rating = convert.get("rating");
                                                 bg="#4A5568"
                                                 w="100%"
                                                 p={20}
-                                                color="white"
+                                                minHeight="525px"
                                                 marginTop={3}
                                                 borderRadius={50}
                                             >
@@ -83,7 +83,7 @@ const Rating = convert.get("rating");
                                                     </div>
 
                                                     <div className="col-9 fs-3">
-                                                        <p className="h1">{Title}</p>
+                                                        <p className="h1" as="u">{Title}</p>
                                                         <p className="h4 mt-5">
                                                             {Plot}
                                                         </p>

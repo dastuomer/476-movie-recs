@@ -19,6 +19,7 @@ import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation.js"
 import { authOptions } from "../api/auth/[...nextauth]/route.js";
 import { getUserInfo } from "@/app/review-my-movie/[id]/page.jsx"
+import SearchBar from "../components/searchBar/searchBarMain.jsx";
 
 //Function used for displaying all movies that the user has reviewd on the page
 async function getMovieList(email) {
@@ -55,7 +56,7 @@ async function getMovieList(email) {
         <Text fontSize={25} >{title}</Text>{/*Movie title*/}
         <Text>Average Score: <StarRatingStatic ratingNum={stars} /></Text>{/*Movie Genres*/}
         {/*Movie's Total average Star rating -- OR -- IMDB average rating if we have that*/}
-        <Button colorScheme='blue' > <Link href={`review-my-movie/${id}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
+        <Button colorScheme='blue' > <Link href={`review-my-movie/${await id}`}>Reviews</Link></Button>{/*Goes to reviews page of the selected movie*/}
       </div>
     )
   }
@@ -125,7 +126,7 @@ export default async function Page() {
                     <Heading colorScheme='blue' fontSize="45" marginTop="30px">My Movies </Heading>
                   </Center>
                   <Center>
-                    <Input size="lg" variant="outline" margin="20px" placeholder="Search your movies" />{/*Search filter's user's movie list displayed*/}
+                    <SearchBar/>
                   </Center>
                   <br />
                   <Box borderWidth="2px" borderColor="#171923" minHeight="850px">
