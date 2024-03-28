@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request,session
 from flask_cors import CORS
 import pandas as pd 
 import re
@@ -10,7 +10,7 @@ from pymongo import MongoClient
 
 
 app = Flask(__name__)
-
+app.secret_key = 'your_secret_key'
 # Set up MongoDB connection 
 client = MongoClient('mongodb+srv://476team:FilmFinder!!@filmfinder.sjnushj.mongodb.net/?retryWrites=true&w=majority&appName=FilmFinder') 
 db = client['test'] 
@@ -152,13 +152,6 @@ def movies1():
 
 
 
-@app.route("/plot_recommend")
-def movies_recommend():
-    #recommend_ratings(movie_id)
-    selectd = enter_movie()
-    #return jsonify({"plot_recommendations": selected_data})  ## this is right
-    return jsonify({"plot_recommendations": selectd}) 
-    #return {"movies2": ["IT", "Works","YIPEE"]}
 
 @app.route("/rating_recommend")
 def rating_recommend():
@@ -176,15 +169,51 @@ def enter_movie():
     data_str = data.decode("utf-8")
 
     print (data_str)
-    
+    session['data_str'] = data_str
+    global rec
     rec = plott(data_str,movies)
-    print({"plot_recommendations": rec})
-
-
-
-    #return data_str, 201
+    #print({"plot_recommendations": rec})
+    
     return rec
+    #return data_str, 201
 
+
+
+@app.route("/plot_recommend/<search>")
+def movies_recommend(search):
+    #recommend_ratings(movie_id)
+    #selectd = enter_movie()
+    data_str = session.get('data_str', None)
+    #if data_str is None:
+        #return jsonify({'error': 'Data not found in session'}), 400
+    rec = enter_movie()
+
+    data_str = search
+
+    sel = plott(data_str, movies)
+    #data_str = sel.decode("utf-8")
+   # rec = plott("Guns",movies)
+    #return jsonify({"plot_recommendations": selected_data})  ## this is right
+    print(sel)
+    return jsonify({"plot_recommendations": sel}) 
+    #return {"movies2": ["IT", "Works","YIPEE"]}
+
+''''
+@app.route("/example", methods=["GET", "POST"])
+def example():
+    if request.method == "GET":
+        # Handle GET request
+        return jsonify({"message": "GET request received"})
+    elif request.method == "POST":
+        # Handle POST request
+        data = request.data
+        data_str = data.decode("utf-8")
+
+
+        data = request.json  # Assuming JSON data is sent in the POST request
+        # Process the data...
+        return jsonify({"message": "POST request received", "data": data})
+'''
 
 
 

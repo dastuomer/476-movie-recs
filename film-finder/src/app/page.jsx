@@ -95,28 +95,28 @@ export default function Page() {
                       <div data-interval="false">
                         {" "}
                         <div>
-                          {typeof data.plot_recommendations === 'undefined' ? (
-                            <p>Loading....</p>
-                          ) : (
-                            <Carousel>
-                              {data.plot_recommendations.map((movie, i) => (
-                                <Carousel.Item key={i}>
-                                  <div>
-                                    <p>Title: {movie.title}</p>
-                                    <Box borderWidth="3px" borderColor="#171923" minHeight="300px">
-                                      <img width='250px' height='300px' objectFit='cover' src={movie.poster} alt={movie.title} />{/*src = Movie Poster URL*/}
-                                    </Box>
+		{typeof data.plot_recommendations === 'undefined' ? (
+			<p>Loading....</p>
+		) : (
+			<Carousel>
+				{data.plot_recommendations.map((movie, i) => (
+					<Carousel.Item key={i}>
+						<div>
+							<p>Title: {movie.title}</p>
+							<Box borderWidth="3px" borderColor="#171923" minHeight="300px">
+							<img width='250px' height='300px' objectFit='cover' src={movie.poster} alt={movie.title} />{/*src = Movie Poster URL*/}
+			</Box>
 
-                                    <p>Year: {movie.year}</p>
-                                    <p>Plot: {movie.plot}</p>
+							<p>Year: {movie.year}</p>
+							<p>Plot: {movie.plot}</p>
 
-                                    {/* Add more fields as needed */}
-                                  </div>
-                                </Carousel.Item>
-                              ))}
-                            </Carousel>
-                          )}
-                        </div>
+							{/* Add more fields as needed */}
+						</div>
+					</Carousel.Item>
+				))}
+			</Carousel>
+		)}
+	</div>
 
                         { /*
                         <Carousel>

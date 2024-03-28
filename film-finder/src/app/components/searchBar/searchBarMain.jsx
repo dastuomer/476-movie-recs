@@ -13,6 +13,21 @@ function SearchBar() {
         const search = e.target[0].value
         //console.log("search" + search)
 
+            const response = await fetch("http://127.0.0.1:5000/enter-movie", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: search
+            });
+            if (response.ok) {
+                console.log("response worked!");
+
+            }
+        
+
+
+
 
         const searchMovie = async (search) => {
             try {
@@ -47,7 +62,8 @@ function SearchBar() {
         <div className="search">
             <Center>
                 <InputGroup size="lg" w="80%" margin="15px">
-                    <form className="form" onSubmit={getRecs}>
+                    <form className="form" onSubmit={getRecs}
+                    >
                         <Input type="text"
                             placeholder={"Search for a movie..."}
                             size="lg"
