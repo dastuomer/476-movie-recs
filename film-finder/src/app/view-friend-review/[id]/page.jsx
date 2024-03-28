@@ -115,7 +115,7 @@ export default async function Page({params}) {
 
   return (
     <ChakraProvider>
-      <title>Film Finder - Your Movies</title>
+      <title>Film Finder - View {info.username}'s Reviews</title>
       <Box backgroundColor="#2D3748">
         <div className="container-fluid">
           <div className="row justify-content-center">

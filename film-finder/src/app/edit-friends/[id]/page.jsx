@@ -92,7 +92,7 @@ const Edit = ({params}) => {
     }
     return (
             <ChakraProvider>
-                <title>Film Finder - Login</title>
+                <title>Film Finder - Add/Remove Friends</title>
             <Box backgroundColor="#2D3748">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
@@ -131,7 +131,6 @@ const Edit = ({params}) => {
                                                         </Flex>
                                                     </form>
                                                     </Grid>
-                                                    
                                                     <Center>
                                                         <Text>{error && error}</Text>
                                                     </Center>
