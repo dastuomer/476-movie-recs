@@ -18,6 +18,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { getServerSession } from "next-auth"
 import { getMovieInfo } from "../../view-my-movies/page.jsx";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route.js"
+import { redirect } from "next/navigation.js"
 import StarRatingStatic from "@/app/components/star_static.js";
 
 //Function to iterate over array so movie info can be shown correctly
@@ -131,7 +132,6 @@ async function getReviewList(movieID) {
       </Box>
     )
   }
-  console.log("#### DONE ####")
   return reviewsArray;
 };
 

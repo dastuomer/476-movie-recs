@@ -79,7 +79,6 @@ async function getFriends(friends) {
                 <Text margin="5px">{finfo.bio}</Text>
             </GridItem>
             </Grid>
-            <Divider colorScheme="black" size="lg"/>
         </div>
       )
     }
