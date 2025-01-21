@@ -1,10 +1,13 @@
 {
   "name": "film-finder",
   "version": "0.1.0",
+  "homepage": "https://dastuomer.github.io/476-movie-recs",
   "private": true,
   "proxy": "http://localhost:5000",
   "scripts": {
     "dev": "next dev",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

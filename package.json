@@ -13,5 +13,8 @@
     "next-auth": "^4.24.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
