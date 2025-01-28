@@ -1,3 +1,4 @@
+"use client"
 import "./search.css";
 import { Center, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { useRouter } from 'next/navigation'
@@ -10,7 +11,8 @@ function SearchBar() {
         const search = e.target[0].value
         //console.log("search" + search)
 
-            const response = await fetch("http://127.0.0.1:5000/enter-movie", {
+            //              V await here    
+            const response = fetch("http://localhost:3000/enter-movie", {
                 method: "POST",
                 headers: {
                     "Content-Type": "text/plain"
@@ -22,10 +24,6 @@ function SearchBar() {
 
             }
         
-
-
-
-
         const searchMovie = async (search) => {
             try {
                 const res = await fetch(`http://localhost:3000/api/recsAPI?name=${search}`, {
